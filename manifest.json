@@ -1,0 +1,43 @@
+{
+    "name": "Impara l'Italiano - Leer Italiaans",
+    "short_name": "Impara Italiano",
+    "description": "Leer Italiaans met woordenschat, grammatica, werkwoorden en spraak oefeningen",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#2e7d32",
+    "theme_color": "#2e7d32",
+    "orientation": "portrait-primary",
+    "scope": "./",
+    "lang": "nl",
+    "icons": [
+        {
+            "src": "icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "icons/icon-maskable.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ],
+    "categories": ["education", "language"],
+    "shortcuts": [
+        {
+            "name": "Woordenschat",
+            "short_name": "Woorden",
+            "description": "Start woordenschat oefeningen",
+            "url": "./index.html?module=vocabulary",
+            "icons": [{"src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml"}]
+        },
+        {
+            "name": "Werkwoorden",
+            "short_name": "Vervoegen",
+            "description": "Oefen werkwoordvervoegingen",
+            "url": "./index.html?module=conjugation",
+            "icons": [{"src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml"}]
+        }
+    ]
+}

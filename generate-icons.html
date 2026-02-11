@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Genereer App Iconen</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .icon-preview { margin: 10px; display: inline-block; text-align: center; }
+        canvas { border: 1px solid #ccc; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px; cursor: pointer; }
+        .download-links { margin-top: 20px; }
+        .download-links a { display: block; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Impara l'Italiano - Icoon Generator</h1>
+    <p>Klik op de knop om alle iconen te genereren en te downloaden.</p>
+
+    <button onclick="generateAllIcons()">Genereer Alle Iconen</button>
+
+    <div id="previews"></div>
+    <div id="downloads" class="download-links"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+        function drawIcon(ctx, size) {
+            const scale = size / 512;
+
+            // Background circle (green)
+            ctx.fillStyle = '#2e7d32';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Inner circle (white)
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size * 0.39, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Italian flag - Green stripe
+            ctx.fillStyle = '#009246';
+            roundRect(ctx, 106 * scale, 156 * scale, 100 * scale, 200 * scale, 10 * scale);
+
+            // Italian flag - White stripe
+            ctx.fillStyle = '#f5f5f5';
+            ctx.fillRect(206 * scale, 156 * scale, 100 * scale, 200 * scale);
+
+            // Italian flag - Red stripe
+            ctx.fillStyle = '#ce2b37';
+            roundRect(ctx, 306 * scale, 156 * scale, 100 * scale, 200 * scale, 10 * scale);
+
+            // Book symbol - dark part
+            ctx.fillStyle = '#2e7d32';
+            ctx.beginPath();
+            ctx.moveTo(256 * scale, 380 * scale);
+            ctx.lineTo(180 * scale, 340 * scale);
+            ctx.lineTo(180 * scale, 280 * scale);
+            ctx.lineTo(256 * scale, 320 * scale);
+            ctx.lineTo(332 * scale, 280 * scale);
+            ctx.lineTo(332 * scale, 340 * scale);
+            ctx.closePath();
+            ctx.fill();
+
+            // Book symbol - light part
+            ctx.fillStyle = '#60ad5e';
+            ctx.beginPath();
+            ctx.moveTo(256 * scale, 320 * scale);
+            ctx.lineTo(180 * scale, 280 * scale);
+            ctx.lineTo(180 * scale, 220 * scale);
+            ctx.lineTo(256 * scale, 260 * scale);
+            ctx.lineTo(332 * scale, 220 * scale);
+            ctx.lineTo(332 * scale, 280 * scale);
+            ctx.closePath();
+            ctx.fill();
+
+            // Dot for "i"
+            ctx.fillStyle = '#2e7d32';
+            ctx.beginPath();
+            ctx.arc(256 * scale, 130 * scale, 15 * scale, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function generateAllIcons() {
+            const previewsDiv = document.getElementById('previews');
+            const downloadsDiv = document.getElementById('downloads');
+            previewsDiv.innerHTML = '<h3>Previews:</h3>';
+            downloadsDiv.innerHTML = '<h3>Download links (rechtermuisklik -> Opslaan als):</h3>';
+
+            sizes.forEach(size => {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                drawIcon(ctx, size);
+
+                // Preview
+                const preview = document.createElement('div');
+                preview.className = 'icon-preview';
+                preview.innerHTML = `<p>${size}x${size}</p>`;
+                preview.appendChild(canvas);
+                previewsDiv.appendChild(preview);
+
+                // Download link
+                const link = document.createElement('a');
+                link.download = `icon-${size}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.textContent = `Download icon-${size}.png`;
+                downloadsDiv.appendChild(link);
+            });
+
+            // Auto-download all
+            setTimeout(() => {
+                if (confirm('Wil je alle iconen automatisch downloaden?')) {
+                    const links = downloadsDiv.querySelectorAll('a');
+                    links.forEach((link, i) => {
+                        setTimeout(() => link.click(), i * 500);
+                    });
+                }
+            }, 500);
+        }
+    </script>
+</body>
+</html>

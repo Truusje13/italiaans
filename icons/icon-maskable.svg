@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Full background for maskable (fills entire square) -->
+  <rect width="512" height="512" fill="#2e7d32"/>
+
+  <!-- Inner circle (white) - smaller for safe zone -->
+  <circle cx="256" cy="256" r="160" fill="#ffffff"/>
+
+  <!-- Italian flag stripes - scaled down for safe zone -->
+  <rect x="136" y="186" width="80" height="140" fill="#009246" rx="6"/>
+  <rect x="216" y="186" width="80" height="140" fill="#f5f5f5"/>
+  <rect x="296" y="186" width="80" height="140" fill="#ce2b37" rx="6"/>
+
+  <!-- Book symbol - scaled down -->
+  <path d="M256 340 L200 310 L200 270 L256 300 L312 270 L312 310 Z" fill="#2e7d32"/>
+  <path d="M256 300 L200 270 L200 230 L256 260 L312 230 L312 270 Z" fill="#60ad5e"/>
+
+  <!-- Dot for "i" -->
+  <circle cx="256" cy="160" r="12" fill="#2e7d32"/>
+</svg>

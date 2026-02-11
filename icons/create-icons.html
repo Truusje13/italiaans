@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iconen Automatisch Opslaan</title>
+</head>
+<body>
+    <h1>Iconen worden gegenereerd...</h1>
+    <div id="status"></div>
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+        function drawIcon(ctx, size) {
+            const scale = size / 512;
+
+            // Background circle (green)
+            ctx.fillStyle = '#2e7d32';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Inner circle (white)
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size * 0.39, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Italian flag - Green stripe
+            ctx.fillStyle = '#009246';
+            ctx.fillRect(106 * scale, 156 * scale, 100 * scale, 200 * scale);
+
+            // Italian flag - White stripe
+            ctx.fillStyle = '#f5f5f5';
+            ctx.fillRect(206 * scale, 156 * scale, 100 * scale, 200 * scale);
+
+            // Italian flag - Red stripe
+            ctx.fillStyle = '#ce2b37';
+            ctx.fillRect(306 * scale, 156 * scale, 100 * scale, 200 * scale);
+
+            // Book symbol
+            ctx.fillStyle = '#2e7d32';
+            ctx.beginPath();
+            ctx.moveTo(256 * scale, 380 * scale);
+            ctx.lineTo(180 * scale, 340 * scale);
+            ctx.lineTo(180 * scale, 280 * scale);
+            ctx.lineTo(256 * scale, 320 * scale);
+            ctx.lineTo(332 * scale, 280 * scale);
+            ctx.lineTo(332 * scale, 340 * scale);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = '#60ad5e';
+            ctx.beginPath();
+            ctx.moveTo(256 * scale, 320 * scale);
+            ctx.lineTo(180 * scale, 280 * scale);
+            ctx.lineTo(180 * scale, 220 * scale);
+            ctx.lineTo(256 * scale, 260 * scale);
+            ctx.lineTo(332 * scale, 220 * scale);
+            ctx.lineTo(332 * scale, 280 * scale);
+            ctx.closePath();
+            ctx.fill();
+
+            // Dot
+            ctx.fillStyle = '#2e7d32';
+            ctx.beginPath();
+            ctx.arc(256 * scale, 130 * scale, 15 * scale, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        sizes.forEach((size, i) => {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            drawIcon(canvas.getContext('2d'), size);
+
+            const link = document.createElement('a');
+            link.download = `icon-${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+
+            setTimeout(() => {
+                link.click();
+                document.getElementById('status').innerHTML += `<p>✓ icon-${size}.png gedownload</p>`;
+            }, i * 300);
+        });
+    </script>
+</body>
+</html>

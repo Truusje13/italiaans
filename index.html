@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Impara l'Italiano - Leer Italiaans</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Leer Italiaans met woordenschat, grammatica, werkwoorden en spraak oefeningen">
+    <meta name="theme-color" content="#2e7d32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Impara Italiano">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h1>Impara l'Italiano</h1>
+                <p class="subtitle">Leer Italiaans</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item active" data-module="home">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Home</span>
+                </li>
+                <li class="nav-item" data-module="vocabulary">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">Woordenschat</span>
+                    <span class="progress-badge" id="vocab-progress">0%</span>
+                </li>
+                <li class="nav-item" data-module="grammar">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Grammatica</span>
+                    <span class="progress-badge" id="grammar-progress">0%</span>
+                </li>
+                <li class="nav-item" data-module="conjugation">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Werkwoorden</span>
+                    <span class="progress-badge" id="conjugation-progress">0%</span>
+                </li>
+                <li class="nav-item" data-module="speaking">
+                    <span class="nav-icon">🎤</span>
+                    <span class="nav-text">Spreken</span>
+                    <span class="progress-badge" id="speaking-progress">0%</span>
+                </li>
+            </ul>
+
+            <div class="stats-summary">
+                <div class="stat">
+                    <span class="stat-value" id="total-xp">0</span>
+                    <span class="stat-label">XP</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="streak-days">0</span>
+                    <span class="stat-label">dagen streak</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- Home Module -->
+            <section id="home-module" class="module active">
+                <div class="module-header">
+                    <h2>Welkom bij Impara l'Italiano!</h2>
+                    <p>Kies een module om te beginnen met leren</p>
+                </div>
+
+                <div class="home-cards">
+                    <div class="home-card" data-module="vocabulary">
+                        <div class="card-icon">📚</div>
+                        <h3>Woordenschat</h3>
+                        <p>Leer nieuwe Italiaanse woorden met flashcards</p>
+                        <div class="card-stats">
+                            <span id="home-vocab-learned">0</span> woorden geleerd
+                        </div>
+                    </div>
+
+                    <div class="home-card" data-module="grammar">
+                        <div class="card-icon">📖</div>
+                        <h3>Grammatica</h3>
+                        <p>Leer grammaticaregels met uitleg en oefeningen</p>
+                        <div class="card-stats">
+                            <span id="home-grammar-completed">0</span> lessen voltooid
+                        </div>
+                    </div>
+
+                    <div class="home-card" data-module="conjugation">
+                        <div class="card-icon">🔄</div>
+                        <h3>Werkwoorden</h3>
+                        <p>Oefen werkwoordvervoegingen in verschillende tijden</p>
+                        <div class="card-stats">
+                            <span id="home-verbs-mastered">0</span> werkwoorden beheerst
+                        </div>
+                    </div>
+
+                    <div class="home-card" data-module="speaking">
+                        <div class="card-icon">🎤</div>
+                        <h3>Spreken</h3>
+                        <p>Oefen je uitspraak met spraakherkenning</p>
+                        <div class="card-stats">
+                            <span id="home-speaking-score">0%</span> uitspraakscore
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-goal">
+                    <h3>Dagelijks doel</h3>
+                    <div class="goal-progress">
+                        <div class="goal-bar">
+                            <div class="goal-fill" id="daily-goal-fill" style="width: 0%"></div>
+                        </div>
+                        <span id="daily-goal-text">0 / 50 XP</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vocabulary Module -->
+            <section id="vocabulary-module" class="module">
+                <button class="back-to-home-btn" data-target="home">← Home</button>
+                <div class="module-header">
+                    <h2>Woordenschat</h2>
+                    <p>Leer nieuwe woorden met flashcards</p>
+                </div>
+
+                <div class="category-selector">
+                    <h3>Kies een categorie:</h3>
+                    <div class="categories" id="vocab-categories">
+                        <!-- Categories will be populated by JS -->
+                    </div>
+                </div>
+
+                <div class="exercise-area" id="vocab-exercise" style="display: none;">
+                    <div class="exercise-progress">
+                        <span id="vocab-current">1</span> / <span id="vocab-total">10</span>
+                    </div>
+
+                    <div class="flashcard" id="flashcard">
+                        <div class="flashcard-front">
+                            <span class="italian-word" id="vocab-italian"></span>
+                            <button class="speak-btn" id="vocab-speak-btn" title="Luister">🔊</button>
+                        </div>
+                    </div>
+
+                    <div class="answer-area">
+                        <div class="multiple-choice" id="vocab-choices">
+                            <!-- Choices will be populated by JS -->
+                        </div>
+
+                        <div class="text-input-mode" id="vocab-text-input" style="display: none;">
+                            <input type="text" id="vocab-answer-input" placeholder="Typ de vertaling...">
+                            <button class="btn btn-primary" id="vocab-submit-btn">Controleer</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback-panel" id="vocab-feedback" style="display: none;">
+                        <div class="feedback-header">
+                            <span class="feedback-icon"></span>
+                            <span class="feedback-title"></span>
+                        </div>
+                        <div class="feedback-content">
+                            <p class="correct-answer"></p>
+                            <p class="explanation"></p>
+                            <p class="tip"></p>
+                        </div>
+                        <button class="btn btn-primary" id="vocab-next-btn">Volgende</button>
+                    </div>
+                </div>
+
+                <div class="mode-toggle">
+                    <label>
+                        <input type="checkbox" id="vocab-hard-mode">
+                        Moeilijke modus (typ antwoord)
+                    </label>
+                </div>
+            </section>
+
+            <!-- Grammar Module -->
+            <section id="grammar-module" class="module">
+                <button class="back-to-home-btn" data-target="home">← Home</button>
+                <div class="module-header">
+                    <h2>Grammatica</h2>
+                    <p>Leer de regels van de Italiaanse taal</p>
+                </div>
+
+                <div class="grammar-topics" id="grammar-topics">
+                    <!-- Topics will be populated by JS -->
+                </div>
+
+                <div class="grammar-lesson" id="grammar-lesson" style="display: none;">
+                    <button class="btn btn-secondary back-btn" id="grammar-back-btn">← Terug naar onderwerpen</button>
+
+                    <div class="lesson-content">
+                        <h3 id="grammar-title"></h3>
+                        <div class="theory-section" id="grammar-theory"></div>
+                        <div class="examples-section">
+                            <h4>Voorbeelden:</h4>
+                            <ul id="grammar-examples"></ul>
+                        </div>
+                    </div>
+
+                    <div class="grammar-exercise" id="grammar-exercise">
+                        <h4>Oefening:</h4>
+                        <div class="exercise-question" id="grammar-question"></div>
+                        <div class="exercise-options" id="grammar-options"></div>
+                        <div class="feedback-panel" id="grammar-feedback" style="display: none;">
+                            <div class="feedback-header">
+                                <span class="feedback-icon"></span>
+                                <span class="feedback-title"></span>
+                            </div>
+                            <div class="feedback-content">
+                                <p class="correct-answer"></p>
+                                <p class="explanation"></p>
+                            </div>
+                            <button class="btn btn-primary" id="grammar-next-btn">Volgende oefening</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conjugation Module -->
+            <section id="conjugation-module" class="module">
+                <button class="back-to-home-btn" data-target="home">← Home</button>
+                <div class="module-header">
+                    <h2>Werkwoordvervoegingen</h2>
+                    <p>Oefen met regelmatige en onregelmatige werkwoorden</p>
+                </div>
+
+                <div class="conjugation-selector">
+                    <div class="selector-group">
+                        <label>Werkwoordtype:</label>
+                        <select id="verb-type">
+                            <option value="all">Alle werkwoorden</option>
+                            <option value="are">-are werkwoorden</option>
+                            <option value="ere">-ere werkwoorden</option>
+                            <option value="ire">-ire werkwoorden</option>
+                            <option value="irregular">Onregelmatige werkwoorden</option>
+                        </select>
+                    </div>
+
+                    <div class="selector-group">
+                        <label>Tijd:</label>
+                        <select id="verb-tense">
+                            <option value="presente">Presente (tegenwoordige tijd)</option>
+                            <option value="passatoProssimo">Passato Prossimo (voltooide tijd)</option>
+                            <option value="imperfetto">Imperfetto (onvoltooid verleden)</option>
+                            <option value="futuro">Futuro (toekomende tijd)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" id="start-conjugation">Start oefening</button>
+                </div>
+
+                <div class="conjugation-reference" id="conjugation-reference">
+                    <h3>Vervoegingstabellen</h3>
+                    <div class="reference-tabs">
+                        <button class="tab-btn active" data-tab="are">-are</button>
+                        <button class="tab-btn" data-tab="ere">-ere</button>
+                        <button class="tab-btn" data-tab="ire">-ire</button>
+                    </div>
+                    <div class="reference-content" id="reference-content">
+                        <!-- Reference tables will be populated by JS -->
+                    </div>
+                </div>
+
+                <div class="conjugation-exercise" id="conjugation-exercise" style="display: none;">
+                    <div class="exercise-progress">
+                        <span id="conj-current">1</span> / <span id="conj-total">10</span>
+                    </div>
+
+                    <div class="conjugation-prompt">
+                        <p class="verb-infinitive">Vervoeging van: <strong id="conj-infinitive"></strong> (<span id="conj-meaning"></span>)</p>
+                        <p class="verb-tense">Tijd: <strong id="conj-tense-display"></strong></p>
+                        <p class="verb-person">Persoon: <strong id="conj-person"></strong></p>
+                    </div>
+
+                    <div class="answer-input">
+                        <input type="text" id="conj-answer" placeholder="Typ de vervoeging...">
+                        <button class="btn btn-primary" id="conj-submit">Controleer</button>
+                    </div>
+
+                    <div class="feedback-panel" id="conj-feedback" style="display: none;">
+                        <div class="feedback-header">
+                            <span class="feedback-icon"></span>
+                            <span class="feedback-title"></span>
+                        </div>
+                        <div class="feedback-content">
+                            <p class="correct-answer"></p>
+                            <p class="explanation"></p>
+                            <div class="conjugation-table-mini" id="conj-table-mini"></div>
+                        </div>
+                        <button class="btn btn-primary" id="conj-next-btn">Volgende</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Speaking Module -->
+            <section id="speaking-module" class="module">
+                <button class="back-to-home-btn" data-target="home">← Home</button>
+                <div class="module-header">
+                    <h2>Spreken</h2>
+                    <p>Oefen je Italiaanse uitspraak</p>
+                </div>
+
+                <div class="browser-support-warning" id="speech-warning" style="display: none;">
+                    <p>⚠️ Je browser ondersteunt geen spraakherkenning. Gebruik Chrome of Edge voor de beste ervaring.</p>
+                </div>
+
+                <div class="speaking-mode-selector">
+                    <button class="mode-btn active" data-mode="listen">🔊 Luisteren & Herhalen</button>
+                    <button class="mode-btn" data-mode="speak">🎤 Spreken & Controleren</button>
+                </div>
+
+                <div class="speaking-category-selector">
+                    <label>Categorie:</label>
+                    <select id="speaking-category">
+                        <option value="greetings">👋 Begroetingen</option>
+                        <option value="phrases">💬 Veelgebruikte zinnen</option>
+                        <option value="restaurant">🍽️ Restaurant & Eten</option>
+                        <option value="shopping">🛍️ Winkelen</option>
+                        <option value="directions">🗺️ Richting & Vervoer</option>
+                        <option value="hotel">🏨 Hotel & Accommodatie</option>
+                        <option value="emergencies">🆘 Noodgevallen</option>
+                        <option value="socializing">🎉 Sociaal & Vrijetijd</option>
+                        <option value="numbers">🔢 Getallen</option>
+                        <option value="vocabulary">📚 Basiswoorden</option>
+                    </select>
+                </div>
+
+                <div class="speaking-exercise" id="speaking-exercise">
+                    <div class="speaking-prompt">
+                        <p class="italian-text" id="speaking-italian"></p>
+                        <p class="dutch-text" id="speaking-dutch"></p>
+                    </div>
+
+                    <div class="speaking-controls">
+                        <button class="control-btn" id="play-btn" title="Luister naar uitspraak">
+                            🔊 Luister
+                        </button>
+                        <div class="speed-control">
+                            <label>Snelheid:</label>
+                            <input type="range" id="speech-speed" min="0.5" max="1.5" step="0.1" value="0.8">
+                            <span id="speed-value">0.8x</span>
+                        </div>
+                    </div>
+
+                    <div class="recording-area" id="recording-area">
+                        <button class="record-btn" id="record-btn" title="Houd ingedrukt om te spreken">
+                            🎤 Houd ingedrukt om te spreken
+                        </button>
+                        <div class="recording-indicator" id="recording-indicator">
+                            <span class="pulse"></span> Luisteren...
+                        </div>
+                        <p class="recognized-text" id="recognized-text"></p>
+                    </div>
+
+                    <div class="speaking-feedback" id="speaking-feedback" style="display: none;">
+                        <div class="feedback-header">
+                            <span class="feedback-icon"></span>
+                            <span class="feedback-title"></span>
+                        </div>
+                        <div class="feedback-content">
+                            <p class="pronunciation-score">Score: <span id="pronunciation-score"></span>%</p>
+                            <p class="pronunciation-tip" id="pronunciation-tip"></p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="speaking-next-btn">Volgende</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/vocabulary.js"></script>
+    <script src="js/grammar.js"></script>
+    <script src="js/conjugation.js"></script>
+    <script src="js/speaking.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('ServiceWorker registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('ServiceWorker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
