@@ -16,9 +16,16 @@ const App = {
         Grammar.init();
         Conjugation.init();
         Speaking.init();
+        GameModule.init();
 
         // Setup responsive menu
         this.setupResponsiveMenu();
+
+        // Update home game highscore
+        const homeGameHigh = document.getElementById('home-game-highscore');
+        if (homeGameHigh) {
+            homeGameHigh.textContent = localStorage.getItem('quizHighScore') || '0';
+        }
 
         // Show home module
         this.showModule('home');

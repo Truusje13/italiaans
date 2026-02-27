@@ -56,6 +56,10 @@
                     <span class="nav-text">Spreken</span>
                     <span class="progress-badge" id="speaking-progress">0%</span>
                 </li>
+                <li class="nav-item" data-module="game">
+                    <span class="nav-icon">🎮</span>
+                    <span class="nav-text">Spellen</span>
+                </li>
             </ul>
 
             <div class="stats-summary">
@@ -113,6 +117,15 @@
                         <p>Oefen je uitspraak met spraakherkenning</p>
                         <div class="card-stats">
                             <span id="home-speaking-score">0%</span> uitspraakscore
+                        </div>
+                    </div>
+
+                    <div class="home-card home-card-game" data-module="game">
+                        <div class="card-icon">🎮</div>
+                        <h3>Spellen</h3>
+                        <p>Quiz, Memory en Dagelijkse uitdaging</p>
+                        <div class="card-stats">
+                            Highscore: <span id="home-game-highscore">0</span> pts
                         </div>
                     </div>
                 </div>
@@ -381,6 +394,123 @@
                     <button class="btn btn-primary" id="speaking-next-btn">Volgende</button>
                 </div>
             </section>
+            <!-- Game Module -->
+            <section id="game-module" class="module">
+                <button class="back-to-home-btn" data-target="home">← Home</button>
+
+                <!-- Game Menu -->
+                <div id="game-menu" class="game-section">
+                    <div class="module-header">
+                        <h2>🎮 Spellen</h2>
+                        <p>Kies een spel om je Italiaans te oefenen</p>
+                    </div>
+                    <p id="game-level-display" class="game-level-info">Level 1: Beginner — 0 XP</p>
+
+                    <div class="game-cards">
+
+                        <!-- Quiz -->
+                        <div class="game-card">
+                            <div class="game-card-header">
+                                <span class="game-card-icon">🏆</span>
+                                <h3>Quiz</h3>
+                            </div>
+                            <p>10 vragen over woordenschat, grammatica en werkwoorden. Beantwoord snel voor extra punten!</p>
+                            <p id="game-quiz-highscore" class="game-card-stat">Highscore: 0 pts</p>
+                            <button class="btn btn-primary" id="start-quiz-btn">Start quiz</button>
+                        </div>
+
+                        <!-- Memory -->
+                        <div class="game-card">
+                            <div class="game-card-header">
+                                <span class="game-card-icon">🃏</span>
+                                <h3>Woordkoppelen</h3>
+                            </div>
+                            <p>Koppel Italiaanse woorden aan de Nederlandse vertaling. Zo snel mogelijk, zo min mogelijk fouten!</p>
+                            <button class="btn btn-primary" id="start-memory-btn">Kies categorie</button>
+                        </div>
+
+                        <!-- Daily -->
+                        <div class="game-card">
+                            <div class="game-card-header">
+                                <span class="game-card-icon">📅</span>
+                                <h3>Dagelijkse uitdaging</h3>
+                            </div>
+                            <p>Elke dag 10 nieuwe vragen. Bouw een streak op door elke dag mee te doen!</p>
+                            <div id="game-daily-status"></div>
+                            <p id="game-daily-streak" class="game-card-stat">🔥 0 dagen streak</p>
+                            <button class="btn btn-primary" id="start-daily-btn">Start uitdaging</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Quiz Game -->
+                <div id="quiz-game" class="game-section" style="display:none;">
+                    <button class="btn btn-secondary game-back-btn">← Terug naar menu</button>
+                    <div class="quiz-header">
+                        <span id="quiz-progress-text">Vraag 1 van 10</span>
+                        <span id="quiz-streak-display" class="streak-badge" style="display:none;">🔥 0</span>
+                        <span id="quiz-score-display" class="score-badge">0 pts</span>
+                    </div>
+                    <div class="quiz-timer">
+                        <div class="timer-bar">
+                            <div class="timer-fill" id="quiz-timer-fill"></div>
+                        </div>
+                        <span class="timer-text" id="quiz-timer-text">15</span>
+                    </div>
+                    <div class="quiz-question-card">
+                        <p id="quiz-question-text" class="quiz-question"></p>
+                    </div>
+                    <div id="quiz-options" class="quiz-options"></div>
+                    <div id="quiz-feedback" class="quiz-feedback" style="display:none;"></div>
+                </div>
+
+                <!-- Quiz End -->
+                <div id="quiz-end" class="game-section" style="display:none;"></div>
+
+                <!-- Memory: Category Selection -->
+                <div id="memory-category" class="game-section" style="display:none;">
+                    <button class="btn btn-secondary game-back-btn">← Terug naar menu</button>
+                    <div class="module-header">
+                        <h3>🃏 Woordkoppelen</h3>
+                        <p>Kies een categorie:</p>
+                    </div>
+                    <div id="memory-category-list" class="memory-cat-grid"></div>
+                </div>
+
+                <!-- Memory Game -->
+                <div id="memory-game" class="game-section" style="display:none;">
+                    <button class="btn btn-secondary game-back-btn">← Terug naar menu</button>
+                    <div class="memory-header">
+                        <span>Paren: <strong id="memory-pairs">0/8</strong></span>
+                        <span>Fouten: <strong id="memory-mistakes">0</strong></span>
+                    </div>
+                    <div id="memory-grid" class="memory-grid"></div>
+                </div>
+
+                <!-- Memory End -->
+                <div id="memory-end" class="game-section" style="display:none;"></div>
+
+                <!-- Daily Game -->
+                <div id="daily-game" class="game-section" style="display:none;">
+                    <button class="btn btn-secondary game-back-btn">← Terug naar menu</button>
+                    <div class="daily-header">
+                        <h3>📅 Dagelijkse uitdaging</h3>
+                        <span id="daily-progress-text">Vraag 1 van 10</span>
+                    </div>
+                    <div id="daily-dots" class="daily-dots"></div>
+                    <div class="quiz-question-card">
+                        <p id="daily-question-text" class="quiz-question"></p>
+                    </div>
+                    <div id="daily-options" class="quiz-options"></div>
+                    <div id="daily-feedback" class="quiz-feedback" style="display:none;"></div>
+                </div>
+
+                <!-- Daily End -->
+                <div id="daily-end" class="game-section" style="display:none;"></div>
+
+            </section>
+
         </main>
     </div>
 
@@ -392,6 +522,7 @@
     <script src="js/grammar.js"></script>
     <script src="js/conjugation.js"></script>
     <script src="js/speaking.js"></script>
+    <script src="js/game.js"></script>
     <script src="js/app.js"></script>
 
     <!-- Service Worker Registration -->
