@@ -69,7 +69,7 @@ const Conjugation = {
         const example = exampleVerbs[verbType];
 
         let html = `<h4>Voorbeeld: ${example.infinitive} (${this.getVerbMeaning(example.infinitive)})</h4>`;
-        html += '<table class="reference-table"><thead><tr><th>Persoon</th>';
+        html += '<div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>Persoon</th>';
 
         tenses.forEach(tense => {
             html += `<th>${AppData.verbs.tenses[tense].name}</th>`;
@@ -92,7 +92,7 @@ const Conjugation = {
             html += '</tr>';
         });
 
-        html += '</tbody></table>';
+        html += '</tbody></table></div>';
 
         // Add note about -isc- verbs for -ire
         if (verbType === 'ire') {

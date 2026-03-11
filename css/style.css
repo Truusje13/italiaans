@@ -769,8 +769,15 @@ body {
     font-weight: 600;
 }
 
+.reference-table-wrap,
+#reference-content {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .reference-table {
     width: 100%;
+    min-width: 420px;
     border-collapse: collapse;
 }
 
@@ -779,6 +786,7 @@ body {
     padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
 }
 
 .reference-table th {
@@ -788,6 +796,14 @@ body {
 
 .reference-table tr:hover {
     background: rgba(46, 125, 50, 0.05);
+}
+
+@media (max-width: 768px) {
+    .reference-table th,
+    .reference-table td {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* Conjugation Exercise */
