@@ -36,6 +36,10 @@ const Grammar = {
                     </div>
                     <span>${progressPercent}%</span>
                 </div>
+                <div class="topic-card-actions">
+                    <button class="btn-topic-read" data-topic-id="${topic.id}">📖 Lees uitleg</button>
+                    <button class="btn-topic-practice" data-topic-id="${topic.id}">✏️ Oefen</button>
+                </div>
             `;
             container.appendChild(card);
         });
@@ -43,11 +47,14 @@ const Grammar = {
 
     // Setup event listeners
     setupEventListeners() {
-        // Topic selection
+        // Topic selection — two buttons per card
         document.getElementById('grammar-topics')?.addEventListener('click', (e) => {
-            const card = e.target.closest('.topic-card');
-            if (card) {
-                this.openTopic(card.dataset.topicId);
+            const readBtn = e.target.closest('.btn-topic-read');
+            const practiceBtn = e.target.closest('.btn-topic-practice');
+            if (readBtn) {
+                this.openTopicReadOnly(readBtn.dataset.topicId);
+            } else if (practiceBtn) {
+                this.openTopic(practiceBtn.dataset.topicId);
             }
         });
 
@@ -79,6 +86,34 @@ const Grammar = {
         // Render content
         this.renderLesson(topic);
         this.renderExercise();
+    },
+
+    // Open a topic in read-only mode (theory only, no exercises)
+    openTopicReadOnly(topicId) {
+        const topic = AppData.grammar.find(t => t.id === topicId);
+        if (!topic) return;
+
+        this.currentTopic = topic;
+
+        document.getElementById('grammar-topics').style.display = 'none';
+        document.getElementById('grammar-lesson').style.display = 'block';
+
+        this.renderLesson(topic);
+
+        // Replace exercise area with a prompt to start exercises
+        const exerciseContainer = document.getElementById('grammar-exercise');
+        exerciseContainer.innerHTML = `
+            <div class="read-only-actions">
+                <p class="read-only-hint">Klaar om te oefenen met deze stof?</p>
+                <button class="btn btn-primary" id="start-exercises-btn">✏️ Start oefeningen →</button>
+            </div>
+        `;
+
+        document.getElementById('start-exercises-btn').addEventListener('click', () => {
+            this.currentExerciseIndex = 0;
+            this.restoreExerciseArea();
+            this.renderExercise();
+        });
     },
 
     // Render lesson content
@@ -296,6 +331,57 @@ grammarStyle.textContent = `
 
     #grammar-theory strong {
         color: var(--primary-color);
+    }
+
+    .topic-card-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+
+    .btn-topic-read,
+    .btn-topic-practice {
+        flex: 1;
+        padding: 0.4rem 0.5rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: all 0.2s ease;
+    }
+
+    .btn-topic-read {
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+    .btn-topic-read:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .btn-topic-practice {
+        background: var(--primary-color);
+        color: white;
+    }
+    .btn-topic-practice:hover {
+        background: var(--primary-dark);
+    }
+
+    .read-only-actions {
+        text-align: center;
+        padding: 1.5rem;
+        background: #f9f9f9;
+        border-radius: 12px;
+        margin-top: 1rem;
+    }
+
+    .read-only-hint {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
     }
 `;
 document.head.appendChild(grammarStyle);
