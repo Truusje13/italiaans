@@ -223,8 +223,10 @@ const Vocabulary = {
 
         if (!userAnswer) return;
 
-        // Check if answer is correct (case-insensitive, trim whitespace)
-        const correct = userAnswer.toLowerCase() === word.nl.toLowerCase();
+        // Check if answer is correct: case-insensitive, accept any "/" alternative or full string
+        const normalised = userAnswer.toLowerCase().trim();
+        const alternatives = word.nl.split('/').map(s => s.trim().toLowerCase());
+        const correct = alternatives.includes(normalised) || normalised === word.nl.toLowerCase().trim();
 
         // Record progress
         const wordId = `${this.currentCategory}_${this.currentIndex}`;
