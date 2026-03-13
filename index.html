@@ -156,6 +156,67 @@
                     </div>
                 </div>
 
+                <!-- Custom Words Management Screen -->
+                <div id="custom-words-screen" class="custom-words-screen hidden">
+                    <div id="custom-words-list">
+                        <div class="custom-words-header">
+                            <h3>✏️ Mijn eigen woorden</h3>
+                            <button id="btn-close-custom-words" class="btn btn-secondary btn-small">← Terug</button>
+                        </div>
+                        <p class="custom-words-intro">Voeg je eigen Italiaanse woorden toe en oefen ze als gewone flashcards.</p>
+
+                        <div id="custom-categories-container">
+                            <!-- Filled by JS -->
+                        </div>
+
+                        <button id="btn-add-category" class="btn btn-primary btn-add-cat">➕ Nieuwe categorie</button>
+
+                        <div id="add-category-form" class="custom-form hidden">
+                            <h4>Nieuwe categorie</h4>
+                            <div class="form-row">
+                                <label>Naam <input type="text" id="new-cat-name" placeholder="bijv. Mijn reiswoorden" maxlength="40"></label>
+                            </div>
+                            <div class="form-row">
+                                <label>Icoon (emoji) <input type="text" id="new-cat-icon" placeholder="bijv. 🗺️" maxlength="4"></label>
+                            </div>
+                            <div class="form-actions">
+                                <button id="btn-save-new-category" class="btn btn-primary btn-small">Opslaan</button>
+                                <button id="btn-cancel-add-category" class="btn btn-secondary btn-small">Annuleren</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="custom-category-detail" class="hidden">
+                        <div class="custom-words-header">
+                            <h3 id="detail-cat-title"></h3>
+                            <button id="btn-back-to-categories" class="btn btn-secondary btn-small">← Terug</button>
+                        </div>
+
+                        <div id="custom-words-container">
+                            <!-- Filled by JS -->
+                        </div>
+
+                        <button id="btn-add-word" class="btn btn-primary btn-add-cat">➕ Woord toevoegen</button>
+
+                        <div id="add-word-form" class="custom-form hidden">
+                            <h4>Nieuw woord</h4>
+                            <div class="form-row">
+                                <label>Italiaans <input type="text" id="new-word-it" placeholder="bijv. la neve" maxlength="80"></label>
+                            </div>
+                            <div class="form-row">
+                                <label>Nederlands <input type="text" id="new-word-nl" placeholder="bijv. de sneeuw" maxlength="80"></label>
+                            </div>
+                            <div class="form-row">
+                                <label>Noot (optioneel) <input type="text" id="new-word-note" placeholder="bijv. Vrouwelijk woord" maxlength="100"></label>
+                            </div>
+                            <div class="form-actions">
+                                <button id="btn-save-new-word" class="btn btn-primary btn-small">Opslaan</button>
+                                <button id="btn-cancel-add-word" class="btn btn-secondary btn-small">Annuleren</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="exercise-area" id="vocab-exercise" style="display: none;">
                     <div class="exercise-progress">
                         <span id="vocab-current">1</span> / <span id="vocab-total">10</span>
@@ -522,6 +583,7 @@
     <script src="js/grammar.js"></script>
     <script src="js/conjugation.js"></script>
     <script src="js/speaking.js"></script>
+    <script src="js/custom-words.js"></script>
     <script src="js/game.js"></script>
     <script src="js/app.js"></script>
 

@@ -20,19 +20,30 @@ const Vocabulary = {
 
         container.innerHTML = '';
 
-        for (const [key, category] of Object.entries(AppData.vocabulary)) {
+        const customCategories = (typeof CustomWords !== 'undefined') ? CustomWords.getAll() : {};
+        const allCategories = { ...AppData.vocabulary, ...customCategories };
+
+        for (const [key, category] of Object.entries(allCategories)) {
             const stats = Progress.getCategoryStats(key);
+            const isCustom = !!category.custom;
             const btn = document.createElement('button');
-            btn.className = 'category-btn';
+            btn.className = 'category-btn' + (isCustom ? ' category-btn-custom' : '');
             btn.dataset.category = key;
             btn.innerHTML = `
                 <span class="icon">${category.icon}</span>
-                <span class="name">${category.name}</span>
-                <span class="count">${category.words.length} woorden</span>
+                <span class="name">${category.name}${isCustom ? ' <span class="custom-badge">Eigen</span>' : ''}</span>
+                <span class="count">${category.words.length} woord${category.words.length !== 1 ? 'en' : ''}</span>
                 ${stats.attempts > 0 ? `<span class="accuracy">${stats.accuracy}% correct</span>` : ''}
             `;
             container.appendChild(btn);
         }
+
+        // Add "manage custom words" button at the bottom
+        const manageBtn = document.createElement('button');
+        manageBtn.id = 'btn-manage-custom-words';
+        manageBtn.className = 'btn-manage-custom';
+        manageBtn.innerHTML = '➕ Eigen woorden beheren';
+        container.appendChild(manageBtn);
     },
 
     // Setup event listeners
@@ -79,7 +90,8 @@ const Vocabulary = {
     // Start a category
     startCategory(categoryKey) {
         this.currentCategory = categoryKey;
-        const category = AppData.vocabulary[categoryKey];
+        const customCategories = (typeof CustomWords !== 'undefined') ? CustomWords.getAll() : {};
+        const category = AppData.vocabulary[categoryKey] || customCategories[categoryKey];
 
         if (!category) return;
 
@@ -150,7 +162,9 @@ const Vocabulary = {
 
         // If we don't have enough wrong answers, get from other categories
         if (wrongAnswers.length < 3) {
-            for (const [key, cat] of Object.entries(AppData.vocabulary)) {
+            const customCategories = (typeof CustomWords !== 'undefined') ? CustomWords.getAll() : {};
+            const allCategories = { ...AppData.vocabulary, ...customCategories };
+            for (const [key, cat] of Object.entries(allCategories)) {
                 if (key !== this.currentCategory && wrongAnswers.length < 3) {
                     const additionalWords = cat.words
                         .filter(w => w.nl !== correctWord.nl && !wrongAnswers.includes(w.nl))

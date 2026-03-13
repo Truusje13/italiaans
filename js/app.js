@@ -12,6 +12,7 @@ const App = {
         this.setupNavigation();
 
         // Initialize all modules
+        CustomWords.init();
         Vocabulary.init();
         Grammar.init();
         Conjugation.init();

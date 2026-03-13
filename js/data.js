@@ -534,6 +534,207 @@ const AppData = {
                 { it: "la promozione", nl: "de promotie", note: "Vrouwelijk woord", level: 5 },
                 { it: "il licenziamento", nl: "het ontslag", note: "Mannelijk woord", level: 5 }
             ]
+        },
+        sport: {
+            name: "Sport & Fitness",
+            icon: "🏃",
+            words: [
+                // Niveau 1 - Basis
+                { it: "il calcio", nl: "het voetbal", note: "Meest populaire sport in Italië", level: 1 },
+                { it: "lo sport", nl: "de sport", note: "Mannelijk woord", level: 1 },
+                { it: "la partita", nl: "de wedstrijd", note: "Vrouwelijk woord", level: 1 },
+                { it: "la squadra", nl: "het team / de ploeg", note: "Vrouwelijk woord", level: 1 },
+                { it: "vincere", nl: "winnen", note: "Onregelmatig werkwoord", level: 1 },
+                { it: "perdere", nl: "verliezen", note: "Regelmatig -ere", level: 1 },
+                // Niveau 2 - Eenvoudig
+                { it: "il nuoto", nl: "het zwemmen", note: "Mannelijk woord", level: 2 },
+                { it: "la piscina", nl: "het zwembad", note: "Vrouwelijk woord", level: 2 },
+                { it: "la palestra", nl: "de sportschool / het gym", note: "Vrouwelijk woord", level: 2 },
+                { it: "correre", nl: "rennen / hardlopen", note: "Onregelmatig werkwoord", level: 2 },
+                { it: "giocare a tennis", nl: "tennissen", note: "Letterlijk: tennis spelen", level: 2 },
+                { it: "la bicicletta", nl: "de fiets", note: "Vrouwelijk woord", level: 2 },
+                { it: "andare in bici", nl: "fietsen", note: "Letterlijk: met de fiets gaan", level: 2 },
+                // Niveau 3 - Gemiddeld
+                { it: "il basket", nl: "het basketbal", note: "Engelstalige lening", level: 3 },
+                { it: "il ciclismo", nl: "het wielrennen", note: "Mannelijk woord", level: 3 },
+                { it: "la pallavolo", nl: "het volleybal", note: "Vrouwelijk woord", level: 3 },
+                { it: "il nuotatore", nl: "de zwemmer", note: "Mannelijk, vrouwelijk: la nuotatrice", level: 3 },
+                { it: "allenarsi", nl: "trainen / sporten", note: "Reflexief werkwoord", level: 3 },
+                { it: "il campo da calcio", nl: "het voetbalveld", note: "Mannelijk woord", level: 3 },
+                { it: "la gara", nl: "de wedstrijd / de race", note: "Vrouwelijk woord", level: 3 },
+                // Niveau 4 - Gevorderd
+                { it: "il campionato", nl: "het kampioenschap", note: "Mannelijk woord", level: 4 },
+                { it: "il pareggio", nl: "de gelijkspel", note: "Mannelijk woord", level: 4 },
+                { it: "il portiere", nl: "de doelverdediger", note: "Mannelijk woord", level: 4 },
+                { it: "la rete", nl: "het net / het doel", note: "Vrouwelijk woord, ook: netwerk", level: 4 },
+                { it: "fare jogging", nl: "joggen", note: "Engelstalige lening", level: 4 },
+                { it: "lo stadio", nl: "het stadion", note: "Mannelijk woord", level: 4 },
+                { it: "il tifoso", nl: "de supporter / de fan", note: "Vrouwelijk: la tifosa", level: 4 },
+                // Niveau 5 - Moeilijk
+                { it: "il palio", nl: "het paardenrennen (Siena)", note: "Beroemd Italiaans event", level: 5 },
+                { it: "la classifica", nl: "de ranglijst / het klassement", note: "Vrouwelijk woord", level: 5 },
+                { it: "il professionista", nl: "de beroepssporter", note: "Mannelijk/vrouwelijk", level: 5 },
+                { it: "il Giro d'Italia", nl: "de Ronde van Italië", note: "Beroemde wielerwedstrijd", level: 5 },
+                { it: "fare stretching", nl: "stretchen", note: "Engelstalige lening", level: 5 },
+                { it: "il cronometro", nl: "de chronometer / de stopwatch", note: "Mannelijk woord", level: 5 }
+            ]
+        },
+        nature: {
+            name: "Natuur & Dieren",
+            icon: "🌿",
+            words: [
+                // Niveau 1 - Basis
+                { it: "il cane", nl: "de hond", note: "Mannelijk woord", level: 1 },
+                { it: "il gatto", nl: "de kat", note: "Mannelijk, vrouwelijk: la gatta", level: 1 },
+                { it: "l'albero", nl: "de boom", note: "Mannelijk woord", level: 1 },
+                { it: "il fiore", nl: "de bloem", note: "Mannelijk woord", level: 1 },
+                { it: "il mare", nl: "de zee", note: "Mannelijk woord", level: 1 },
+                { it: "la montagna", nl: "de berg", note: "Vrouwelijk woord", level: 1 },
+                // Niveau 2 - Eenvoudig
+                { it: "il bosco", nl: "het bos", note: "Mannelijk woord", level: 2 },
+                { it: "il fiume", nl: "de rivier", note: "Mannelijk woord", level: 2 },
+                { it: "il lago", nl: "het meer", note: "Mannelijk woord", level: 2 },
+                { it: "l'uccello", nl: "de vogel", note: "Mannelijk woord", level: 2 },
+                { it: "il pesce", nl: "de vis", note: "Mannelijk woord", level: 2 },
+                { it: "la rosa", nl: "de roos", note: "Vrouwelijk woord", level: 2 },
+                { it: "l'erba", nl: "het gras / het kruid", note: "Vrouwelijk woord", level: 2 },
+                // Niveau 3 - Gemiddeld
+                { it: "la farfalla", nl: "de vlinder", note: "Vrouwelijk woord", level: 3 },
+                { it: "l'ape", nl: "de bij", note: "Vrouwelijk woord", level: 3 },
+                { it: "il lupo", nl: "de wolf", note: "Mannelijk woord", level: 3 },
+                { it: "la volpe", nl: "de vos", note: "Vrouwelijk woord", level: 3 },
+                { it: "il cervo", nl: "het hert", note: "Mannelijk woord", level: 3 },
+                { it: "la spiaggia", nl: "het strand", note: "Vrouwelijk woord", level: 3 },
+                { it: "la cascata", nl: "de waterval", note: "Vrouwelijk woord", level: 3 },
+                // Niveau 4 - Gevorderd
+                { it: "il paesaggio", nl: "het landschap", note: "Mannelijk woord", level: 4 },
+                { it: "la foresta", nl: "het woud / de wildernis", note: "Vrouwelijk woord", level: 4 },
+                { it: "il vulcano", nl: "de vulkaan", note: "Mannelijk woord, bijv. Etna", level: 4 },
+                { it: "il terremoto", nl: "de aardbeving", note: "Mannelijk woord", level: 4 },
+                { it: "la quercia", nl: "de eik", note: "Vrouwelijk woord", level: 4 },
+                { it: "l'aquila", nl: "de adelaar", note: "Vrouwelijk woord, ook: de hoofdstad", level: 4 },
+                // Niveau 5 - Moeilijk
+                { it: "la biodiversità", nl: "de biodiversiteit", note: "Vrouwelijk woord", level: 5 },
+                { it: "il cambiamento climatico", nl: "de klimaatverandering", note: "Mannelijk woord", level: 5 },
+                { it: "la fauna", nl: "de fauna / de diersoorten", note: "Vrouwelijk woord", level: 5 },
+                { it: "la flora", nl: "de flora / de plantensoorten", note: "Vrouwelijk woord", level: 5 },
+                { it: "il cinghiale", nl: "het wild zwijn", note: "Mannelijk woord, veel in Toscane", level: 5 },
+                { it: "la riserva naturale", nl: "het natuurreservaat", note: "Vrouwelijk woord", level: 5 }
+            ]
+        },
+        health: {
+            name: "Gezondheid",
+            icon: "🏥",
+            words: [
+                // Niveau 1 - Basis
+                { it: "il dottore", nl: "de dokter (m)", note: "Vrouwelijk: la dottoressa", level: 1 },
+                { it: "l'ospedale", nl: "het ziekenhuis", note: "Mannelijk woord", level: 1 },
+                { it: "la medicina", nl: "de medicijn / de geneeskunde", note: "Vrouwelijk woord", level: 1 },
+                { it: "la salute", nl: "de gezondheid", note: "Vrouwelijk woord, toast: Salute!", level: 1 },
+                { it: "il mal di testa", nl: "de hoofdpijn", note: "Mannelijk woord", level: 1 },
+                // Niveau 2 - Eenvoudig
+                { it: "la febbre", nl: "de koorts", note: "Vrouwelijk woord", level: 2 },
+                { it: "il raffreddore", nl: "de verkoudheid", note: "Mannelijk woord", level: 2 },
+                { it: "il mal di gola", nl: "de keelpijn", note: "Mannelijk woord", level: 2 },
+                { it: "la farmacia", nl: "de apotheek", note: "Vrouwelijk woord", level: 2 },
+                { it: "il farmacista", nl: "de apotheker", note: "Vrouwelijk: la farmacista", level: 2 },
+                { it: "la visita medica", nl: "het doktersbezoek", note: "Vrouwelijk woord", level: 2 },
+                // Niveau 3 - Gemiddeld
+                { it: "l'allergia", nl: "de allergie", note: "Vrouwelijk woord", level: 3 },
+                { it: "il pronto soccorso", nl: "de eerste hulp / spoedeisende hulp", note: "Mannelijk woord", level: 3 },
+                { it: "la ricetta", nl: "het recept (medisch)", note: "Vrouwelijk woord, ook: kookrecept", level: 3 },
+                { it: "la pressione del sangue", nl: "de bloeddruk", note: "Vrouwelijk woord", level: 3 },
+                { it: "stare male", nl: "zich niet goed voelen / ziek zijn", note: "Letterlijk: slecht zijn", level: 3 },
+                { it: "stare bene", nl: "zich goed voelen / gezond zijn", note: "Letterlijk: goed zijn", level: 3 },
+                // Niveau 4 - Gevorderd
+                { it: "l'ambulanza", nl: "de ambulance", note: "Vrouwelijk woord", level: 4 },
+                { it: "il chirurgo", nl: "de chirurg", note: "Mannelijk woord", level: 4 },
+                { it: "l'intervento chirurgico", nl: "de operatie", note: "Mannelijk woord", level: 4 },
+                { it: "la radiografia", nl: "de röntgenfoto", note: "Vrouwelijk woord", level: 4 },
+                { it: "il dolore", nl: "de pijn", note: "Mannelijk woord", level: 4 },
+                // Niveau 5 - Moeilijk
+                { it: "la diagnosi", nl: "de diagnose", note: "Vrouwelijk woord", level: 5 },
+                { it: "la terapia", nl: "de therapie / de behandeling", note: "Vrouwelijk woord", level: 5 },
+                { it: "il reparto", nl: "de afdeling (ziekenhuis)", note: "Mannelijk woord", level: 5 },
+                { it: "la convalescenza", nl: "het herstel / het genezingsproces", note: "Vrouwelijk woord", level: 5 },
+                { it: "l'assicurazione sanitaria", nl: "de ziektekostenverzekering", note: "Vrouwelijk woord", level: 5 }
+            ]
+        },
+        shopping: {
+            name: "Winkelen",
+            icon: "🛍️",
+            words: [
+                // Niveau 1 - Basis
+                { it: "il negozio", nl: "de winkel", note: "Mannelijk woord", level: 1 },
+                { it: "comprare", nl: "kopen", note: "Regelmatig -are", level: 1 },
+                { it: "vendere", nl: "verkopen", note: "Regelmatig -ere", level: 1 },
+                { it: "il prezzo", nl: "de prijs", note: "Mannelijk woord", level: 1 },
+                { it: "quanto costa?", nl: "hoeveel kost het?", note: "Standaardzin bij winkelen", level: 1 },
+                // Niveau 2 - Eenvoudig
+                { it: "il mercato", nl: "de markt", note: "Mannelijk woord", level: 2 },
+                { it: "il supermercato", nl: "de supermarkt", note: "Mannelijk woord", level: 2 },
+                { it: "la cassa", nl: "de kassa", note: "Vrouwelijk woord", level: 2 },
+                { it: "lo scontrino", nl: "het kassabonnetje", note: "Mannelijk woord", level: 2 },
+                { it: "la borsa", nl: "de tas", note: "Vrouwelijk woord", level: 2 },
+                { it: "pagare", nl: "betalen", note: "Regelmatig -are", level: 2 },
+                // Niveau 3 - Gemiddeld
+                { it: "lo sconto", nl: "de korting", note: "Mannelijk woord", level: 3 },
+                { it: "la vetrina", nl: "de etalage", note: "Vrouwelijk woord", level: 3 },
+                { it: "il camerino", nl: "het kleedhokje / de paskamer", note: "Mannelijk woord", level: 3 },
+                { it: "la taglia", nl: "de maat (kleding)", note: "Vrouwelijk woord", level: 3 },
+                { it: "provare", nl: "passen (kleding) / proberen", note: "Regelmatig -are", level: 3 },
+                { it: "il reparto", nl: "de afdeling (winkel)", note: "Mannelijk woord", level: 3 },
+                // Niveau 4 - Gevorderd
+                { it: "il commesso", nl: "de winkelbediende (m)", note: "Vrouwelijk: la commessa", level: 4 },
+                { it: "fare shopping", nl: "shoppen / winkelen", note: "Engelstalige uitdrukking", level: 4 },
+                { it: "la ricevuta", nl: "het reçu / het bewijs van betaling", note: "Vrouwelijk woord", level: 4 },
+                { it: "il rimborso", nl: "de terugbetaling / het geld terug", note: "Mannelijk woord", level: 4 },
+                { it: "il buono regalo", nl: "de cadeaubon", note: "Mannelijk woord", level: 4 },
+                // Niveau 5 - Moeilijk
+                { it: "la boutique", nl: "de boetiek", note: "Frans leenwoord, vrouwelijk", level: 5 },
+                { it: "l'artigianato", nl: "het ambacht / het handwerk", note: "Mannelijk woord", level: 5 },
+                { it: "la liquidazione", nl: "de uitverkoop / de opruiming", note: "Vrouwelijk woord", level: 5 },
+                { it: "fare un affare", nl: "een koopje doen", note: "Idioom", level: 5 },
+                { it: "contrattare", nl: "onderhandelen / afdingen", note: "Regelmatig -are", level: 5 }
+            ]
+        },
+        emotions: {
+            name: "Gevoelens & Emoties",
+            icon: "❤️",
+            words: [
+                // Niveau 1 - Basis
+                { it: "felice", nl: "gelukkig / blij", note: "Bijvoeglijk naamwoord", level: 1 },
+                { it: "triste", nl: "verdrietig / treurig", note: "Bijvoeglijk naamwoord", level: 1 },
+                { it: "arrabbiato/a", nl: "boos / kwaad", note: "Past aan naar geslacht", level: 1 },
+                { it: "stanco/a", nl: "moe", note: "Past aan naar geslacht", level: 1 },
+                { it: "contento/a", nl: "tevreden / blij", note: "Past aan naar geslacht", level: 1 },
+                // Niveau 2 - Eenvoudig
+                { it: "avere paura", nl: "bang zijn", note: "Letterlijk: angst hebben", level: 2 },
+                { it: "avere vergogna", nl: "zich schamen", note: "Letterlijk: schaamte hebben", level: 2 },
+                { it: "ridere", nl: "lachen", note: "Onregelmatig werkwoord", level: 2 },
+                { it: "piangere", nl: "huilen", note: "Onregelmatig werkwoord", level: 2 },
+                { it: "amare", nl: "houden van / liefhebben", note: "Regelmatig -are", level: 2 },
+                { it: "l'amore", nl: "de liefde", note: "Mannelijk woord", level: 2 },
+                // Niveau 3 - Gemiddeld
+                { it: "la gioia", nl: "de vreugde / de blijdschap", note: "Vrouwelijk woord", level: 3 },
+                { it: "la tristezza", nl: "de verdrietigheid / de droefheid", note: "Vrouwelijk woord", level: 3 },
+                { it: "l'ansia", nl: "de angst / de bezorgdheid", note: "Vrouwelijk woord", level: 3 },
+                { it: "la nostalgia", nl: "het heimwee / de nostalgie", note: "Vrouwelijk woord", level: 3 },
+                { it: "emozionato/a", nl: "opgewonden / ontroerd", note: "Past aan naar geslacht", level: 3 },
+                { it: "sorpreso/a", nl: "verrast", note: "Past aan naar geslacht", level: 3 },
+                // Niveau 4 - Gevorderd
+                { it: "la speranza", nl: "de hoop", note: "Vrouwelijk woord", level: 4 },
+                { it: "la fiducia", nl: "het vertrouwen", note: "Vrouwelijk woord", level: 4 },
+                { it: "il rimpianto", nl: "het spijt / het berouw", note: "Mannelijk woord", level: 4 },
+                { it: "la gelosia", nl: "de jaloezie", note: "Vrouwelijk woord", level: 4 },
+                { it: "provare imbarazzo", nl: "verlegen zijn / zich schamen", note: "Letterlijk: verlegenheid voelen", level: 4 },
+                // Niveau 5 - Moeilijk
+                { it: "la commozione", nl: "de ontroering / de bewogenheid", note: "Vrouwelijk woord", level: 5 },
+                { it: "il senso di colpa", nl: "het schuldgevoel", note: "Mannelijk woord", level: 5 },
+                { it: "l'entusiasmo", nl: "het enthousiasme", note: "Mannelijk woord", level: 5 },
+                { it: "la rassegnazione", nl: "de berusting", note: "Vrouwelijk woord", level: 5 },
+                { it: "stravolgere qualcuno", nl: "iemand diep ontroeren / overstelpen", note: "Sterk werkwoord", level: 5 }
+            ]
         }
     },
 
