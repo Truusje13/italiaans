@@ -18,6 +18,7 @@ const App = {
         Conjugation.init();
         Speaking.init();
         GameModule.init();
+        Listening.init();
 
         // Setup responsive menu
         this.setupResponsiveMenu();

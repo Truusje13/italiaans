@@ -56,6 +56,10 @@
                     <span class="nav-text">Spreken</span>
                     <span class="progress-badge" id="speaking-progress">0%</span>
                 </li>
+                <li class="nav-item" data-module="listening">
+                    <span class="nav-icon">👂</span>
+                    <span class="nav-text">Luisteren</span>
+                </li>
                 <li class="nav-item" data-module="game">
                     <span class="nav-icon">🎮</span>
                     <span class="nav-text">Spellen</span>
@@ -117,6 +121,15 @@
                         <p>Oefen je uitspraak met spraakherkenning</p>
                         <div class="card-stats">
                             <span id="home-speaking-score">0%</span> uitspraakscore
+                        </div>
+                    </div>
+
+                    <div class="home-card" data-module="listening">
+                        <div class="card-icon">👂</div>
+                        <h3>Luisteren</h3>
+                        <p>Herken Italiaanse woorden op gehoor</p>
+                        <div class="card-stats">
+                            Oefen je luistervaardigheid
                         </div>
                     </div>
 
@@ -572,6 +585,80 @@
 
             </section>
 
+            <!-- Listening Module -->
+            <section id="listening-module" class="module">
+                <button class="back-to-home-btn" data-target="home">← Home</button>
+                <div class="module-header">
+                    <h2>👂 Luisteren</h2>
+                    <p>Herken Italiaanse woorden op gehoor</p>
+                </div>
+
+                <!-- Category Screen -->
+                <div id="listening-category-screen">
+                    <div class="listening-mode-toggle">
+                        <label class="hard-mode-label">
+                            <input type="checkbox" id="listening-hard-mode">
+                            <span>Moeilijke modus (typ de vertaling)</span>
+                        </label>
+                    </div>
+                    <h3>Kies een categorie:</h3>
+                    <div class="categories" id="listening-categories-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Exercise Screen -->
+                <div id="listening-exercise-screen" style="display:none;">
+                    <div class="listening-header">
+                        <button id="listening-back-btn" class="btn btn-secondary btn-small">← Categorieën</button>
+                        <span id="listening-category-name" class="listening-cat-label"></span>
+                        <span class="listening-counter">
+                            <span id="listening-current">1</span> / <span id="listening-total">10</span>
+                        </span>
+                    </div>
+
+                    <div class="listening-play-area">
+                        <p class="listening-instruction">Luister en kies de juiste vertaling</p>
+                        <button id="listening-replay-btn" class="listening-play-btn">🔊 Herspeel</button>
+                    </div>
+
+                    <!-- Multiple choice options -->
+                    <div id="listening-options-area" class="listening-options" style="display:grid;">
+                        <div id="listening-options"></div>
+                    </div>
+
+                    <!-- Text input (hard mode) -->
+                    <div id="listening-input-area" class="vocab-text-input" style="display:none;">
+                        <input type="text" id="listening-answer-input"
+                               placeholder="Typ de Nederlandse vertaling..."
+                               autocomplete="off" autocorrect="off" autocapitalize="off">
+                        <button id="listening-submit-btn" class="btn btn-primary">Controleer</button>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div id="listening-feedback" class="feedback-panel" style="display:none;"></div>
+                </div>
+
+                <!-- End Screen -->
+                <div id="listening-end-screen" style="display:none;">
+                    <div class="session-complete">
+                        <div class="session-complete-icon">👂</div>
+                        <h3>Sessie voltooid!</h3>
+                        <div class="score-display">
+                            <span id="listening-end-score" class="score-value">0 / 10</span>
+                            <span id="listening-end-pct" class="score-pct">0%</span>
+                        </div>
+                        <p id="listening-end-message"></p>
+                        <p class="xp-reward" id="listening-end-xp">+0 XP</p>
+                        <div class="session-complete-actions">
+                            <button id="listening-retry-btn" class="btn btn-primary">🔄 Opnieuw</button>
+                            <button id="listening-end-back-btn" class="btn btn-secondary">📋 Andere categorie</button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
         </main>
     </div>
 
@@ -585,6 +672,7 @@
     <script src="js/speaking.js"></script>
     <script src="js/custom-words.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/listening.js"></script>
     <script src="js/app.js"></script>
 
     <!-- Service Worker Registration -->
