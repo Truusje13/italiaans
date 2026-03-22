@@ -1,5 +1,28 @@
 // Vocabulary Module - Flashcards and exercises
 
+// Map numeric level (1-5) to CEFR
+const LEVEL_MAP = { 1: 'A1', 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2' };
+
+// Grammar topics related to each vocabulary category
+const VOCAB_GRAMMAR_LINKS = {
+    greetings:  ['pronouns-subject'],
+    food:       ['articles-definite', 'articles-indefinite'],
+    family:     ['possessives', 'adjectives'],
+    colors:     ['adjectives'],
+    travel:     ['prepositions'],
+    days:       [],
+    common:     ['questions', 'negation'],
+    body:       ['articles-definite', 'possessives'],
+    house:      ['prepositions', 'articles-definite'],
+    weather:    ['adjectives'],
+    work:       ['articles-definite'],
+    sport:      ['reflexive'],
+    nature:     ['articles-definite'],
+    health:     ['reflexive'],
+    shopping:   ['questions', 'comparatives'],
+    emotions:   ['reflexive', 'adjectives']
+};
+
 const Vocabulary = {
     currentCategory: null,
     currentWords: [],
@@ -26,6 +49,15 @@ const Vocabulary = {
         for (const [key, category] of Object.entries(allCategories)) {
             const stats = Progress.getCategoryStats(key);
             const isCustom = !!category.custom;
+            // Calculate level range for this category
+            const levels = category.words.map(w => w.level).filter(Boolean);
+            const minLvl = levels.length ? LEVEL_MAP[Math.min(...levels)] || '' : '';
+            const maxLvl = levels.length ? LEVEL_MAP[Math.max(...levels)] || '' : '';
+            const levelLabel = minLvl === maxLvl ? minLvl : `${minLvl}–${maxLvl}`;
+
+            // SRS due count
+            const dueCount = !isCustom ? Progress.getCategoryDueCount(key) : 0;
+
             const btn = document.createElement('button');
             btn.className = 'category-btn' + (isCustom ? ' category-btn-custom' : '');
             btn.dataset.category = key;
@@ -33,6 +65,8 @@ const Vocabulary = {
                 <span class="icon">${category.icon}</span>
                 <span class="name">${category.name}${isCustom ? ' <span class="custom-badge">Eigen</span>' : ''}</span>
                 <span class="count">${category.words.length} woord${category.words.length !== 1 ? 'en' : ''}</span>
+                ${levelLabel ? `<span class="level-badge level-${minLvl.replace(/[^A-Z0-9]/g,'')}">${levelLabel}</span>` : ''}
+                ${dueCount > 0 ? `<span class="srs-due-badge">🔁 ${dueCount}</span>` : ''}
                 ${stats.attempts > 0 ? `<span class="accuracy">${stats.accuracy}% correct</span>` : ''}
             `;
             container.appendChild(btn);
@@ -95,8 +129,12 @@ const Vocabulary = {
 
         if (!category) return;
 
-        // Shuffle words for this session
-        this.currentWords = this.shuffleArray([...category.words]);
+        // Prioritise SRS due words, then fill up to 10 with others
+        const { due, other } = Progress.getDueWords(categoryKey, category.words);
+        const shuffledDue = this.shuffleArray(due);
+        const shuffledOther = this.shuffleArray(other);
+        const combined = [...shuffledDue, ...shuffledOther];
+        this.currentWords = combined.slice(0, Math.max(10, shuffledDue.length));
         this.currentIndex = 0;
 
         // Show exercise area, hide category selector
@@ -117,8 +155,10 @@ const Vocabulary = {
         // Update progress
         document.getElementById('vocab-current').textContent = this.currentIndex + 1;
 
-        // Show Italian word
-        document.getElementById('vocab-italian').textContent = word.it;
+        // Show Italian word with level badge
+        const italianEl = document.getElementById('vocab-italian');
+        const cefr = word.level ? LEVEL_MAP[word.level] : '';
+        italianEl.innerHTML = `${word.it}${cefr ? ` <span class="word-level-badge level-${cefr.replace(/[^A-Z0-9]/g,'')}">${cefr}</span>` : ''}`;
 
         // Hide feedback
         document.getElementById('vocab-feedback').style.display = 'none';
@@ -252,6 +292,11 @@ const Vocabulary = {
         const icon = feedback.isCorrect ? '✓' : '✗';
         const title = feedback.isCorrect ? 'Correct!' : 'Helaas, dat is niet juist';
 
+        const word = this.currentWords[this.currentIndex];
+        const sentenceHtml = word?.sentence
+            ? `<div class="example-sentence">💬 <em>${word.sentence.it}</em> → ${word.sentence.nl}</div>`
+            : '';
+
         container.innerHTML = `
             <div class="feedback-header">
                 <span class="feedback-icon">${icon}</span>
@@ -261,6 +306,7 @@ const Vocabulary = {
                 <p class="correct-answer">Antwoord: ${feedback.correctAnswer}</p>
                 <p class="explanation">${feedback.explanation}</p>
                 ${feedback.tip && !feedback.isCorrect ? `<p class="tip">💡 Tip: ${feedback.tip}</p>` : ''}
+                ${sentenceHtml}
             </div>
             <button class="btn btn-primary" id="vocab-next-btn">Volgende</button>
         `;
@@ -293,7 +339,25 @@ const Vocabulary = {
         if (!exerciseArea) return;
 
         const stats = Progress.getCategoryStats(this.currentCategory);
-        const category = AppData.vocabulary[this.currentCategory];
+        const customCats = (typeof CustomWords !== 'undefined') ? CustomWords.getAll() : {};
+        const category = AppData.vocabulary[this.currentCategory] || customCats[this.currentCategory];
+
+        // Build grammar suggestion HTML
+        const links = VOCAB_GRAMMAR_LINKS[this.currentCategory] || [];
+        let grammarSuggestHtml = '';
+        if (links.length > 0) {
+            const topics = links.map(id => {
+                const topic = AppData.grammar?.find(t => t.id === id);
+                return topic ? `<button class="btn-grammar-suggest" data-topic="${id}">📖 ${topic.title}</button>` : '';
+            }).filter(Boolean).join('');
+            if (topics) {
+                grammarSuggestHtml = `
+                    <div class="grammar-suggestion">
+                        <p>📚 <strong>Gerelateerde grammatica:</strong></p>
+                        <div class="grammar-suggest-btns">${topics}</div>
+                    </div>`;
+            }
+        }
 
         exerciseArea.innerHTML = `
             <div class="session-complete">
@@ -309,6 +373,7 @@ const Vocabulary = {
                         <span class="stat-label">Correct</span>
                     </div>
                 </div>
+                ${grammarSuggestHtml}
                 <div class="session-actions">
                     <button class="btn btn-primary" id="vocab-restart">Opnieuw oefenen</button>
                     <button class="btn btn-secondary" id="vocab-back">Andere categorie</button>
@@ -323,6 +388,17 @@ const Vocabulary = {
 
         document.getElementById('vocab-back')?.addEventListener('click', () => {
             this.backToCategories();
+        });
+
+        // Grammar suggestion buttons
+        exerciseArea.querySelectorAll('.btn-grammar-suggest').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const topicId = btn.dataset.topic;
+                App.showModule('grammar');
+                if (typeof Grammar !== 'undefined') {
+                    setTimeout(() => Grammar.openTopicReadOnly(topicId), 100);
+                }
+            });
         });
     },
 

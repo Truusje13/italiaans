@@ -152,6 +152,41 @@
                         <span id="daily-goal-text">0 / 50 XP</span>
                     </div>
                 </div>
+
+                <!-- Progress Dashboard -->
+                <div class="dashboard-section">
+                    <button class="dashboard-toggle" id="dashboard-toggle">
+                        📊 Mijn voortgang <span class="dashboard-chevron">▼</span>
+                    </button>
+                    <div class="dashboard-body" id="dashboard-body" style="display:none;">
+                        <div class="dashboard-streak-calendar">
+                            <h4>Activiteit (laatste 30 dagen)</h4>
+                            <div class="streak-dots" id="streak-dots"></div>
+                        </div>
+                        <div class="dashboard-stats-grid">
+                            <div class="dashboard-stat">
+                                <span class="dashboard-stat-value" id="dash-words-learned">0</span>
+                                <span class="dashboard-stat-label">Woorden geleerd</span>
+                            </div>
+                            <div class="dashboard-stat">
+                                <span class="dashboard-stat-value" id="dash-grammar-done">0</span>
+                                <span class="dashboard-stat-label">Grammatica-lessen</span>
+                            </div>
+                            <div class="dashboard-stat">
+                                <span class="dashboard-stat-value" id="dash-verbs-mastered">0</span>
+                                <span class="dashboard-stat-label">Werkwoorden</span>
+                            </div>
+                            <div class="dashboard-stat">
+                                <span class="dashboard-stat-value" id="dash-streak">0</span>
+                                <span class="dashboard-stat-label">Dagen streak</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-categories">
+                            <h4>Woordenschat per categorie</h4>
+                            <div id="dashboard-category-bars"></div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Vocabulary Module -->
@@ -281,6 +316,13 @@
                 <div class="module-header">
                     <h2>Grammatica</h2>
                     <p>Leer de regels van de Italiaanse taal</p>
+                </div>
+
+                <!-- Pronunciation Guide -->
+                <div class="pronunciation-guide">
+                    <h3 class="section-subtitle">🗣️ Uitspraakg ids</h3>
+                    <p class="section-intro">Klik op een regel om de uitleg te zien en druk op 🔊 om het voorbeeld te horen.</p>
+                    <div id="pronunciation-rules"></div>
                 </div>
 
                 <div class="grammar-topics" id="grammar-topics">
@@ -673,6 +715,7 @@
     <script src="js/custom-words.js"></script>
     <script src="js/game.js"></script>
     <script src="js/listening.js"></script>
+    <script src="js/pronunciation.js"></script>
     <script src="js/app.js"></script>
 
     <!-- Service Worker Registration -->

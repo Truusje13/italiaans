@@ -19,6 +19,8 @@ const App = {
         Speaking.init();
         GameModule.init();
         Listening.init();
+        Pronunciation.init();
+        this.initDashboard();
 
         // Setup responsive menu
         this.setupResponsiveMenu();
@@ -87,6 +89,64 @@ const App = {
 
         // Scroll to top
         window.scrollTo(0, 0);
+    },
+
+    // Initialize progress dashboard
+    initDashboard() {
+        const toggle = document.getElementById('dashboard-toggle');
+        const body = document.getElementById('dashboard-body');
+        if (!toggle || !body) return;
+
+        toggle.addEventListener('click', () => {
+            const isOpen = body.style.display !== 'none';
+            body.style.display = isOpen ? 'none' : 'block';
+            toggle.querySelector('.dashboard-chevron').textContent = isOpen ? '▼' : '▲';
+            if (!isOpen) this.renderDashboard();
+        });
+    },
+
+    renderDashboard() {
+        const progress = Progress.load();
+
+        // Streak dots (last 30 days)
+        const dotsEl = document.getElementById('streak-dots');
+        if (dotsEl) {
+            const days = Progress.getLast30Days();
+            dotsEl.innerHTML = days.map(d => {
+                const cls = d.active ? (d.xp >= 50 ? 'dot-goal' : 'dot-active') : 'dot-empty';
+                return `<span class="streak-dot ${cls}" title="${d.date}: ${d.xp} XP"></span>`;
+            }).join('');
+        }
+
+        // Stats
+        const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+        setEl('dash-words-learned', progress.vocabulary.learned.length);
+        setEl('dash-grammar-done', progress.grammar.completedTopics.length);
+        setEl('dash-verbs-mastered', progress.conjugation.masteredVerbs.length);
+        setEl('dash-streak', progress.streak);
+
+        // Category bars
+        const barsEl = document.getElementById('dashboard-category-bars');
+        if (barsEl) {
+            const entries = Object.entries(AppData.vocabulary).map(([key, cat]) => {
+                const total = cat.words.length;
+                const learned = cat.words.filter((w, i) =>
+                    progress.vocabulary.learned.includes(`${key}_${i}`)
+                ).length;
+                const pct = total > 0 ? Math.round((learned / total) * 100) : 0;
+                return { name: cat.name, icon: cat.icon, learned, total, pct };
+            }).sort((a, b) => b.pct - a.pct);
+
+            barsEl.innerHTML = entries.map(e => `
+                <div class="cat-bar-row">
+                    <span class="cat-bar-label">${e.icon} ${e.name}</span>
+                    <div class="cat-bar-track">
+                        <div class="cat-bar-fill" style="width:${e.pct}%"></div>
+                    </div>
+                    <span class="cat-bar-pct">${e.learned}/${e.total}</span>
+                </div>
+            `).join('');
+        }
     },
 
     // Setup responsive menu for mobile

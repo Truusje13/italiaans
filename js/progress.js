@@ -39,7 +39,14 @@ const Progress = {
             practiced: [],         // Phrases that have been practiced
             averageScore: 0,
             totalPracticed: 0
-        }
+        },
+
+        srs: {
+            // wordId → { interval, easiness, repetitions, nextReview ('YYYY-MM-DD') }
+            schedule: {}
+        },
+
+        dailyHistory: []  // Array of { date: 'YYYY-MM-DD', xp: N } (last 90 days)
     },
 
     // Initialize or load progress
@@ -103,6 +110,18 @@ const Progress = {
         }
 
         progress.lastVisit = today;
+
+        // Record daily history
+        if (!progress.dailyHistory) progress.dailyHistory = [];
+        const todayStr = new Date().toISOString().slice(0, 10);
+        if (!progress.dailyHistory.find(d => d.date === todayStr)) {
+            progress.dailyHistory.push({ date: todayStr, xp: 0 });
+            // Keep only last 90 days
+            if (progress.dailyHistory.length > 90) {
+                progress.dailyHistory = progress.dailyHistory.slice(-90);
+            }
+        }
+
         this.save(progress);
     },
 
@@ -166,10 +185,19 @@ const Progress = {
             progress.vocabulary.categoryProgress[category].correct++;
         }
 
+        // Update SRS schedule
+        this.updateSRS(wordId, correct, progress);
+
         // Add XP
         const xpGained = correct ? 10 : 2;
         progress.xp += xpGained;
         progress.dailyXP += xpGained;
+
+        // Update daily history XP
+        if (!progress.dailyHistory) progress.dailyHistory = [];
+        const todayStr = new Date().toISOString().slice(0, 10);
+        const todayEntry = progress.dailyHistory.find(d => d.date === todayStr);
+        if (todayEntry) todayEntry.xp += xpGained;
 
         this.save(progress);
         this.updateUI(progress);
@@ -392,6 +420,101 @@ const Progress = {
             attempts: catProgress.attempts,
             accuracy: catProgress.attempts > 0 ? Math.round((catProgress.correct / catProgress.attempts) * 100) : 0
         };
+    },
+
+    // Update SRS schedule for a word (simplified SM-2)
+    updateSRS(wordId, correct, progress) {
+        if (!progress) progress = this.load();
+        if (!progress.srs) progress.srs = { schedule: {} };
+
+        const today = new Date().toISOString().slice(0, 10);
+        let entry = progress.srs.schedule[wordId] || { interval: 1, easiness: 2.5, repetitions: 0, nextReview: today };
+
+        if (correct) {
+            entry.repetitions++;
+            entry.interval = entry.repetitions === 1 ? 1 : Math.round(entry.interval * entry.easiness);
+            entry.easiness = Math.min(3.5, entry.easiness + 0.1);
+        } else {
+            entry.repetitions = 0;
+            entry.interval = 1;
+            entry.easiness = Math.max(1.3, entry.easiness - 0.2);
+        }
+
+        const next = new Date();
+        next.setDate(next.getDate() + entry.interval);
+        entry.nextReview = next.toISOString().slice(0, 10);
+        progress.srs.schedule[wordId] = entry;
+        // Note: caller must save(progress) after this
+    },
+
+    // Get words due for review in a category
+    getDueWords(categoryKey, words) {
+        const progress = this.load();
+        if (!progress.srs) return { due: [], other: words };
+        const today = new Date().toISOString().slice(0, 10);
+        const due = [];
+        const other = [];
+        words.forEach((word, idx) => {
+            const wordId = `${categoryKey}_${idx}`;
+            const entry = progress.srs.schedule[wordId];
+            if (!entry || entry.nextReview <= today) {
+                due.push(word);
+            } else {
+                other.push(word);
+            }
+        });
+        return { due, other };
+    },
+
+    // Count total due words across all categories
+    getTotalDueCount() {
+        const progress = this.load();
+        if (!progress.srs) return 0;
+        const today = new Date().toISOString().slice(0, 10);
+        let count = 0;
+        for (const [key, cat] of Object.entries(AppData.vocabulary)) {
+            cat.words.forEach((word, idx) => {
+                const wordId = `${key}_${idx}`;
+                const entry = progress.srs.schedule[wordId];
+                if (entry && entry.nextReview <= today && progress.vocabulary.learned.includes(wordId)) {
+                    count++;
+                }
+            });
+        }
+        return count;
+    },
+
+    // Count due words for a specific category
+    getCategoryDueCount(categoryKey) {
+        const progress = this.load();
+        if (!progress.srs) return 0;
+        const today = new Date().toISOString().slice(0, 10);
+        const cat = AppData.vocabulary[categoryKey];
+        if (!cat) return 0;
+        let count = 0;
+        cat.words.forEach((word, idx) => {
+            const wordId = `${categoryKey}_${idx}`;
+            const entry = progress.srs.schedule[wordId];
+            if (entry && entry.nextReview <= today && progress.vocabulary.learned.includes(wordId)) {
+                count++;
+            }
+        });
+        return count;
+    },
+
+    // Get last 30 days as array of { date, xp, active }
+    getLast30Days() {
+        const progress = this.load();
+        const history = progress.dailyHistory || [];
+        const days = [];
+        for (let i = 29; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dateStr = d.toISOString().slice(0, 10);
+            const entry = history.find(h => h.date === dateStr);
+            days.push({ date: dateStr, xp: entry ? entry.xp : 0, active: !!entry });
+        }
+        return days;
     },
 
     // Reset all progress (for testing or user request)

@@ -121,6 +121,11 @@ const Listening = {
         // Update progress counter
         document.getElementById('listening-current').textContent = this.currentIndex + 1;
 
+        // Show level badge on play button area
+        const cefr = word.level ? ({ 1:'A1',2:'A1',3:'A2',4:'B1',5:'B2' })[word.level] : '';
+        const instrEl = document.querySelector('.listening-instruction');
+        if (instrEl && cefr) instrEl.innerHTML = `Luister en kies de juiste vertaling <span class="word-level-badge level-${cefr}">${cefr}</span>`;
+
         // Hide feedback
         const feedback = document.getElementById('listening-feedback');
         feedback.style.display = 'none';
@@ -265,15 +270,22 @@ const Listening = {
         const icon = correct ? '✅' : '❌';
         const title = correct ? 'Goed!' : 'Helaas';
         const noteHtml = word.note ? `<p class="feedback-note">💡 ${word.note}</p>` : '';
+        const sentenceHtml = word.sentence
+            ? `<div class="example-sentence">💬 <em>${word.sentence.it}</em> → ${word.sentence.nl}</div>`
+            : '';
+        const cefr = word.level ? ({ 1:'A1',2:'A1',3:'A2',4:'B1',5:'B2' })[word.level] : '';
+        const levelHtml = cefr ? `<span class="word-level-badge level-${cefr}">${cefr}</span>` : '';
 
         panel.innerHTML = `
             <div class="feedback-header">
                 <span class="feedback-icon">${icon}</span>
                 <span class="feedback-title">${title}</span>
+                ${levelHtml}
             </div>
             <div class="feedback-content">
                 <p><strong>${word.it}</strong> = ${word.nl}</p>
                 ${noteHtml}
+                ${sentenceHtml}
             </div>
             <button class="btn btn-primary btn-next">
                 ${this.currentIndex + 1 < this.currentWords.length ? 'Volgende →' : 'Resultaat bekijken'}
