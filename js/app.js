@@ -1,12 +1,115 @@
 // Main Application - Navigation and initialization
 
+// Dark Mode
+const DarkMode = {
+    STORAGE_KEY: 'darkMode',
+
+    init() {
+        const enabled = localStorage.getItem(this.STORAGE_KEY) === 'true';
+        this.apply(enabled);
+        document.getElementById('dark-mode-toggle')
+            ?.addEventListener('click', () => this.toggle());
+    },
+
+    toggle() {
+        const next = !document.body.classList.contains('dark-mode');
+        localStorage.setItem(this.STORAGE_KEY, next);
+        this.apply(next);
+    },
+
+    apply(enabled) {
+        document.body.classList.toggle('dark-mode', enabled);
+        const btn = document.getElementById('dark-mode-toggle');
+        if (btn) btn.textContent = enabled ? '☀️' : '🌙';
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', enabled ? '#1a1a1a' : '#2e7d32');
+    }
+};
+
+// Daily Reminder
+const DailyReminder = {
+    PREF_KEY: 'notificationsEnabled',
+
+    init() {
+        this.updateButtonState();
+        document.getElementById('notification-toggle')
+            ?.addEventListener('click', () => this.handleToggle());
+        this.checkAndNotify();
+    },
+
+    isEnabled() {
+        return localStorage.getItem(this.PREF_KEY) === 'true';
+    },
+
+    updateButtonState() {
+        const btn = document.getElementById('notification-toggle');
+        if (!btn) return;
+        const enabled = this.isEnabled();
+        btn.textContent = enabled ? '🔕' : '🔔';
+        btn.title = enabled ? 'Herinnering uitschakelen' : 'Dagelijkse herinnering instellen';
+    },
+
+    async handleToggle() {
+        if (this.isEnabled()) {
+            localStorage.setItem(this.PREF_KEY, 'false');
+            this.updateButtonState();
+            return;
+        }
+        if (!('Notification' in window)) {
+            alert('Je browser ondersteunt geen meldingen.');
+            return;
+        }
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+            localStorage.setItem(this.PREF_KEY, 'true');
+            this.updateButtonState();
+            new Notification('Impara l\'Italiano 🇮🇹', {
+                body: 'Herinneringen zijn ingeschakeld! Tot vanavond.',
+                icon: 'icons/icon.svg'
+            });
+        } else {
+            alert('Meldingen zijn geblokkeerd. Pas dit aan in je browserinstellingen.');
+        }
+    },
+
+    checkAndNotify() {
+        if (!this.isEnabled()) return;
+        if (!('Notification' in window) || Notification.permission !== 'granted') return;
+
+        const hour = new Date().getHours();
+        if (hour < 18) return;
+
+        const todayStr = new Date().toISOString().slice(0, 10);
+        const lastNotified = localStorage.getItem('lastReminderDate');
+        if (lastNotified === todayStr) return;
+
+        const progress = Progress.load();
+        const todayEntry = progress.dailyHistory
+            ? progress.dailyHistory.find(d => d.date === todayStr)
+            : null;
+        if (todayEntry && todayEntry.xp > 0) return;
+
+        localStorage.setItem('lastReminderDate', todayStr);
+        new Notification('Impara l\'Italiano 🇮🇹', {
+            body: 'Je hebt vandaag nog niet geoefend. Doe nog even een paar minuten Italiaans!',
+            icon: 'icons/icon.svg'
+        });
+    }
+};
+
 const App = {
     currentModule: 'home',
 
     // Initialize the application
     init() {
+        // Apply dark mode before anything renders
+        DarkMode.init();
+
         // Initialize progress first
         Progress.init();
+
+        // Initialize daily reminder (needs progress data)
+        DailyReminder.init();
 
         // Setup navigation
         this.setupNavigation();

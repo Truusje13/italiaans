@@ -94,11 +94,22 @@ const CustomWords = {
 
     init() {
         this.bindNavButton();
+        document.getElementById('input-import-custom')
+            ?.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    this.importFromFile(file);
+                    e.target.value = '';
+                }
+            });
     },
 
     bindNavButton() {
         // The manage button in the vocabulary section
         document.addEventListener('click', (e) => {
+            if (e.target.closest('#btn-export-custom')) {
+                this.exportToFile();
+            }
             if (e.target.closest('#btn-manage-custom-words')) {
                 this.showManageScreen();
             }
@@ -282,6 +293,83 @@ const CustomWords = {
             this.deleteWord(key, index);
             this.renderWordList(key);
         }
+    },
+
+    exportToFile() {
+        const data = this.getAll();
+        const exportData = Object.entries(data).map(([key, cat]) => ({
+            key,
+            name: cat.name,
+            icon: cat.icon,
+            words: cat.words.map(w => ({ it: w.it, nl: w.nl, note: w.note || '' }))
+        }));
+        const json = JSON.stringify(exportData, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'mijn-italiaanse-woorden.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    },
+
+    importFromFile(file) {
+        const feedback = document.getElementById('custom-io-feedback');
+        const showFeedback = (msg, type) => {
+            if (!feedback) return;
+            feedback.textContent = msg;
+            feedback.className = `custom-io-feedback ${type}`;
+            feedback.style.display = 'block';
+            setTimeout(() => { feedback.style.display = 'none'; }, 4000);
+        };
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const parsed = JSON.parse(e.target.result);
+                if (!Array.isArray(parsed)) throw new Error('Ongeldig formaat: verwacht een array.');
+
+                const existing = this.getAll();
+                let imported = 0;
+                let skipped = 0;
+
+                parsed.forEach(cat => {
+                    if (!cat.name || !Array.isArray(cat.words)) { skipped++; return; }
+                    const baseKey = cat.key || ('custom_' + cat.name.toLowerCase()
+                        .replace(/[^a-z0-9]/g, '_').substring(0, 20));
+                    let key = baseKey;
+                    let counter = 1;
+                    while (existing[key]) {
+                        key = baseKey + '_' + counter;
+                        counter++;
+                    }
+                    existing[key] = {
+                        name: cat.name,
+                        icon: cat.icon || '📝',
+                        words: cat.words.map(w => ({
+                            it: String(w.it || '').trim(),
+                            nl: String(w.nl || '').trim(),
+                            note: String(w.note || '').trim(),
+                            level: 1
+                        })).filter(w => w.it && w.nl),
+                        custom: true
+                    };
+                    imported++;
+                });
+
+                this.save(existing);
+                this.renderCategoryList();
+                if (window.Vocabulary) Vocabulary.renderCategories();
+                showFeedback(
+                    `${imported} categorie${imported !== 1 ? 'ën' : ''} geïmporteerd${skipped > 0 ? `, ${skipped} overgeslagen` : ''}.`,
+                    'success'
+                );
+            } catch (err) {
+                showFeedback('Importeren mislukt: ' + err.message, 'error');
+            }
+        };
+        reader.onerror = () => showFeedback('Bestand kon niet worden gelezen.', 'error');
+        reader.readAsText(file);
     },
 
     escape(str) {

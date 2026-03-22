@@ -2283,3 +2283,243 @@ body {
     font-size: 0.85rem;
     margin-left: auto;
 }
+
+/* =============================================
+   Sidebar Controls (dark mode + notifications)
+   ============================================= */
+.sidebar-controls {
+    padding: 0.5rem 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sidebar-icon-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: white;
+    line-height: 1;
+}
+
+.sidebar-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+/* =============================================
+   Custom Words Export / Import
+   ============================================= */
+.custom-io-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.custom-import-label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+.custom-io-feedback {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.custom-io-feedback.success {
+    background: rgba(76, 175, 80, 0.12);
+    color: #2e7d32;
+    border-left: 3px solid #4caf50;
+}
+
+.custom-io-feedback.error {
+    background: rgba(244, 67, 54, 0.08);
+    color: #c62828;
+    border-left: 3px solid #f44336;
+}
+
+/* =============================================
+   Dark Mode
+   ============================================= */
+body.dark-mode {
+    --background-color: #121212;
+    --card-background: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #9e9e9e;
+}
+
+body.dark-mode .main-content {
+    background: #121212;
+}
+
+body.dark-mode .home-card,
+body.dark-mode .module-card,
+body.dark-mode .flashcard,
+body.dark-mode .pron-rule,
+body.dark-mode .custom-cat-item,
+body.dark-mode .custom-word-item,
+body.dark-mode .dashboard-stat {
+    background: var(--card-background);
+    border-color: #333;
+}
+
+body.dark-mode .btn-secondary {
+    background: #2c2c2c;
+    color: var(--text-primary);
+    border-color: #444;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: #383838;
+}
+
+body.dark-mode .category-btn,
+body.dark-mode .choice-btn,
+body.dark-mode .listening-option {
+    background: #2c2c2c;
+    color: var(--text-primary);
+    border-color: #444;
+}
+
+body.dark-mode .category-btn:hover,
+body.dark-mode .choice-btn:hover,
+body.dark-mode .listening-option:hover {
+    background: #383838;
+    border-color: var(--primary-light);
+}
+
+body.dark-mode .selector-group select,
+body.dark-mode .text-input-mode input,
+body.dark-mode .form-row input,
+body.dark-mode .listening-text-input,
+body.dark-mode #listening-answer-input {
+    background: #2c2c2c;
+    color: var(--text-primary);
+    border-color: #444;
+}
+
+body.dark-mode .goal-bar {
+    background: #333;
+}
+
+body.dark-mode .custom-form {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-mode .custom-words-intro,
+body.dark-mode .custom-cat-info span,
+body.dark-mode .custom-word-arrow,
+body.dark-mode .section-intro {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .dashboard-section {
+    border-color: #333;
+}
+
+body.dark-mode .dashboard-toggle {
+    background: #2a2a2a;
+    color: var(--text-primary);
+    border-color: #333;
+}
+
+body.dark-mode .dashboard-toggle:hover {
+    background: #333;
+}
+
+body.dark-mode .dashboard-body {
+    background: #1e1e1e;
+}
+
+body.dark-mode .mode-toggle {
+    border-top-color: #333;
+}
+
+body.dark-mode .feedback-panel {
+    background: #1e1e1e;
+    border-color: #333;
+}
+
+body.dark-mode .feedback-panel.success {
+    background: rgba(76, 175, 80, 0.1);
+}
+
+body.dark-mode .feedback-panel.error {
+    background: rgba(244, 67, 54, 0.08);
+}
+
+body.dark-mode .pron-rule-header {
+    background: #2a2a2a;
+    color: var(--text-primary);
+}
+
+body.dark-mode .pron-rule-header:hover {
+    background: #333;
+}
+
+body.dark-mode .pron-rule-body {
+    background: #1e1e1e;
+}
+
+body.dark-mode .pron-example {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-mode .pron-dutch {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .example-sentence {
+    background: #2a2a2a;
+    border-color: #555;
+    color: var(--text-secondary);
+}
+
+body.dark-mode .word-card {
+    background: linear-gradient(135deg, #1e3a1e 0%, #2a2a2a 100%);
+    color: var(--text-primary);
+}
+
+body.dark-mode .topic-card {
+    background: var(--card-background);
+    border-color: #333;
+    color: var(--text-primary);
+}
+
+body.dark-mode .topic-card:hover {
+    border-color: var(--primary-light);
+}
+
+body.dark-mode .game-choice-btn {
+    background: #2c2c2c;
+    color: var(--text-primary);
+    border-color: #444;
+}
+
+body.dark-mode .cat-bar-track {
+    background: #333;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode textarea {
+    background: #2c2c2c;
+    color: var(--text-primary);
+    border-color: #444;
+}
+
+body.dark-mode .speaking-phrase-card {
+    background: var(--card-background);
+    color: var(--text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    /* Respect system preference on first visit */
+}
