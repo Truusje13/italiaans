@@ -124,6 +124,7 @@ const App = {
         Listening.init();
         Pronunciation.init();
         this.initDashboard();
+        this.initLevelSelector();
 
         // Setup responsive menu
         this.setupResponsiveMenu();
@@ -274,6 +275,60 @@ const App = {
                 sidebar.classList.remove('open');
             }
         });
+    },
+
+    // Initialize the level selector on the home page
+    initLevelSelector() {
+        this.renderLevelSelector();
+        document.getElementById('level-selector-btns')
+            ?.addEventListener('click', (e) => {
+                const btn = e.target.closest('.level-sel-btn');
+                if (!btn) return;
+                Progress.setUserLevel(parseInt(btn.dataset.level));
+                this.renderLevelSelector();
+                if (window.Vocabulary) Vocabulary.renderCategories();
+                if (window.Listening) Listening.renderCategories();
+            });
+    },
+
+    // Render the level selector UI and progress bar
+    renderLevelSelector() {
+        const CEFR = { 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2 / Alles' };
+        const userLevel = Progress.getUserLevel();
+
+        // Mark active button
+        document.querySelectorAll('.level-sel-btn').forEach(btn => {
+            btn.classList.toggle('active', parseInt(btn.dataset.level) === userLevel);
+        });
+
+        // Progress bar and text
+        const { learned, total, pct } = Progress.getLevelProgress(userLevel);
+        const bar = document.getElementById('level-progress-bar');
+        const txt = document.getElementById('level-progress-text');
+        if (bar) bar.style.width = pct + '%';
+        if (txt) txt.textContent = `${learned} van ${total} ${CEFR[userLevel]}-woorden geleerd (${pct}%)`;
+
+        // Level-up suggestion when 80%+ mastered
+        const nextLevel = userLevel < 5 ? userLevel + 1 : null;
+        const CEFR_NEXT = { 3: 'A2', 4: 'B1', 5: 'B2 / Alles' };
+        const existingAlert = document.getElementById('level-up-alert');
+        if (pct >= 80 && nextLevel && !existingAlert) {
+            const alertEl = document.createElement('div');
+            alertEl.id = 'level-up-alert';
+            alertEl.className = 'level-up-alert';
+            alertEl.innerHTML = `🎉 Goed gedaan! Je beheerst ${pct}% van alle ${CEFR[userLevel]}-woorden. Klaar voor <strong>${CEFR_NEXT[nextLevel]}</strong>?
+                <button class="btn btn-small btn-primary btn-level-up">Ga naar ${CEFR_NEXT[nextLevel]}</button>`;
+            txt?.after(alertEl);
+            alertEl.querySelector('.btn-level-up').addEventListener('click', () => {
+                Progress.setUserLevel(nextLevel);
+                alertEl.remove();
+                this.renderLevelSelector();
+                if (window.Vocabulary) Vocabulary.renderCategories();
+                if (window.Listening) Listening.renderCategories();
+            });
+        } else if ((pct < 80 || !nextLevel) && existingAlert) {
+            existingAlert.remove();
+        }
     }
 };
 

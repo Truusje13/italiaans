@@ -2523,3 +2523,120 @@ body.dark-mode .speaking-phrase-card {
 @media (prefers-color-scheme: dark) {
     /* Respect system preference on first visit */
 }
+
+/* =============================================
+   Level Selector
+   ============================================= */
+.level-selector-section {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.level-selector-section .section-subtitle {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.level-selector-btns {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.level-sel-btn {
+    padding: 0.45rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    background: white;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.level-sel-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.level-sel-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.level-progress-bar-wrap {
+    background: #e0e0e0;
+    border-radius: 8px;
+    height: 8px;
+    margin: 0.4rem 0;
+    overflow: hidden;
+}
+
+.level-progress-bar {
+    background: var(--primary-color);
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease;
+}
+
+.level-progress-text {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0;
+}
+
+.level-up-alert {
+    margin-top: 0.75rem;
+    padding: 0.65rem 0.9rem;
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 3px solid #4caf50;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* Dark mode for level selector */
+body.dark-mode .level-selector-section {
+    background: var(--card-background);
+}
+
+body.dark-mode .level-sel-btn {
+    background: #2c2c2c;
+    border-color: #444;
+    color: var(--text-primary);
+}
+
+body.dark-mode .level-sel-btn:hover {
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+}
+
+body.dark-mode .level-sel-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+body.dark-mode .level-progress-bar-wrap {
+    background: #333;
+}
+
+body.dark-mode .level-progress-text {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .level-up-alert {
+    background: rgba(76, 175, 80, 0.08);
+}

@@ -46,7 +46,9 @@ const Progress = {
             schedule: {}
         },
 
-        dailyHistory: []  // Array of { date: 'YYYY-MM-DD', xp: N } (last 90 days)
+        dailyHistory: [],  // Array of { date: 'YYYY-MM-DD', xp: N } (last 90 days)
+
+        userLevel: 2       // Max numeric word level to show: 2=A1, 3=A2, 4=B1, 5=B2/Alles
     },
 
     // Initialize or load progress
@@ -515,6 +517,40 @@ const Progress = {
             days.push({ date: dateStr, xp: entry ? entry.xp : 0, active: !!entry });
         }
         return days;
+    },
+
+    // Get the user's current level (numeric)
+    getUserLevel() {
+        const p = this.load();
+        return p.userLevel || 2;
+    },
+
+    // Set the user's current level and save
+    setUserLevel(level) {
+        const p = this.load();
+        p.userLevel = level;
+        this.save(p);
+    },
+
+    // Calculate progress at a given max level
+    // Returns { learned, total, pct }
+    getLevelProgress(maxLevel) {
+        const p = this.load();
+        const learned = new Set(p.vocabulary.learned || []);
+        let levelTotal = 0, levelLearned = 0;
+        Object.entries(AppData.vocabulary).forEach(([cat, catData]) => {
+            catData.words.forEach((w, i) => {
+                if (w.level && w.level <= maxLevel) {
+                    levelTotal++;
+                    if (learned.has(`${cat}_${i}`)) levelLearned++;
+                }
+            });
+        });
+        return {
+            learned: levelLearned,
+            total: levelTotal,
+            pct: levelTotal ? Math.round(levelLearned / levelTotal * 100) : 0
+        };
     },
 
     // Reset all progress (for testing or user request)

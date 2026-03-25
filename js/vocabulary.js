@@ -58,13 +58,23 @@ const Vocabulary = {
             // SRS due count
             const dueCount = !isCustom ? Progress.getCategoryDueCount(key) : 0;
 
+            // Available words at current user level
+            const userLevel = Progress.getUserLevel();
+            const availableCount = !isCustom && userLevel < 5
+                ? category.words.filter(w => !w.level || w.level <= userLevel).length
+                : category.words.length;
+            const totalCount = category.words.length;
+            const countLabel = (!isCustom && userLevel < 5 && availableCount < totalCount)
+                ? `${availableCount} van ${totalCount} woorden`
+                : `${totalCount} woord${totalCount !== 1 ? 'en' : ''}`;
+
             const btn = document.createElement('button');
             btn.className = 'category-btn' + (isCustom ? ' category-btn-custom' : '');
             btn.dataset.category = key;
             btn.innerHTML = `
                 <span class="icon">${category.icon}</span>
                 <span class="name">${category.name}${isCustom ? ' <span class="custom-badge">Eigen</span>' : ''}</span>
-                <span class="count">${category.words.length} woord${category.words.length !== 1 ? 'en' : ''}</span>
+                <span class="count">${countLabel}</span>
                 ${levelLabel ? `<span class="level-badge level-${minLvl.replace(/[^A-Z0-9]/g,'')}">${levelLabel}</span>` : ''}
                 ${dueCount > 0 ? `<span class="srs-due-badge">🔁 ${dueCount}</span>` : ''}
                 ${stats.attempts > 0 ? `<span class="accuracy">${stats.accuracy}% correct</span>` : ''}
@@ -129,8 +139,14 @@ const Vocabulary = {
 
         if (!category) return;
 
+        // Filter words to current user level
+        const userLevel = Progress.getUserLevel();
+        const levelWords = userLevel < 5
+            ? category.words.filter(w => !w.level || w.level <= userLevel)
+            : category.words;
+
         // Prioritise SRS due words, then fill up to 10 with others
-        const { due, other } = Progress.getDueWords(categoryKey, category.words);
+        const { due, other } = Progress.getDueWords(categoryKey, levelWords);
         const shuffledDue = this.shuffleArray(due);
         const shuffledOther = this.shuffleArray(other);
         const combined = [...shuffledDue, ...shuffledOther];

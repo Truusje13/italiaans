@@ -1,5 +1,5 @@
 // Service Worker for Impara l'Italiano PWA
-const CACHE_NAME = 'impara-italiano-v7';
+const CACHE_NAME = 'impara-italiano-v8';
 
 // Files to cache for offline use
 const FILES_TO_CACHE = [

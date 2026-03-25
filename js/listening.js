@@ -94,8 +94,14 @@ const Listening = {
         const category = AppData.vocabulary[categoryKey] || customCategories[categoryKey];
         if (!category) return;
 
+        // Filter to current user level
+        const userLevel = Progress.getUserLevel();
+        const levelWords = userLevel < 5
+            ? category.words.filter(w => !w.level || w.level <= userLevel)
+            : category.words;
+
         // Pick up to sessionSize words, shuffled
-        const shuffled = this.shuffleArray([...category.words]);
+        const shuffled = this.shuffleArray([...levelWords]);
         this.currentWords = shuffled.slice(0, this.sessionSize);
         this.currentIndex = 0;
         this.score = 0;
