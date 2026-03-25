@@ -293,7 +293,7 @@ const App = {
 
     // Render the level selector UI and progress bar
     renderLevelSelector() {
-        const CEFR = { 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2 / Alles' };
+        const CEFR = { 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2', 6: 'C1', 7: 'C2 / Alles' };
         const userLevel = Progress.getUserLevel();
 
         // Mark active button
@@ -309,8 +309,8 @@ const App = {
         if (txt) txt.textContent = `${learned} van ${total} ${CEFR[userLevel]}-woorden geleerd (${pct}%)`;
 
         // Level-up suggestion when 80%+ mastered
-        const nextLevel = userLevel < 5 ? userLevel + 1 : null;
-        const CEFR_NEXT = { 3: 'A2', 4: 'B1', 5: 'B2 / Alles' };
+        const nextLevel = userLevel < 7 ? userLevel + 1 : null;
+        const CEFR_NEXT = { 3: 'A2', 4: 'B1', 5: 'B2', 6: 'C1', 7: 'C2 / Alles' };
         const existingAlert = document.getElementById('level-up-alert');
         if (pct >= 80 && nextLevel && !existingAlert) {
             const alertEl = document.createElement('div');
@@ -326,7 +326,7 @@ const App = {
                 if (window.Vocabulary) Vocabulary.renderCategories();
                 if (window.Listening) Listening.renderCategories();
             });
-        } else if ((pct < 80 || !nextLevel) && existingAlert) {
+        } else if ((pct < 80 || userLevel >= 7) && existingAlert) {
             existingAlert.remove();
         }
     }

@@ -1974,6 +1974,8 @@ body {
 .level-A2  { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
 .level-B1  { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
 .level-B2  { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; }
+.level-C1  { background: #ede7f6; color: #4527a0; border: 1px solid #b39ddb; }
+.level-C2  { background: #1a1a2e; color: #e0e0ff; border: 1px solid #5c5c99; }
 
 /* SRS due badge on category cards */
 .srs-due-badge {

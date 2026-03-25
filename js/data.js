@@ -42,7 +42,18 @@ const AppData = {
                 { it: "Le presento...", nl: "Mag ik u voorstellen aan...", note: "Formeel", level: 5 },
                 { it: "Ti presento...", nl: "Dit is... (informeel)", note: "", level: 5 },
                 { it: "Benvenuto/a", nl: "Welkom", note: "Past aan naar geslacht", level: 5 },
-                { it: "In bocca al lupo!", nl: "Succes! (Letterlijk: in de bek van de wolf)", note: "Antwoord: Crepi!", level: 5 }
+                { it: "In bocca al lupo!", nl: "Succes! (Letterlijk: in de bek van de wolf)", note: "Antwoord: Crepi!", level: 5 },
+                // Niveau 6 - C1 (formeel/zakelijk)
+                { it: "Distinti saluti", nl: "Met vriendelijke groet (formele afsluiting)", note: "Gebruik in zakelijke brieven/e-mails", level: 6 },
+                { it: "Con i miei più cordiali saluti", nl: "Met mijn hartelijke groeten", note: "Iets warmer dan 'Distinti saluti'", level: 6 },
+                { it: "Mi permetta di presentarmi", nl: "Laat mij mij voorstellen (formeel)", note: "Formele kennismaking", level: 6 },
+                { it: "In attesa di un suo riscontro", nl: "In afwachting van uw reactie", note: "Formule aan het einde van een e-mail", level: 6 },
+                { it: "La ringrazio anticipatamente", nl: "Bij voorbaat dank", note: "Formeel, in correspondentie", level: 6 },
+                { it: "Porgo i miei saluti", nl: "Ik stuur u mijn groeten", note: "Neutraal-formeel", level: 6 },
+                // Niveau 7 - C2 (zeer formeel / schrijftaal)
+                { it: "Voglia gradire i miei più distinti saluti", nl: "Gelieve mijn meest onderscheiden groeten te ontvangen", note: "Zeer formeel, ouderwets correct", level: 7 },
+                { it: "Con ossequi", nl: "Met eerbied / Hoogachtend", note: "Zeer formeel, bijna archaïsch", level: 7 },
+                { it: "Ringraziandola anticipatamente della sua cortese attenzione", nl: "Bij voorbaat dankend voor uw vriendelijke aandacht", note: "Officiële correspondentie", level: 7 }
             ]
         },
         numbers: {
@@ -365,7 +376,23 @@ const AppData = {
                 { it: "magari", nl: "misschien/hopelijk/als het maar kon", note: "Veelzijdig woord", level: 5 },
                 { it: "piuttosto", nl: "eerder/nogal", note: "", level: 5 },
                 { it: "appena", nl: "net/zodra/nauwelijks", note: "Meerdere betekenissen", level: 5 },
-                { it: "mica", nl: "toch niet/helemaal niet", note: "Versterkt ontkenning", level: 5 }
+                { it: "mica", nl: "toch niet/helemaal niet", note: "Versterkt ontkenning", level: 5 },
+                // Niveau 6 - C1 (geavanceerde voegwoorden + congiuntivo)
+                { it: "benché", nl: "hoewel / ofschoon", note: "+ congiuntivo", level: 6 },
+                { it: "sebbene", nl: "hoewel / ook al", note: "+ congiuntivo", level: 6 },
+                { it: "affinché", nl: "opdat / zodat", note: "+ congiuntivo", level: 6 },
+                { it: "purché", nl: "mits / als maar", note: "+ congiuntivo", level: 6 },
+                { it: "qualora", nl: "ingeval / mocht het zo zijn dat", note: "+ congiuntivo", level: 6 },
+                { it: "eppure", nl: "en toch / maar toch", note: "Tegenstelling na verwachting", level: 6 },
+                { it: "nonché", nl: "evenals / alsmede", note: "Formeel voegwoord", level: 6 },
+                { it: "pertanto", nl: "daarom / bijgevolg", note: "Formeler dan 'quindi'", level: 6 },
+                // Niveau 7 - C2 (literair/schrijftaal)
+                { it: "ciononostante", nl: "desondanks / niettemin", note: "Schrijftaal, formeel", level: 7 },
+                { it: "nondimeno", nl: "toch / desalniettemin", note: "Literair, archaïsch aandoend", level: 7 },
+                { it: "laddove", nl: "daar waar / terwijl (tegenstelling)", note: "Litterair voegwoord", level: 7 },
+                { it: "allorché", nl: "toen / zodra", note: "Litterair, schrijftaal", level: 7 },
+                { it: "quand'anche", nl: "zelfs als / ook al", note: "Litterair, + congiuntivo", level: 7 },
+                { it: "frattanto", nl: "ondertussen / intussen", note: "Formeler dan 'nel frattempo'", level: 7 }
             ]
         },
         body: {
@@ -532,7 +559,20 @@ const AppData = {
                 { it: "il colloquio di lavoro", nl: "het sollicitatiegesprek", note: "", level: 5 },
                 { it: "il curriculum vitae", nl: "het cv", note: "", level: 5 },
                 { it: "la promozione", nl: "de promotie", note: "Vrouwelijk woord", level: 5 },
-                { it: "il licenziamento", nl: "het ontslag", note: "Mannelijk woord", level: 5 }
+                { it: "il licenziamento", nl: "het ontslag", note: "Mannelijk woord", level: 5 },
+                // Niveau 6 - C1 (zakelijk/professioneel)
+                { it: "la contrattazione collettiva", nl: "de collectieve arbeidsonderhandelingen", note: "CAO in het Italiaans: CCNL", level: 6 },
+                { it: "l'organigramma", nl: "het organigram / de organisatiestructuur", note: "Mannelijk woord", level: 6 },
+                { it: "il mansionario", nl: "de functiebeschrijving / het takenpakket", note: "Mannelijk woord", level: 6 },
+                { it: "la fatturazione", nl: "de facturering / het facturatieproces", note: "Vrouwelijk woord", level: 6 },
+                { it: "la trattativa", nl: "de onderhandeling / de bespreking", note: "Vrouwelijk woord", level: 6 },
+                { it: "il piano aziendale", nl: "het bedrijfsplan / businessplan", note: "Mannelijk woord", level: 6 },
+                { it: "la rendicontazione", nl: "de verantwoording / de rapportage", note: "Vrouwelijk woord", level: 6 },
+                // Niveau 7 - C2 (abstracte bedrijfstermen)
+                { it: "la lungimiranza", nl: "de vooruitziendheid / het strategisch inzicht", note: "Vrouwelijk woord, letterlijk: 'ver kijken'", level: 7 },
+                { it: "l'equanimità", nl: "de gelijkmoedigheid / de kalmte", note: "Vrouwelijk woord", level: 7 },
+                { it: "la sussidiarietà", nl: "het subsidiariteitsbeginsel", note: "Vrouwelijk woord, Europees begrip", level: 7 },
+                { it: "la resilienza organizzativa", nl: "de organisatorische veerkracht", note: "Vrouwelijk woord, managementtaal", level: 7 }
             ]
         },
         sport: {
@@ -733,7 +773,20 @@ const AppData = {
                 { it: "il senso di colpa", nl: "het schuldgevoel", note: "Mannelijk woord", level: 5 },
                 { it: "l'entusiasmo", nl: "het enthousiasme", note: "Mannelijk woord", level: 5 },
                 { it: "la rassegnazione", nl: "de berusting", note: "Vrouwelijk woord", level: 5 },
-                { it: "stravolgere qualcuno", nl: "iemand diep ontroeren / overstelpen", note: "Sterk werkwoord", level: 5 }
+                { it: "stravolgere qualcuno", nl: "iemand diep ontroeren / overstelpen", note: "Sterk werkwoord", level: 5 },
+                // Niveau 6 - C1 (genuanceerde emoties)
+                { it: "la malinconia", nl: "de melancholie / de weemoed", note: "Vrouwelijk woord", level: 6 },
+                { it: "l'angoscia", nl: "de angst / de beklemmende onrust", note: "Vrouwelijk woord, sterker dan 'paura'", level: 6 },
+                { it: "il rimorso", nl: "het berouw / het schuldgevoel", note: "Mannelijk woord, sterker dan 'senso di colpa'", level: 6 },
+                { it: "l'euforia", nl: "de euforie / de uitgelatenheid", note: "Vrouwelijk woord", level: 6 },
+                { it: "l'ambivalenza", nl: "de ambivalentie / de tegenstrijdige gevoelens", note: "Vrouwelijk woord", level: 6 },
+                { it: "il rimpianto", nl: "de spijt / het gemis", note: "Mannelijk woord, spijt over iets wat voorbij is", level: 6 },
+                // Niveau 7 - C2 (dieppsychologisch / literair)
+                { it: "lo sconforto", nl: "de moedeloosheid / de ontmoediging", note: "Mannelijk woord", level: 7 },
+                { it: "il turbamento", nl: "de innerlijke onrust / de verwarring", note: "Mannelijk woord", level: 7 },
+                { it: "la velleità", nl: "de ijdele ambitie / de onhaalbare wens", note: "Vrouwelijk woord, iets willen zonder het echt na te streven", level: 7 },
+                { it: "l'avvilimento", nl: "de neerslachtigheid / de ontluistering", note: "Mannelijk woord", level: 7 },
+                { it: "l'esaltazione", nl: "de extase / de vervoering", note: "Vrouwelijk woord, positieve overdrijving", level: 7 }
             ]
         }
     },

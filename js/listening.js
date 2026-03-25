@@ -96,7 +96,7 @@ const Listening = {
 
         // Filter to current user level
         const userLevel = Progress.getUserLevel();
-        const levelWords = userLevel < 5
+        const levelWords = userLevel < 7
             ? category.words.filter(w => !w.level || w.level <= userLevel)
             : category.words;
 
@@ -128,7 +128,7 @@ const Listening = {
         document.getElementById('listening-current').textContent = this.currentIndex + 1;
 
         // Show level badge on play button area
-        const cefr = word.level ? ({ 1:'A1',2:'A1',3:'A2',4:'B1',5:'B2' })[word.level] : '';
+        const cefr = word.level ? ({ 1:'A1',2:'A1',3:'A2',4:'B1',5:'B2',6:'C1',7:'C2' })[word.level] : '';
         const instrEl = document.querySelector('.listening-instruction');
         if (instrEl && cefr) instrEl.innerHTML = `Luister en kies de juiste vertaling <span class="word-level-badge level-${cefr}">${cefr}</span>`;
 
@@ -279,7 +279,7 @@ const Listening = {
         const sentenceHtml = word.sentence
             ? `<div class="example-sentence">💬 <em>${word.sentence.it}</em> → ${word.sentence.nl}</div>`
             : '';
-        const cefr = word.level ? ({ 1:'A1',2:'A1',3:'A2',4:'B1',5:'B2' })[word.level] : '';
+        const cefr = word.level ? ({ 1:'A1',2:'A1',3:'A2',4:'B1',5:'B2',6:'C1',7:'C2' })[word.level] : '';
         const levelHtml = cefr ? `<span class="word-level-badge level-${cefr}">${cefr}</span>` : '';
 
         panel.innerHTML = `

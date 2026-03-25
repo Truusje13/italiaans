@@ -1,7 +1,7 @@
 // Vocabulary Module - Flashcards and exercises
 
 // Map numeric level (1-5) to CEFR
-const LEVEL_MAP = { 1: 'A1', 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2' };
+const LEVEL_MAP = { 1: 'A1', 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2', 6: 'C1', 7: 'C2' };
 
 // Grammar topics related to each vocabulary category
 const VOCAB_GRAMMAR_LINKS = {
@@ -60,11 +60,11 @@ const Vocabulary = {
 
             // Available words at current user level
             const userLevel = Progress.getUserLevel();
-            const availableCount = !isCustom && userLevel < 5
+            const availableCount = !isCustom && userLevel < 7
                 ? category.words.filter(w => !w.level || w.level <= userLevel).length
                 : category.words.length;
             const totalCount = category.words.length;
-            const countLabel = (!isCustom && userLevel < 5 && availableCount < totalCount)
+            const countLabel = (!isCustom && userLevel < 7 && availableCount < totalCount)
                 ? `${availableCount} van ${totalCount} woorden`
                 : `${totalCount} woord${totalCount !== 1 ? 'en' : ''}`;
 
@@ -141,7 +141,7 @@ const Vocabulary = {
 
         // Filter words to current user level
         const userLevel = Progress.getUserLevel();
-        const levelWords = userLevel < 5
+        const levelWords = userLevel < 7
             ? category.words.filter(w => !w.level || w.level <= userLevel)
             : category.words;
 
