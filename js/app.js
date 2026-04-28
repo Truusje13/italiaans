@@ -124,6 +124,7 @@ const App = {
         Listening.init();
         Pronunciation.init();
         this.initDashboard();
+        this.renderLearningPath();
         this.initLevelSelector();
 
         // Setup responsive menu
@@ -193,6 +194,121 @@ const App = {
 
         // Scroll to top
         window.scrollTo(0, 0);
+
+        // Refresh learning path when navigating to home
+        if (moduleName === 'home') {
+            this.renderLearningPath();
+        }
+    },
+
+    // Determine the recommended next learning step
+    getNextStep() {
+        const userLevel = Progress.getUserLevel();
+        const { pct: vocabPct } = Progress.getLevelProgress(userLevel);
+        const grammarPct = Progress.getGrammarPct(userLevel);
+        const CEFR = { 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2', 6: 'C1', 7: 'C2' };
+
+        if (vocabPct >= 80 && userLevel < 7) {
+            const nextLvl = userLevel + 1;
+            return {
+                type: 'levelup', icon: '🏆',
+                label: `Je beheerst ${vocabPct}% van ${CEFR[userLevel]}! Klaar voor het volgende niveau?`,
+                btn: `Ga naar ${CEFR[nextLvl]}`,
+                action: () => {
+                    Progress.setUserLevel(nextLvl);
+                    this.renderLevelSelector();
+                    this.renderLearningPath();
+                    if (window.Vocabulary) Vocabulary.renderCategories();
+                    if (window.Listening) Listening.renderCategories();
+                }
+            };
+        }
+        if (vocabPct < 60) {
+            const cat = Progress.getWeakestVocabCategory(userLevel);
+            const catName = cat ? (AppData.vocabulary[cat]?.name || 'woordenschat') : 'woordenschat';
+            return {
+                type: 'vocabulary', icon: '📚',
+                label: `Oefen woordenschat: ${catName}`,
+                btn: 'Oefenen →',
+                action: () => {
+                    this.showModule('vocabulary');
+                    if (cat && window.Vocabulary)
+                        setTimeout(() => Vocabulary.startCategory(cat), 150);
+                }
+            };
+        }
+        if (grammarPct < 60 && vocabPct >= 30) {
+            const p = Progress.load();
+            const done = p.grammar.completedTopics;
+            const next = (AppData.grammar || []).find(t => !done.includes(t.id));
+            return {
+                type: 'grammar', icon: '📖',
+                label: `Leer grammatica: ${next?.title || 'volgende les'}`,
+                btn: 'Lees meer →',
+                action: () => {
+                    this.showModule('grammar');
+                    if (next && window.Grammar)
+                        setTimeout(() => Grammar.openTopicReadOnly(next.id), 150);
+                }
+            };
+        }
+        if (vocabPct >= 40) {
+            return {
+                type: 'conjugation', icon: '🔄',
+                label: 'Oefen werkwoordvervoegingen',
+                btn: 'Oefenen →',
+                action: () => this.showModule('conjugation')
+            };
+        }
+        if (vocabPct >= 50) {
+            return {
+                type: 'listening', icon: '👂',
+                label: 'Oefen je luistervaardigheid',
+                btn: 'Oefenen →',
+                action: () => this.showModule('listening')
+            };
+        }
+        return {
+            type: 'vocabulary', icon: '📚',
+            label: 'Begin met woordenschat oefenen',
+            btn: 'Start →',
+            action: () => this.showModule('vocabulary')
+        };
+    },
+
+    // Render the learning path widget on the home screen
+    renderLearningPath() {
+        const container = document.getElementById('learning-path-content');
+        if (!container) return;
+        const step = this.getNextStep();
+        const userLevel = Progress.getUserLevel();
+        const { pct } = Progress.getLevelProgress(userLevel);
+        const CEFR = { 2: 'A1', 3: 'A2', 4: 'B1', 5: 'B2', 6: 'C1', 7: 'C2' };
+        const isLevelUp = step.type === 'levelup';
+
+        container.innerHTML = `
+            <div class="leerpad-step${isLevelUp ? ' leerpad-levelup' : ''}">
+                <div class="leerpad-level-badge">
+                    Huidig niveau: <span class="level-badge level-${CEFR[userLevel]}">${CEFR[userLevel]}</span>
+                    <span class="leerpad-pct">${pct}% beheerst</span>
+                </div>
+                <div class="leerpad-bar-wrap">
+                    <div class="leerpad-bar" style="width:${pct}%"></div>
+                </div>
+                <div class="leerpad-next">
+                    <span class="leerpad-icon">${step.icon}</span>
+                    <span class="leerpad-label">${step.label}</span>
+                    <button class="btn btn-primary btn-small leerpad-action-btn">${step.btn}</button>
+                </div>
+            </div>`;
+
+        container.querySelector('.leerpad-action-btn')
+            ?.addEventListener('click', () => step.action());
+    },
+
+    // Navigate to the recommended next step (called from session-complete screens)
+    navigateNextStep() {
+        this.getNextStep().action();
     },
 
     // Initialize progress dashboard

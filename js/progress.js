@@ -553,6 +553,32 @@ const Progress = {
         };
     },
 
+    // Calculate percentage of grammar topics completed at the given CEFR user level
+    getGrammarPct(userLevel) {
+        const p = this.load();
+        const cefrToGramLvl = { 2: 1, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4 };
+        const maxGramLvl = cefrToGramLvl[userLevel] || 2;
+        const available = (AppData.grammar || []).filter(t => !t.level || t.level <= maxGramLvl);
+        if (!available.length) return 0;
+        const done = available.filter(t => p.grammar.completedTopics.includes(t.id)).length;
+        return Math.round(done / available.length * 100);
+    },
+
+    // Returns the category key with the lowest % of learned words at the current user level
+    getWeakestVocabCategory(userLevel) {
+        const p = this.load();
+        const learned = new Set(p.vocabulary.learned || []);
+        let weakest = null, weakestPct = 101;
+        Object.entries(AppData.vocabulary).forEach(([key, cat]) => {
+            const words = cat.words.filter(w => !w.level || w.level <= userLevel);
+            if (!words.length) return;
+            const learnedCount = words.filter((w, i) => learned.has(`${key}_${i}`)).length;
+            const pct = learnedCount / words.length * 100;
+            if (pct < weakestPct) { weakestPct = pct; weakest = key; }
+        });
+        return weakest;
+    },
+
     // Reset all progress (for testing or user request)
     reset() {
         const defaultProgress = JSON.parse(JSON.stringify(this.defaultProgress));

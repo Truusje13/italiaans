@@ -393,6 +393,7 @@ const Vocabulary = {
                 <div class="session-actions">
                     <button class="btn btn-primary" id="vocab-restart">Opnieuw oefenen</button>
                     <button class="btn btn-secondary" id="vocab-back">Andere categorie</button>
+                    <button class="btn btn-accent" id="vocab-next-step">🗺️ Volgende stap →</button>
                 </div>
             </div>
         `;
@@ -404,6 +405,10 @@ const Vocabulary = {
 
         document.getElementById('vocab-back')?.addEventListener('click', () => {
             this.backToCategories();
+        });
+
+        document.getElementById('vocab-next-step')?.addEventListener('click', () => {
+            if (window.App) App.navigateNextStep();
         });
 
         // Grammar suggestion buttons

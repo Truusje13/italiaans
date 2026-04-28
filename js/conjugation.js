@@ -370,6 +370,7 @@ const Conjugation = {
                 <div class="session-actions">
                     <button class="btn btn-primary" id="conj-restart">Opnieuw oefenen</button>
                     <button class="btn btn-secondary" id="conj-back">Terug naar opties</button>
+                    <button class="btn btn-accent" id="conj-next-step">🗺️ Volgende stap →</button>
                 </div>
             </div>
         `;
@@ -380,6 +381,10 @@ const Conjugation = {
 
         document.getElementById('conj-back')?.addEventListener('click', () => {
             this.backToSelector();
+        });
+
+        document.getElementById('conj-next-step')?.addEventListener('click', () => {
+            if (window.App) App.navigateNextStep();
         });
     },
 
