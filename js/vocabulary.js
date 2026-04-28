@@ -33,7 +33,27 @@ const Vocabulary = {
     // Initialize the vocabulary module
     init() {
         this.renderCategories();
+        // Sla de originele oefening-HTML op zodat we hem kunnen herstellen
+        // na showSessionComplete() (die innerHTML vervangt)
+        const exerciseEl = document.getElementById('vocab-exercise');
+        if (exerciseEl) this._origExerciseHTML = exerciseEl.innerHTML;
         this.setupEventListeners();
+    },
+
+    // Herverbind alleen de listeners die BINNEN #vocab-exercise zitten
+    _rebindExerciseListeners() {
+        document.getElementById('vocab-speak-btn')?.addEventListener('click', () => {
+            this.speakCurrentWord();
+        });
+        document.getElementById('vocab-submit-btn')?.addEventListener('click', () => {
+            this.checkTextAnswer();
+        });
+        document.getElementById('vocab-answer-input')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.checkTextAnswer();
+        });
+        document.getElementById('vocab-feedback')?.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-primary')) this.nextWord();
+        });
     },
 
     // Render category buttons
@@ -155,6 +175,15 @@ const Vocabulary = {
         const category = AppData.vocabulary[categoryKey] || customCategories[categoryKey];
 
         if (!category) return;
+
+        // Herstel de oefening-HTML als showSessionComplete() hem heeft vervangen
+        if (!document.getElementById('vocab-italian') && this._origExerciseHTML) {
+            const exerciseEl = document.getElementById('vocab-exercise');
+            if (exerciseEl) {
+                exerciseEl.innerHTML = this._origExerciseHTML;
+                this._rebindExerciseListeners();
+            }
+        }
 
         // Filter words to current user level
         const userLevel = Progress.getUserLevel();
