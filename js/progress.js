@@ -245,7 +245,7 @@ const Progress = {
 
         // Track category progress
         if (!progress.vocabulary.categoryProgress[category]) {
-            progress.vocabulary.categoryProgress[category] = { correct: 0, attempts: 0 };
+            progress.vocabulary.categoryProgress[category] = { correct: 0, attempts: 0, bestAccuracy: 0 };
         }
         progress.vocabulary.categoryProgress[category].attempts++;
         if (correct) {
@@ -473,19 +473,35 @@ const Progress = {
         }
     },
 
+    // Sla de beste sessie-nauwkeurigheid op voor een categorie
+    recordBestAccuracy(category, sessionCorrect, sessionTotal) {
+        if (!sessionTotal) return;
+        const progress = this.load();
+        if (!progress.vocabulary.categoryProgress[category]) {
+            progress.vocabulary.categoryProgress[category] = { correct: 0, attempts: 0, bestAccuracy: 0 };
+        }
+        const sessionAccuracy = Math.round((sessionCorrect / sessionTotal) * 100);
+        const current = progress.vocabulary.categoryProgress[category].bestAccuracy || 0;
+        if (sessionAccuracy > current) {
+            progress.vocabulary.categoryProgress[category].bestAccuracy = sessionAccuracy;
+            this.save(progress);
+        }
+    },
+
     // Get statistics for a specific category
     getCategoryStats(category) {
         const progress = this.load();
         const catProgress = progress.vocabulary.categoryProgress[category];
 
         if (!catProgress) {
-            return { correct: 0, attempts: 0, accuracy: 0 };
+            return { correct: 0, attempts: 0, accuracy: 0, bestAccuracy: 0 };
         }
 
         return {
             correct: catProgress.correct,
             attempts: catProgress.attempts,
-            accuracy: catProgress.attempts > 0 ? Math.round((catProgress.correct / catProgress.attempts) * 100) : 0
+            accuracy: catProgress.attempts > 0 ? Math.round((catProgress.correct / catProgress.attempts) * 100) : 0,
+            bestAccuracy: catProgress.bestAccuracy || 0
         };
     },
 

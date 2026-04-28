@@ -29,6 +29,7 @@ const Vocabulary = {
     currentIndex: 0,
     hardMode: false,
     shuffledChoices: [],
+    sessionCorrect: 0,   // correct in huidige sessie
 
     // Initialize the vocabulary module
     init() {
@@ -176,6 +177,9 @@ const Vocabulary = {
 
         if (!category) return;
 
+        // Reset sessie-teller
+        this.sessionCorrect = 0;
+
         // Herstel de oefening-HTML als showSessionComplete() hem heeft vervangen
         if (!document.getElementById('vocab-italian') && this._origExerciseHTML) {
             const exerciseEl = document.getElementById('vocab-exercise');
@@ -319,6 +323,7 @@ const Vocabulary = {
         // Record progress
         const wordId = `${this.currentCategory}_${this.currentIndex}`;
         Progress.recordVocabularyAttempt(wordId, this.currentCategory, correct);
+        if (correct) this.sessionCorrect++;
 
         // Show feedback
         const feedback = Feedback.vocabularyFeedback(word, selectedAnswer, correct);
@@ -341,6 +346,7 @@ const Vocabulary = {
         // Record progress
         const wordId = `${this.currentCategory}_${this.currentIndex}`;
         Progress.recordVocabularyAttempt(wordId, this.currentCategory, correct);
+        if (correct) this.sessionCorrect++;
 
         // Show feedback
         const feedback = Feedback.vocabularyFeedback(word, userAnswer, correct);
@@ -414,9 +420,20 @@ const Vocabulary = {
         const exerciseArea = document.getElementById('vocab-exercise');
         if (!exerciseArea) return;
 
+        // Bereken sessie-score (alleen deze ronde)
+        const sessionTotal = this.currentWords.length;
+        const sessionAccuracy = sessionTotal > 0 ? Math.round((this.sessionCorrect / sessionTotal) * 100) : 0;
+
+        // Sla op als beste score als beter dan vorige beste
+        Progress.recordBestAccuracy(this.currentCategory, this.sessionCorrect, sessionTotal);
+
+        // Haal opgeslagen stats op (inclusief bijgewerkte bestScore)
         const stats = Progress.getCategoryStats(this.currentCategory);
         const customCats = (typeof CustomWords !== 'undefined') ? CustomWords.getAll() : {};
         const category = AppData.vocabulary[this.currentCategory] || customCats[this.currentCategory];
+
+        const isPerfectSession = sessionAccuracy === 100;
+        const isNewBest = sessionAccuracy > 0 && sessionAccuracy === stats.bestAccuracy;
 
         // Build grammar suggestion HTML
         const links = VOCAB_GRAMMAR_LINKS[this.currentCategory] || [];
@@ -435,20 +452,24 @@ const Vocabulary = {
             }
         }
 
-        // Confetti bij perfecte score
-        if (stats.accuracy === 100 && window.launchConfetti) launchConfetti();
+        // Confetti bij perfecte sessie
+        if (isPerfectSession && window.launchConfetti) launchConfetti();
 
         exerciseArea.innerHTML = `
             <div class="session-complete">
-                <h3>${stats.accuracy === 100 ? '🏆 Perfect!' : '🎉 Categorie voltooid!'}</h3>
-                <p>Je hebt alle ${this.currentWords.length} woorden in "${category.name}" geoefend.</p>
+                <h3>${isPerfectSession ? '🏆 Perfect!' : isNewBest ? '🌟 Nieuw record!' : '🎉 Categorie voltooid!'}</h3>
+                <p>Je hebt alle ${sessionTotal} woorden in "${category.name}" geoefend.</p>
                 <div class="session-stats">
                     <div class="stat-item">
-                        <span class="stat-value">${stats.accuracy}%</span>
-                        <span class="stat-label">Nauwkeurigheid</span>
+                        <span class="stat-value">${sessionAccuracy}%</span>
+                        <span class="stat-label">Deze ronde</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-value">${stats.correct}/${stats.attempts}</span>
+                        <span class="stat-value">${stats.bestAccuracy}%</span>
+                        <span class="stat-label">Beste score</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">${this.sessionCorrect}/${sessionTotal}</span>
                         <span class="stat-label">Correct</span>
                     </div>
                 </div>
