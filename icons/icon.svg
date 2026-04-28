@@ -1,19 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Background circle -->
-  <circle cx="256" cy="256" r="256" fill="#2e7d32"/>
+  <defs>
+    <!-- Afgeronde hoeken voor het app-icoon -->
+    <clipPath id="iconClip">
+      <rect width="512" height="512" rx="96" ry="96"/>
+    </clipPath>
+    <!-- Schaduw voor de spraakbel -->
+    <filter id="bubbleShadow" x="-12%" y="-10%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="11" flood-color="rgba(0,0,0,0.25)"/>
+    </filter>
+    <!-- Subtiele glans op de vlag boven -->
+    <linearGradient id="topGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="0.18"/>
+      <stop offset="50%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
 
-  <!-- Inner circle (white) -->
-  <circle cx="256" cy="256" r="200" fill="#ffffff"/>
+  <!-- === Italiaanse vlag als achtergrond === -->
+  <g clip-path="url(#iconClip)">
+    <!-- Groen -->
+    <rect x="0"   y="0" width="171" height="512" fill="#009246"/>
+    <!-- Wit -->
+    <rect x="171" y="0" width="170" height="512" fill="#EFEFEF"/>
+    <!-- Rood -->
+    <rect x="341" y="0" width="171" height="512" fill="#CE2B37"/>
+    <!-- Glans overlay -->
+    <rect width="512" height="512" fill="url(#topGlow)"/>
+  </g>
 
-  <!-- Italian flag stripes -->
-  <rect x="106" y="156" width="100" height="200" fill="#009246" rx="10"/>
-  <rect x="206" y="156" width="100" height="200" fill="#ffffff" stroke="#e0e0e0" stroke-width="1" rx="0"/>
-  <rect x="306" y="156" width="100" height="200" fill="#ce2b37" rx="10"/>
+  <!-- === Spraakbel (met schaduw) === -->
+  <g filter="url(#bubbleShadow)">
+    <!-- Hoofd van de bel -->
+    <rect x="60" y="74" width="392" height="278" rx="54" ry="54" fill="white"/>
+    <!-- Staart van de bel (linksonder) -->
+    <polygon points="128,338  76,444  232,338" fill="white"/>
+  </g>
 
-  <!-- Book/Learning symbol -->
-  <path d="M256 380 L180 340 L180 280 L256 320 L332 280 L332 340 Z" fill="#2e7d32"/>
-  <path d="M256 320 L180 280 L180 220 L256 260 L332 220 L332 280 Z" fill="#60ad5e"/>
-
-  <!-- Letter "i" for italiano -->
-  <circle cx="256" cy="130" r="15" fill="#2e7d32"/>
+  <!-- === "IT" tekst in Italiaanse vlagkleuren === -->
+  <text
+    text-anchor="middle"
+    x="258"
+    y="278"
+    font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif"
+    font-size="175"
+    font-weight="900"
+    letter-spacing="2">
+    <tspan fill="#009246">I</tspan><tspan fill="#CE2B37">T</tspan>
+  </text>
 </svg>

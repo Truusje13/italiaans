@@ -74,7 +74,7 @@ const DarkMode = {
         const btn = document.getElementById('dark-mode-toggle');
         if (btn) btn.textContent = enabled ? '☀️' : '🌙';
         const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', enabled ? '#1a1a1a' : '#2e7d32');
+        if (meta) meta.setAttribute('content', enabled ? '#1a1a1a' : '#009246');
     }
 };
 

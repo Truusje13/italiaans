@@ -1,19 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Full background for maskable (fills entire square) -->
-  <rect width="512" height="512" fill="#2e7d32"/>
+  <!--
+    Maskable icon: volledig vierkant achtergrond zodat het OS
+    het in elke vorm kan uitsnijden (cirkel, squircle, etc.)
+    Veilige zone: 10% marge = inhoud tussen px 51 en 461
+  -->
+  <defs>
+    <filter id="mShadow" x="-12%" y="-10%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,0.22)"/>
+    </filter>
+    <linearGradient id="mGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="0.16"/>
+      <stop offset="50%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
 
-  <!-- Inner circle (white) - smaller for safe zone -->
-  <circle cx="256" cy="256" r="160" fill="#ffffff"/>
+  <!-- Volledige vlag achtergrond (geen afgeknipte hoeken bij maskable) -->
+  <rect x="0"   y="0" width="171" height="512" fill="#009246"/>
+  <rect x="171" y="0" width="170" height="512" fill="#EFEFEF"/>
+  <rect x="341" y="0" width="171" height="512" fill="#CE2B37"/>
+  <rect width="512" height="512" fill="url(#mGlow)"/>
 
-  <!-- Italian flag stripes - scaled down for safe zone -->
-  <rect x="136" y="186" width="80" height="140" fill="#009246" rx="6"/>
-  <rect x="216" y="186" width="80" height="140" fill="#f5f5f5"/>
-  <rect x="296" y="186" width="80" height="140" fill="#ce2b37" rx="6"/>
+  <!-- Spraakbel — iets kleiner voor veilige zone -->
+  <g filter="url(#mShadow)">
+    <rect x="76" y="94" width="360" height="254" rx="50" ry="50" fill="white"/>
+    <!-- Staart binnen veilige zone houden -->
+    <polygon points="140,336  96,420  236,336" fill="white"/>
+  </g>
 
-  <!-- Book symbol - scaled down -->
-  <path d="M256 340 L200 310 L200 270 L256 300 L312 270 L312 310 Z" fill="#2e7d32"/>
-  <path d="M256 300 L200 270 L200 230 L256 260 L312 230 L312 270 Z" fill="#60ad5e"/>
-
-  <!-- Dot for "i" -->
-  <circle cx="256" cy="160" r="12" fill="#2e7d32"/>
+  <!-- "IT" tekst -->
+  <text
+    text-anchor="middle"
+    x="258"
+    y="268"
+    font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif"
+    font-size="158"
+    font-weight="900"
+    letter-spacing="2">
+    <tspan fill="#009246">I</tspan><tspan fill="#CE2B37">T</tspan>
+  </text>
 </svg>
