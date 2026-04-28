@@ -163,9 +163,12 @@ const App = {
         // Initialize daily reminder (needs progress data)
         DailyReminder.init();
 
-        // Voortgang exporteren / importeren
+        // Voortgang exporteren / delen / importeren
         document.getElementById('btn-export-progress')?.addEventListener('click', () => {
             Progress.exportProgress();
+        });
+        document.getElementById('btn-share-progress')?.addEventListener('click', () => {
+            Progress.shareProgress();
         });
         document.getElementById('btn-import-progress')?.addEventListener('click', () => {
             Progress.importProgress();

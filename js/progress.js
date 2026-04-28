@@ -92,13 +92,72 @@ const Progress = {
     exportProgress() {
         const data = localStorage.getItem(this.STORAGE_KEY);
         if (!data) { alert('Geen voortgang gevonden om te exporteren.'); return; }
-        const blob = new Blob([data], { type: 'application/json' });
+        this._triggerDownload(data);
+        localStorage.setItem('lastAutoBackup', new Date().toISOString().slice(0, 10));
+    },
+
+    // Interne download-helper
+    _triggerDownload(json) {
+        const blob = new Blob([json], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = `impara-italiano-voortgang-${new Date().toISOString().slice(0,10)}.json`;
         a.click();
         URL.revokeObjectURL(url);
+    },
+
+    // Deel voortgang via Web Share API (werkt op mobiel met share-menu)
+    shareProgress() {
+        const data = localStorage.getItem(this.STORAGE_KEY);
+        if (!data) { alert('Geen voortgang gevonden.'); return; }
+        if (navigator.share) {
+            const blob = new Blob([data], { type: 'application/json' });
+            const file = new File([blob], `impara-italiano-voortgang-${new Date().toISOString().slice(0,10)}.json`, { type: 'application/json' });
+            navigator.share({
+                title: 'Impara Italiano – Voortgang',
+                text: 'Mijn leervoortgang van Impara Italiano',
+                files: [file]
+            }).catch(() => {
+                // Fallback: gewone download als share mislukt
+                this._triggerDownload(data);
+            });
+        } else {
+            // Desktop: gewone download
+            this._triggerDownload(data);
+        }
+        localStorage.setItem('lastAutoBackup', new Date().toISOString().slice(0, 10));
+    },
+
+    // Automatische backup: wordt na elke sessie aangeroepen
+    // Download stille backup als de laatste meer dan 7 dagen geleden was
+    autoBackupIfNeeded() {
+        const data = localStorage.getItem(this.STORAGE_KEY);
+        if (!data) return;
+        const last = localStorage.getItem('lastAutoBackup');
+        const today = new Date().toISOString().slice(0, 10);
+        if (last === today) return; // al vandaag gedaan
+        const daysSince = last
+            ? Math.floor((new Date(today) - new Date(last)) / 86400000)
+            : 999;
+        if (daysSince < 7) return; // nog geen 7 dagen
+        // Trigger stille download
+        this._triggerDownload(data);
+        localStorage.setItem('lastAutoBackup', today);
+        // Toon korte melding
+        this._showAutoBackupToast();
+    },
+
+    _showAutoBackupToast() {
+        const toast = document.createElement('div');
+        toast.className = 'auto-backup-toast';
+        toast.textContent = '💾 Wekelijkse backup automatisch opgeslagen';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.add('show'), 50);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400);
+        }, 3500);
     },
 
     // Importeer voortgang vanuit een JSON-bestand

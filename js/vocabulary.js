@@ -455,6 +455,9 @@ const Vocabulary = {
         // Confetti bij perfecte sessie
         if (isPerfectSession && window.launchConfetti) launchConfetti();
 
+        // Automatische wekelijkse backup
+        Progress.autoBackupIfNeeded();
+
         exerciseArea.innerHTML = `
             <div class="session-complete">
                 <h3>${isPerfectSession ? '🏆 Perfect!' : isNewBest ? '🌟 Nieuw record!' : '🎉 Categorie voltooid!'}</h3>

@@ -353,6 +353,9 @@ const Conjugation = {
         const tenseStats = progress.conjugation.tenseProgress[this.currentTense] || { correct: 0, attempts: 0 };
         const accuracy = tenseStats.attempts > 0 ? Math.round((tenseStats.correct / tenseStats.attempts) * 100) : 0;
 
+        // Automatische wekelijkse backup
+        Progress.autoBackupIfNeeded();
+
         container.innerHTML = `
             <div class="session-complete">
                 <h3>🎉 Oefening voltooid!</h3>
