@@ -43,13 +43,25 @@ const Vocabulary = {
 
         container.innerHTML = '';
 
+        // Load progress once for all learned-word lookups
+        const progressData = Progress.load();
+        const learnedSet = new Set(progressData.vocabulary.learned || []);
+        const userLevel = Progress.getUserLevel();
+        const cefrLabel = LEVEL_MAP[userLevel] || 'A1';
+
+        // Level context header (spans full grid width via CSS)
+        const levelHeader = document.createElement('div');
+        levelHeader.className = 'cat-level-header';
+        levelHeader.innerHTML = `Jouw niveau: <span class="level-badge level-${cefrLabel}">${cefrLabel}</span>`;
+        container.appendChild(levelHeader);
+
         const customCategories = (typeof CustomWords !== 'undefined') ? CustomWords.getAll() : {};
         const allCategories = { ...AppData.vocabulary, ...customCategories };
 
         for (const [key, category] of Object.entries(allCategories)) {
-            const stats = Progress.getCategoryStats(key);
             const isCustom = !!category.custom;
-            // Calculate level range for this category
+
+            // Level range label for this category
             const levels = category.words.map(w => w.level).filter(Boolean);
             const minLvl = levels.length ? LEVEL_MAP[Math.min(...levels)] || '' : '';
             const maxLvl = levels.length ? LEVEL_MAP[Math.max(...levels)] || '' : '';
@@ -59,14 +71,17 @@ const Vocabulary = {
             const dueCount = !isCustom ? Progress.getCategoryDueCount(key) : 0;
 
             // Available words at current user level
-            const userLevel = Progress.getUserLevel();
             const availableCount = !isCustom && userLevel < 7
                 ? category.words.filter(w => !w.level || w.level <= userLevel).length
                 : category.words.length;
-            const totalCount = category.words.length;
-            const countLabel = (!isCustom && userLevel < 7 && availableCount < totalCount)
-                ? `${availableCount} van ${totalCount} woorden`
-                : `${totalCount} woord${totalCount !== 1 ? 'en' : ''}`;
+
+            // Learned words count (unique words seen/answered, filtered to available level)
+            const learnedCount = category.words.reduce((count, w, idx) => {
+                const isAvailable = isCustom || (!w.level || w.level <= userLevel);
+                return count + (isAvailable && learnedSet.has(`${key}_${idx}`) ? 1 : 0);
+            }, 0);
+            const learnedPct = availableCount > 0 ? Math.round(learnedCount / availableCount * 100) : 0;
+            const isComplete = learnedPct >= 100;
 
             const btn = document.createElement('button');
             btn.className = 'category-btn' + (isCustom ? ' category-btn-custom' : '');
@@ -74,10 +89,12 @@ const Vocabulary = {
             btn.innerHTML = `
                 <span class="icon">${category.icon}</span>
                 <span class="name">${category.name}${isCustom ? ' <span class="custom-badge">Eigen</span>' : ''}</span>
-                <span class="count">${countLabel}</span>
+                <div class="cat-progress-bar-wrap">
+                    <div class="cat-progress-bar${isComplete ? ' complete' : ''}" style="width:${learnedPct}%"></div>
+                </div>
+                <span class="cat-learned-count">${learnedCount}/${availableCount} geleerd</span>
                 ${levelLabel ? `<span class="level-badge level-${minLvl.replace(/[^A-Z0-9]/g,'')}">${levelLabel}</span>` : ''}
                 ${dueCount > 0 ? `<span class="srs-due-badge">🔁 ${dueCount}</span>` : ''}
-                ${stats.attempts > 0 ? `<span class="accuracy">${stats.accuracy}% correct</span>` : ''}
             `;
             container.appendChild(btn);
         }
