@@ -2,6 +2,8 @@
 
 const Progress = {
     STORAGE_KEY: 'italian_learning_progress',
+    USERDATA_CACHE: 'impara-italiano-userdata',   // aparte cache, nooit gewist
+    USERDATA_CACHE_KEY: '/progress-backup',
 
     // Default progress structure
     defaultProgress: {
@@ -141,13 +143,44 @@ const Progress = {
         return null;
     },
 
-    // Save progress to LocalStorage
+    // Save progress to LocalStorage + automatische cache-backup
     save(progress) {
         try {
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
+            const json = JSON.stringify(progress);
+            localStorage.setItem(this.STORAGE_KEY, json);
+            this._backupToCache(json); // fire-and-forget backup
         } catch (e) {
             console.error('Error saving progress:', e);
         }
+    },
+
+    // Sla een kopie op in de Cache API (aparte persistente cache)
+    _backupToCache(json) {
+        if (typeof caches === 'undefined') return;
+        caches.open(this.USERDATA_CACHE).then(cache => {
+            const res = new Response(json, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            cache.put(this.USERDATA_CACHE_KEY, res);
+        }).catch(() => {});
+    },
+
+    // Herstel vanuit cache-backup als localStorage leeg is (async, voor App.init)
+    async _restoreFromCacheIfNeeded() {
+        if (typeof caches === 'undefined') return;
+        try {
+            const existing = localStorage.getItem(this.STORAGE_KEY);
+            if (existing) return; // localStorage heeft nog data
+            const cache = await caches.open(this.USERDATA_CACHE);
+            const response = await cache.match(this.USERDATA_CACHE_KEY);
+            if (!response) return;
+            const json = await response.text();
+            const parsed = JSON.parse(json);
+            if (parsed && parsed.vocabulary) {
+                localStorage.setItem(this.STORAGE_KEY, json);
+                console.log('[Progress] Voortgang automatisch hersteld vanuit cache-backup');
+            }
+        } catch (e) { /* stille mislukking */ }
     },
 
     // Check and update streak

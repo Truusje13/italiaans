@@ -1,5 +1,6 @@
 // Service Worker for Impara l'Italiano PWA
-const CACHE_NAME = 'impara-italiano-v14';
+const CACHE_NAME = 'impara-italiano-v15';
+const USERDATA_CACHE = 'impara-italiano-userdata'; // nooit verwijderen
 
 // Files to cache for offline use
 const FILES_TO_CACHE = [
@@ -45,7 +46,8 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keyList) => {
             return Promise.all(keyList.map((key) => {
-                if (key !== CACHE_NAME) {
+                // Bewaar gebruikersdata-cache altijd, wis alleen oude app-caches
+                if (key !== CACHE_NAME && key !== USERDATA_CACHE) {
                     console.log('[ServiceWorker] Removing old cache', key);
                     return caches.delete(key);
                 }

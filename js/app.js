@@ -181,7 +181,10 @@ const App = {
                     for (const reg of regs) await reg.unregister();
                 }
                 const keys = await caches.keys();
-                for (const key of keys) await caches.delete(key);
+                for (const key of keys) {
+                    // Bewaar de gebruikersdata-cache — wis alleen app-bestanden
+                    if (key !== Progress.USERDATA_CACHE) await caches.delete(key);
+                }
             } catch(e) { /* ignore */ }
             window.location.reload(true);
         });
@@ -524,7 +527,9 @@ const App = {
 };
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+// Herstel eerst voortgang uit cache-backup als localStorage leeg is
+document.addEventListener('DOMContentLoaded', async () => {
+    await Progress._restoreFromCacheIfNeeded();
     App.init();
 });
 
