@@ -1,22 +1,22 @@
-/* CSS Variables */
+/* CSS Variables — Italiaans kleurenpalet */
 :root {
-    --primary-color: #2e7d32;
-    --primary-light: #60ad5e;
-    --primary-dark: #005005;
-    --secondary-color: #c62828;
-    --secondary-light: #ff5f52;
-    --accent-color: #ff9800;
-    --background-color: #f5f5f5;
+    --primary-color: #009246;      /* Italiaans groen */
+    --primary-light: #4DB878;
+    --primary-dark: #007A3D;
+    --secondary-color: #CE2B37;    /* Italiaans rood */
+    --secondary-light: #E05060;
+    --accent-color: #FFC800;       /* Goud voor XP / streaks */
+    --background-color: #F7FFFE;
     --card-background: #ffffff;
-    --text-primary: #212121;
-    --text-secondary: #757575;
-    --success-color: #4caf50;
-    --error-color: #f44336;
-    --warning-color: #ff9800;
-    --border-radius: 12px;
-    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
-    --transition: all 0.3s ease;
+    --text-primary: #2D3436;
+    --text-secondary: #636e72;
+    --success-color: #009246;
+    --error-color: #CE2B37;
+    --warning-color: #FFC800;
+    --border-radius: 16px;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.14);
+    --transition: all 0.2s ease;
 }
 
 /* Reset & Base */
@@ -27,7 +27,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--background-color);
     color: var(--text-primary);
     line-height: 1.6;
@@ -243,40 +243,56 @@ body {
     transition: width 0.5s ease;
 }
 
-/* Buttons */
+/* Buttons — Duolingo 3D stijl */
 .btn {
     padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: var(--border-radius);
+    border: 2px solid transparent;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.22);
+    border-radius: 14px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: inherit;
     cursor: pointer;
-    transition: var(--transition);
+    transition: transform 0.1s ease, border-bottom-width 0.1s ease;
     white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+.btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
 .btn-small {
     padding: 0.4rem 0.85rem;
     font-size: 0.85rem;
-    border-radius: 8px;
+    border-radius: 10px;
+    border-bottom-width: 3px;
 }
 
 .btn-primary {
     background: var(--primary-color);
     color: white;
+    border-bottom-color: var(--primary-dark);
 }
 
-.btn-primary:hover {
-    background: var(--primary-dark);
+.btn-primary:hover:not(:disabled) {
+    background: #00A352;
 }
 
 .btn-secondary {
-    background: #e0e0e0;
+    background: #e8e8e8;
     color: var(--text-primary);
+    border-bottom-color: #b8b8b8;
 }
 
-.btn-secondary:hover {
-    background: #bdbdbd;
+.btn-secondary:hover:not(:disabled) {
+    background: #d8d8d8;
 }
 
 /* Back to Home Button */
@@ -446,32 +462,50 @@ body {
 }
 
 .choice-btn {
-    background: var(--card-background);
-    border: 2px solid #e0e0e0;
-    border-radius: var(--border-radius);
-    padding: 1rem;
-    font-size: 1.1rem;
+    background: white;
+    border: 2.5px solid #E0E0E0;
+    border-bottom: 4px solid #C8C8C8;
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
     cursor: pointer;
-    transition: var(--transition);
+    transition: border 0.12s ease, transform 0.1s ease, background 0.12s ease;
+    text-align: left;
+    color: var(--text-primary);
+    width: 100%;
 }
 
-.choice-btn:hover {
-    border-color: var(--primary-color);
-    background: rgba(46, 125, 50, 0.05);
+.choice-btn:hover:not(:disabled) {
+    border-color: #7DCCA0;
+    border-bottom-color: var(--primary-color);
+    background: #F0FAF5;
+}
+
+.choice-btn:active:not(:disabled) {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
 }
 
 .choice-btn.correct {
-    border-color: var(--success-color);
-    background: rgba(76, 175, 80, 0.15);
+    border-color: var(--primary-color) !important;
+    border-bottom-color: var(--primary-dark) !important;
+    background: #E8F8EF !important;
+    color: var(--primary-dark) !important;
+    font-weight: 700;
 }
 
 .choice-btn.incorrect {
-    border-color: var(--error-color);
-    background: rgba(244, 67, 54, 0.15);
+    border-color: var(--error-color) !important;
+    border-bottom-color: #A82030 !important;
+    background: #FDF0F1 !important;
+    color: #A82030 !important;
+    font-weight: 700;
 }
 
 .choice-btn:disabled {
-    cursor: not-allowed;
+    cursor: default;
 }
 
 /* Text Input Mode */
@@ -493,23 +527,28 @@ body {
     border-color: var(--primary-color);
 }
 
-/* Feedback Panel */
+/* Feedback Panel — Duolingo slide-up stijl */
 .feedback-panel {
-    background: var(--card-background);
-    border-radius: var(--border-radius);
-    padding: 1rem 1.25rem;
-    margin-top: 0.75rem;
-    border-left: 4px solid var(--primary-color);
+    border-radius: 16px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 0.85rem;
+    border: 2.5px solid transparent;
+    animation: slideUp 0.22s ease-out;
 }
 
 .feedback-panel.success {
-    border-left-color: var(--success-color);
-    background: rgba(76, 175, 80, 0.05);
+    background: #E8F8EF;
+    border-color: var(--primary-color);
 }
 
 .feedback-panel.error {
-    border-left-color: var(--error-color);
-    background: rgba(244, 67, 54, 0.05);
+    background: #FDF0F1;
+    border-color: var(--error-color);
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .feedback-header {
@@ -1599,6 +1638,25 @@ body {
     75%       { transform: translateX(6px); }
 }
 
+/* Duolingo-stijl animaties */
+@keyframes shake-answer {
+    0%, 100% { transform: translateX(0); }
+    15%       { transform: translateX(-8px); }
+    40%       { transform: translateX(8px); }
+    65%       { transform: translateX(-5px); }
+    85%       { transform: translateX(5px); }
+}
+
+@keyframes bounce-correct {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.07); }
+    65%  { transform: scale(0.97); }
+    100% { transform: scale(1); }
+}
+
+.shake-anim   { animation: shake-answer 0.42s ease-in-out; }
+.bounce-anim  { animation: bounce-correct 0.32s ease-out; }
+
 /* Daily dots */
 .daily-header {
     display: flex;
@@ -1971,32 +2029,46 @@ body {
 
 .listening-option {
     background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: var(--border-radius);
-    padding: 0.9rem 1rem;
+    border: 2.5px solid #E0E0E0;
+    border-bottom: 4px solid #C8C8C8;
+    border-radius: 14px;
+    padding: 0.95rem 1.1rem;
     font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
     cursor: pointer;
-    transition: var(--transition);
+    transition: border 0.12s ease, transform 0.1s ease, background 0.12s ease;
     text-align: left;
     line-height: 1.4;
+    color: var(--text-primary);
+    width: 100%;
 }
 
 .listening-option:hover:not(:disabled) {
-    border-color: var(--primary-color);
-    background: #f1f8e9;
+    border-color: #7DCCA0;
+    border-bottom-color: var(--primary-color);
+    background: #F0FAF5;
+}
+
+.listening-option:active:not(:disabled) {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
 }
 
 .listening-option.correct {
-    border-color: var(--success-color);
-    background: #e8f5e9;
-    color: #2e7d32;
-    font-weight: 600;
+    border-color: var(--primary-color) !important;
+    border-bottom-color: var(--primary-dark) !important;
+    background: #E8F8EF !important;
+    color: var(--primary-dark) !important;
+    font-weight: 700;
 }
 
 .listening-option.wrong {
-    border-color: var(--error-color);
-    background: #ffebee;
-    color: #c62828;
+    border-color: var(--error-color) !important;
+    border-bottom-color: #A82030 !important;
+    background: #FDF0F1 !important;
+    color: #A82030 !important;
+    font-weight: 700;
 }
 
 .listening-option:disabled {
@@ -2439,14 +2511,16 @@ body.dark-mode .choice-btn,
 body.dark-mode .listening-option {
     background: #2c2c2c;
     color: var(--text-primary);
-    border-color: #444;
+    border-color: #4a4a4a;
+    border-bottom-color: #222;
 }
 
 body.dark-mode .category-btn:hover,
-body.dark-mode .choice-btn:hover,
-body.dark-mode .listening-option:hover {
-    background: #383838;
+body.dark-mode .choice-btn:hover:not(:disabled),
+body.dark-mode .listening-option:hover:not(:disabled) {
+    background: #363636;
     border-color: var(--primary-light);
+    border-bottom-color: var(--primary-color);
 }
 
 body.dark-mode .selector-group select,
@@ -2499,15 +2573,17 @@ body.dark-mode .mode-toggle {
 
 body.dark-mode .feedback-panel {
     background: #1e1e1e;
-    border-color: #333;
+    border-color: #444;
 }
 
 body.dark-mode .feedback-panel.success {
-    background: rgba(76, 175, 80, 0.1);
+    background: rgba(0, 146, 70, 0.12);
+    border-color: var(--primary-color);
 }
 
 body.dark-mode .feedback-panel.error {
-    background: rgba(244, 67, 54, 0.08);
+    background: rgba(206, 43, 55, 0.10);
+    border-color: var(--error-color);
 }
 
 body.dark-mode .pron-rule-header {
@@ -2653,23 +2729,29 @@ body.dark-mode .speaking-phrase-card {
     min-width: 0;
 }
 
-/* Accent button for "Volgende stap" */
+/* Accent button voor "Volgende stap" — ook 3D */
 .btn-accent {
-    background: linear-gradient(135deg, #ff9800, #f57c00);
-    color: white;
-    border: none;
-    border-radius: 8px;
+    background: #FFC800;
+    color: #5A3D00;
+    border: 2px solid transparent;
+    border-bottom: 4px solid #C89A00;
+    border-radius: 12px;
     padding: 0.6rem 1rem;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: inherit;
     cursor: pointer;
-    transition: var(--transition);
+    transition: transform 0.1s ease, border-bottom-width 0.1s ease;
     white-space: nowrap;
 }
 
-.btn-accent:hover {
-    background: linear-gradient(135deg, #f57c00, #e65100);
-    transform: translateY(-1px);
+.btn-accent:hover:not(:disabled) {
+    background: #FFD330;
+}
+
+.btn-accent:active:not(:disabled) {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
 }
 
 /* Dark mode for leerpad */

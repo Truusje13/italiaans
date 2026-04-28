@@ -1,5 +1,57 @@
 // Main Application - Navigation and initialization
 
+// =============================================
+// Confetti — Italiaanse vlagkleuren
+// =============================================
+function launchConfetti() {
+    const colors = ['#009246', '#FFFFFF', '#CE2B37', '#FFC800', '#4DB878', '#E05060'];
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = Array.from({ length: 90 }, () => ({
+        x:         Math.random() * canvas.width,
+        y:        -20 - Math.random() * 100,
+        r:          3 + Math.random() * 5,
+        speed:      2.5 + Math.random() * 3,
+        color:      colors[Math.floor(Math.random() * colors.length)],
+        angle:      Math.random() * Math.PI * 2,
+        spin:       (Math.random() - 0.5) * 0.18,
+        drift:      (Math.random() - 0.5) * 1.5,
+        shape:      Math.random() < 0.5 ? 'circle' : 'rect'
+    }));
+
+    let frame = 0;
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+            p.angle += p.spin;
+            p.y     += p.speed;
+            p.x     += p.drift + Math.sin(p.angle) * 0.8;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.angle);
+            ctx.fillStyle = p.color;
+            if (p.shape === 'circle') {
+                ctx.beginPath();
+                ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                ctx.fillRect(-p.r, -p.r * 0.5, p.r * 2, p.r);
+            }
+            ctx.restore();
+        });
+        frame++;
+        if (frame < 140) requestAnimationFrame(draw);
+        else canvas.remove();
+    }
+    requestAnimationFrame(draw);
+}
+window.launchConfetti = launchConfetti;
+
 // Dark Mode
 const DarkMode = {
     STORAGE_KEY: 'darkMode',

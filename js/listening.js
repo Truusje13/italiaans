@@ -235,6 +235,7 @@ const Listening = {
 
         // Disable all options, highlight correct/wrong
         const options = document.querySelectorAll('.listening-option');
+        let selectedBtn = null;
         options.forEach(btn => {
             btn.disabled = true;
             const btnText = btn.textContent;
@@ -244,7 +245,15 @@ const Listening = {
             } else if (parseInt(btn.dataset.index) === selectedIndex && !correct) {
                 btn.classList.add('wrong');
             }
+            if (parseInt(btn.dataset.index) === selectedIndex) selectedBtn = btn;
         });
+
+        // Animatie: bounce bij goed, shake bij fout
+        if (selectedBtn) {
+            const animClass = correct ? 'bounce-anim' : 'shake-anim';
+            selectedBtn.classList.add(animClass);
+            selectedBtn.addEventListener('animationend', () => selectedBtn.classList.remove(animClass), { once: true });
+        }
 
         this.showFeedback(correct, word);
         if (correct) this.score++;
@@ -333,6 +342,9 @@ const Listening = {
         const xp = this.score * 5;
         Progress.addXP(xp);
         document.getElementById('listening-end-xp').textContent = `+${xp} XP`;
+
+        // Confetti bij perfecte score
+        if (pct === 100 && window.launchConfetti) launchConfetti();
 
         // Message based on score
         let message = '';

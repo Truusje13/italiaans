@@ -251,7 +251,7 @@ const Vocabulary = {
         const selectedAnswer = this.shuffledChoices[selectedIndex];
         const correct = selectedAnswer === word.nl;
 
-        // Disable all buttons
+        // Disable all buttons + markeer juist/fout
         const buttons = document.querySelectorAll('#vocab-choices .choice-btn');
         buttons.forEach((btn, i) => {
             btn.disabled = true;
@@ -261,6 +261,14 @@ const Vocabulary = {
                 btn.classList.add('incorrect');
             }
         });
+
+        // Animatie: bounce bij goed, shake bij fout
+        const selectedBtn = buttons[selectedIndex];
+        if (selectedBtn) {
+            const animClass = correct ? 'bounce-anim' : 'shake-anim';
+            selectedBtn.classList.add(animClass);
+            selectedBtn.addEventListener('animationend', () => selectedBtn.classList.remove(animClass), { once: true });
+        }
 
         // Record progress
         const wordId = `${this.currentCategory}_${this.currentIndex}`;
@@ -381,9 +389,12 @@ const Vocabulary = {
             }
         }
 
+        // Confetti bij perfecte score
+        if (stats.accuracy === 100 && window.launchConfetti) launchConfetti();
+
         exerciseArea.innerHTML = `
             <div class="session-complete">
-                <h3>🎉 Categorie voltooid!</h3>
+                <h3>${stats.accuracy === 100 ? '🏆 Perfect!' : '🎉 Categorie voltooid!'}</h3>
                 <p>Je hebt alle ${this.currentWords.length} woorden in "${category.name}" geoefend.</p>
                 <div class="session-stats">
                     <div class="stat-item">
