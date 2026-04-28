@@ -376,14 +376,35 @@ body {
 .flashcard {
     background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
     border-radius: var(--border-radius);
-    padding: 3rem;
+    padding: 2rem;
     text-align: center;
     color: white;
-    margin-bottom: 2rem;
-    min-height: 150px;
+    margin-bottom: 1.25rem;
+    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-height: 700px) {
+    .flashcard {
+        padding: 1.25rem 1.5rem;
+        min-height: 90px;
+        margin-bottom: 0.75rem;
+    }
+    .italian-word {
+        font-size: 2rem !important;
+    }
+    .exercise-area {
+        padding: 1.25rem;
+    }
+    .answer-area {
+        margin-bottom: 0.75rem;
+    }
+    .feedback-panel {
+        padding: 1rem;
+        margin-top: 0.75rem;
+    }
 }
 
 .flashcard-front {
@@ -415,13 +436,13 @@ body {
 
 /* Answer Area */
 .answer-area {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .multiple-choice {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 0.65rem;
 }
 
 .choice-btn {
@@ -476,8 +497,8 @@ body {
 .feedback-panel {
     background: var(--card-background);
     border-radius: var(--border-radius);
-    padding: 1.5rem;
-    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    margin-top: 0.75rem;
     border-left: 4px solid var(--primary-color);
 }
 

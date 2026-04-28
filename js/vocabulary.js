@@ -326,6 +326,12 @@ const Vocabulary = {
             </div>
             <button class="btn btn-primary" id="vocab-next-btn">Volgende</button>
         `;
+
+        // Scroll feedback into view so user sees it without scrolling
+        setTimeout(() => {
+            const rect = container.getBoundingClientRect();
+            window.scrollTo({ top: window.scrollY + rect.top - 20 });
+        }, 0);
     },
 
     // Move to next word

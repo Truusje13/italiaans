@@ -271,6 +271,7 @@ const Listening = {
     // Show feedback panel
     showFeedback(correct, word) {
         const panel = document.getElementById('listening-feedback');
+
         panel.className = 'feedback-panel ' + (correct ? 'success' : 'error');
 
         const icon = correct ? '✅' : '❌';
@@ -298,6 +299,12 @@ const Listening = {
             </button>
         `;
         panel.style.display = 'block';
+
+        // Scroll feedback into view
+        setTimeout(() => {
+            const rect = panel.getBoundingClientRect();
+            window.scrollTo({ top: window.scrollY + rect.top - 20 });
+        }, 0);
     },
 
     // Move to the next item or end screen
