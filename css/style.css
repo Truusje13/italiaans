@@ -1227,6 +1227,26 @@ body {
         font-size: 1.5rem;
         cursor: pointer;
     }
+
+    /* Knoppen uit de sidebar halen en vast rechtsbovenin plakken */
+    .sidebar-controls {
+        position: fixed;
+        top: 0.65rem;
+        right: 0.75rem;
+        z-index: 1002;
+        background: var(--primary-color);
+        border-radius: 10px;
+        padding: 0.3rem 0.4rem;
+        gap: 0.25rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        /* Haal uit sidebar flow */
+        width: auto;
+    }
+
+    .sidebar-icon-btn {
+        padding: 0.45rem 0.55rem;
+        font-size: 1rem;
+    }
 }
 
 /* Menu toggle button - always hidden on desktop */
