@@ -163,6 +163,21 @@ const App = {
         // Initialize daily reminder (needs progress data)
         DailyReminder.init();
 
+        // App vernieuwen knop: wist cache en herlaadt
+        document.getElementById('refresh-app-btn')?.addEventListener('click', async () => {
+            const btn = document.getElementById('refresh-app-btn');
+            if (btn) { btn.textContent = '⏳'; btn.disabled = true; }
+            try {
+                if ('serviceWorker' in navigator) {
+                    const regs = await navigator.serviceWorker.getRegistrations();
+                    for (const reg of regs) await reg.unregister();
+                }
+                const keys = await caches.keys();
+                for (const key of keys) await caches.delete(key);
+            } catch(e) { /* ignore */ }
+            window.location.reload(true);
+        });
+
         // Setup navigation
         this.setupNavigation();
 
