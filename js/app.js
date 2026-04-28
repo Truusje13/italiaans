@@ -163,6 +163,14 @@ const App = {
         // Initialize daily reminder (needs progress data)
         DailyReminder.init();
 
+        // Voortgang exporteren / importeren
+        document.getElementById('btn-export-progress')?.addEventListener('click', () => {
+            Progress.exportProgress();
+        });
+        document.getElementById('btn-import-progress')?.addEventListener('click', () => {
+            Progress.importProgress();
+        });
+
         // App vernieuwen knop: wist cache en herlaadt
         document.getElementById('refresh-app-btn')?.addEventListener('click', async () => {
             const btn = document.getElementById('refresh-app-btn');

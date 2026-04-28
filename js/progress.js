@@ -53,14 +53,79 @@ const Progress = {
 
     // Initialize or load progress
     init() {
-        let progress = this.load();
-        if (!progress) {
+        let stored = this.load();
+        let progress;
+        if (!stored) {
             progress = JSON.parse(JSON.stringify(this.defaultProgress));
-            this.save(progress);
+        } else {
+            // Vul eventueel ontbrekende velden in na een update, zonder bestaande data te wissen
+            progress = this._mergeWithDefaults(stored, this.defaultProgress);
         }
+        this.save(progress);
         this.checkStreak(progress);
         this.updateUI(progress);
         return progress;
+    },
+
+    // Deep merge: vul ontbrekende velden in vanuit defaults, behoud bestaande waarden
+    _mergeWithDefaults(stored, defaults) {
+        const result = Object.assign({}, stored);
+        for (const key of Object.keys(defaults)) {
+            if (result[key] === undefined || result[key] === null) {
+                result[key] = JSON.parse(JSON.stringify(defaults[key]));
+            } else if (
+                typeof defaults[key] === 'object' &&
+                !Array.isArray(defaults[key]) &&
+                defaults[key] !== null &&
+                typeof result[key] === 'object' &&
+                !Array.isArray(result[key])
+            ) {
+                result[key] = this._mergeWithDefaults(result[key], defaults[key]);
+            }
+        }
+        return result;
+    },
+
+    // Exporteer voortgang als JSON-bestand
+    exportProgress() {
+        const data = localStorage.getItem(this.STORAGE_KEY);
+        if (!data) { alert('Geen voortgang gevonden om te exporteren.'); return; }
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `impara-italiano-voortgang-${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    },
+
+    // Importeer voortgang vanuit een JSON-bestand
+    importProgress(callback) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json,application/json';
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                try {
+                    const parsed = JSON.parse(ev.target.result);
+                    // Basisvalidatie: moet vocabulary en xp bevatten
+                    if (!parsed.vocabulary || parsed.xp === undefined) {
+                        alert('Ongeldig bestand: dit lijkt geen voortgangsbestand van Impara Italiano te zijn.');
+                        return;
+                    }
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(parsed));
+                    alert('Voortgang hersteld! De app wordt opnieuw geladen.');
+                    window.location.reload();
+                } catch {
+                    alert('Fout bij het lezen van het bestand. Controleer of het een geldig JSON-bestand is.');
+                }
+            };
+            reader.readAsText(file);
+        };
+        input.click();
     },
 
     // Load progress from LocalStorage
