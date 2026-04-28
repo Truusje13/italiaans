@@ -4,13 +4,54 @@ const Grammar = {
     currentTopic: null,
     currentExerciseIndex: 0,
 
+    // Topic groups definition
+    GRAMMAR_GROUPS: [
+        {
+            id: 'lidwoorden',
+            label: '📚 Lidwoorden & Naamwoorden',
+            topics: ['articles-definite', 'articles-indefinite', 'adjectives', 'possessives']
+        },
+        {
+            id: 'voornaamwoorden',
+            label: '👤 Voornaamwoorden',
+            topics: ['pronouns-subject', 'pronouns-direct', 'reflexive']
+        },
+        {
+            id: 'zinsbouw',
+            label: '🔧 Zinsbouw',
+            topics: ['prepositions', 'negation', 'questions', 'comparatives']
+        },
+        {
+            id: 'werkwoorden',
+            label: '⏰ Werkwoordstijden',
+            topics: ['condizionale', 'imperfetto-vs-passato']
+        }
+    ],
+
+    // CEFR level per topic
+    TOPIC_LEVELS: {
+        'articles-definite':   'A1',
+        'articles-indefinite': 'A1',
+        'adjectives':          'A1',
+        'negation':            'A1',
+        'questions':           'A1',
+        'pronouns-subject':    'A1',
+        'prepositions':        'A2',
+        'pronouns-direct':     'A2',
+        'possessives':         'A2',
+        'reflexive':           'A2',
+        'comparatives':        'B1',
+        'condizionale':        'B1',
+        'imperfetto-vs-passato': 'B1'
+    },
+
     // Initialize the grammar module
     init() {
         this.renderTopics();
         this.setupEventListeners();
     },
 
-    // Render topic cards
+    // Render grouped topic rows
     renderTopics() {
         const container = document.getElementById('grammar-topics');
         if (!container) return;
@@ -18,30 +59,58 @@ const Grammar = {
         container.innerHTML = '';
         const progress = Progress.load();
 
-        AppData.grammar.forEach(topic => {
-            const topicProgress = progress.grammar.topicProgress[topic.id] || { correct: 0, attempts: 0 };
-            const isCompleted = progress.grammar.completedTopics.includes(topic.id);
-            const progressPercent = topicProgress.attempts > 0 ?
-                Math.round((topicProgress.correct / Math.max(topicProgress.attempts, 5)) * 100) : 0;
+        this.GRAMMAR_GROUPS.forEach(group => {
+            // Gather topics for this group
+            const groupTopics = group.topics
+                .map(id => AppData.grammar.find(t => t.id === id))
+                .filter(Boolean);
 
-            const card = document.createElement('div');
-            card.className = 'topic-card' + (isCompleted ? ' completed' : '');
-            card.dataset.topicId = topic.id;
-            card.innerHTML = `
-                <h4>${isCompleted ? '✓ ' : ''}${topic.topic}</h4>
-                <p>${topic.summary}</p>
-                <div class="topic-progress">
-                    <div class="topic-progress-bar">
-                        <div class="topic-progress-fill" style="width: ${progressPercent}%"></div>
-                    </div>
-                    <span>${progressPercent}%</span>
+            const completedInGroup = groupTopics.filter(t =>
+                progress.grammar.completedTopics.includes(t.id)
+            ).length;
+
+            // Group header
+            const groupEl = document.createElement('div');
+            groupEl.className = 'grammar-group';
+            groupEl.innerHTML = `
+                <div class="grammar-group-header">
+                    <span class="grammar-group-label">${group.label}</span>
+                    <span class="grammar-group-badge">${completedInGroup}/${groupTopics.length}</span>
                 </div>
-                <div class="topic-card-actions">
-                    <button class="btn-topic-read" data-topic-id="${topic.id}">📖 Lees uitleg</button>
-                    <button class="btn-topic-practice" data-topic-id="${topic.id}">✏️ Oefen</button>
-                </div>
+                <div class="grammar-group-rows"></div>
             `;
-            container.appendChild(card);
+
+            const rowsEl = groupEl.querySelector('.grammar-group-rows');
+
+            groupTopics.forEach(topic => {
+                const topicProgress = progress.grammar.topicProgress[topic.id] || { correct: 0, attempts: 0 };
+                const isCompleted = progress.grammar.completedTopics.includes(topic.id);
+                const progressPercent = topicProgress.attempts > 0
+                    ? Math.round((topicProgress.correct / Math.max(topicProgress.attempts, 5)) * 100)
+                    : 0;
+                const level = this.TOPIC_LEVELS[topic.id] || '';
+
+                const row = document.createElement('div');
+                row.className = 'topic-row' + (isCompleted ? ' topic-row--done' : '');
+                row.innerHTML = `
+                    <span class="topic-status-dot ${isCompleted ? 'dot-done' : (topicProgress.attempts > 0 ? 'dot-progress' : 'dot-new')}"></span>
+                    <span class="topic-level-pill pill-${level}">${level}</span>
+                    <div class="topic-row-info">
+                        <span class="topic-row-name">${topic.topic}</span>
+                        <span class="topic-row-summary">${topic.summary}</span>
+                        <div class="topic-row-bar-wrap">
+                            <div class="topic-row-bar" style="width:${progressPercent}%"></div>
+                        </div>
+                    </div>
+                    <div class="topic-row-actions">
+                        <button class="btn-topic-icon btn-topic-read" data-topic-id="${topic.id}" title="Lees uitleg">📖</button>
+                        <button class="btn-topic-icon btn-topic-practice" data-topic-id="${topic.id}" title="Oefen">✏️</button>
+                    </div>
+                `;
+                rowsEl.appendChild(row);
+            });
+
+            container.appendChild(groupEl);
         });
     },
 
@@ -288,7 +357,7 @@ const Grammar = {
 
     // Go back to topics
     backToTopics() {
-        document.getElementById('grammar-topics').style.display = 'grid';
+        document.getElementById('grammar-topics').style.display = 'block';
         document.getElementById('grammar-lesson').style.display = 'none';
 
         // Restore exercise area
@@ -305,15 +374,167 @@ const Grammar = {
 // Add CSS for grammar module
 const grammarStyle = document.createElement('style');
 grammarStyle.textContent = `
-    .topic-card.completed {
-        border-left-color: var(--success-color);
-        background: rgba(76, 175, 80, 0.05);
+    /* Grammar groups */
+    .grammar-group {
+        margin-bottom: 1.25rem;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
     }
 
-    .topic-card.completed h4 {
-        color: var(--success-color);
+    .grammar-group-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.6rem 1rem;
+        background: var(--primary-color);
+        color: white;
     }
 
+    .grammar-group-label {
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 0.01em;
+    }
+
+    .grammar-group-badge {
+        font-size: 0.78rem;
+        background: rgba(255,255,255,0.25);
+        border-radius: 20px;
+        padding: 0.15rem 0.55rem;
+        font-weight: 600;
+    }
+
+    /* Topic rows */
+    .topic-row {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.65rem 1rem;
+        background: var(--card-background);
+        border-top: 1px solid #f0f0f0;
+        transition: background 0.15s;
+    }
+
+    .topic-row:hover {
+        background: rgba(0,0,0,0.02);
+    }
+
+    .topic-row--done {
+        background: rgba(76,175,80,0.04);
+    }
+
+    /* Status dot */
+    .topic-status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .dot-new      { background: #ccc; }
+    .dot-progress { background: #ff9800; }
+    .dot-done     { background: #4caf50; }
+
+    /* Level pill */
+    .topic-level-pill {
+        font-size: 0.68rem;
+        font-weight: 700;
+        border-radius: 4px;
+        padding: 0.1rem 0.35rem;
+        flex-shrink: 0;
+        letter-spacing: 0.03em;
+    }
+    .pill-A1 { background: #e8f5e9; color: #2e7d32; }
+    .pill-A2 { background: #e3f2fd; color: #1565c0; }
+    .pill-B1 { background: #fff3e0; color: #e65100; }
+    .pill-B2 { background: #fce4ec; color: #880e4f; }
+
+    /* Row info */
+    .topic-row-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .topic-row-name {
+        display: block;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .topic-row--done .topic-row-name {
+        color: var(--success-color, #4caf50);
+    }
+
+    .topic-row-summary {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .topic-row-bar-wrap {
+        height: 3px;
+        background: #e0e0e0;
+        border-radius: 2px;
+        margin-top: 0.3rem;
+    }
+
+    .topic-row-bar {
+        height: 100%;
+        background: var(--primary-color);
+        border-radius: 2px;
+        transition: width 0.4s ease;
+    }
+
+    /* Action icon buttons */
+    .topic-row-actions {
+        display: flex;
+        gap: 0.3rem;
+        flex-shrink: 0;
+    }
+
+    .btn-topic-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.1s, background 0.15s;
+        font-family: inherit;
+    }
+
+    .btn-topic-read {
+        background: transparent;
+        border: 1.5px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+    .btn-topic-read:hover {
+        background: var(--primary-color);
+    }
+
+    .btn-topic-practice {
+        background: var(--primary-color);
+        color: white;
+    }
+    .btn-topic-practice:hover {
+        background: var(--primary-dark);
+    }
+
+    .btn-topic-icon:active {
+        transform: scale(0.9);
+    }
+
+    /* Grammar lesson */
     .completion-badge {
         color: var(--success-color);
         font-weight: 600;
@@ -333,43 +554,6 @@ grammarStyle.textContent = `
         color: var(--primary-color);
     }
 
-    .topic-card-actions {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 0.75rem;
-    }
-
-    .btn-topic-read,
-    .btn-topic-practice {
-        flex: 1;
-        padding: 0.4rem 0.5rem;
-        border-radius: 8px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        cursor: pointer;
-        border: none;
-        font-family: inherit;
-        transition: all 0.2s ease;
-    }
-
-    .btn-topic-read {
-        background: transparent;
-        border: 2px solid var(--primary-color);
-        color: var(--primary-color);
-    }
-    .btn-topic-read:hover {
-        background: var(--primary-color);
-        color: white;
-    }
-
-    .btn-topic-practice {
-        background: var(--primary-color);
-        color: white;
-    }
-    .btn-topic-practice:hover {
-        background: var(--primary-dark);
-    }
-
     .read-only-actions {
         text-align: center;
         padding: 1.5rem;
@@ -382,6 +566,30 @@ grammarStyle.textContent = `
         color: var(--text-secondary);
         margin-bottom: 1rem;
         font-size: 0.95rem;
+    }
+
+    /* Dark mode */
+    body.dark-mode .grammar-group {
+        border-color: #333;
+    }
+    body.dark-mode .topic-row {
+        border-top-color: #2a2a2a;
+    }
+    body.dark-mode .topic-row:hover {
+        background: rgba(255,255,255,0.03);
+    }
+    body.dark-mode .topic-row-bar-wrap {
+        background: #333;
+    }
+    body.dark-mode .dot-new { background: #555; }
+    body.dark-mode .pill-A1 { background: #1b3a1e; color: #81c784; }
+    body.dark-mode .pill-A2 { background: #0d2137; color: #64b5f6; }
+    body.dark-mode .pill-B1 { background: #2d1b00; color: #ffb74d; }
+    body.dark-mode .btn-topic-read {
+        background: transparent;
+    }
+    body.dark-mode .read-only-actions {
+        background: #1e1e1e;
     }
 `;
 document.head.appendChild(grammarStyle);

@@ -659,57 +659,9 @@ body {
     cursor: pointer;
 }
 
-/* Grammar Topics */
+/* Grammar Topics — grouped compact layout */
 .grammar-topics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.topic-card {
-    background: var(--card-background);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: var(--transition);
-    border-left: 4px solid var(--primary-color);
-}
-
-.topic-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-}
-
-.topic-card h4 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.topic-card p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.topic-progress {
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.topic-progress-bar {
-    flex: 1;
-    height: 6px;
-    background: #e0e0e0;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.topic-progress-fill {
-    height: 100%;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
+    display: block;
 }
 
 /* Grammar Lesson */
@@ -2702,15 +2654,7 @@ body.dark-mode .word-card {
     color: var(--text-primary);
 }
 
-body.dark-mode .topic-card {
-    background: var(--card-background);
-    border-color: #333;
-    color: var(--text-primary);
-}
-
-body.dark-mode .topic-card:hover {
-    border-color: var(--primary-light);
-}
+/* Dark mode grammar groups handled via grammar.js inline styles */
 
 body.dark-mode .game-choice-btn {
     background: #2c2c2c;
