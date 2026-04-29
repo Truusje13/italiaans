@@ -147,6 +147,14 @@ const GameModule = {
         });
         const section = document.getElementById(sectionId);
         if (section) section.style.display = 'block';
+
+        // Verberg module-header tijdens actief spelen (niet in menu)
+        const gameModule = document.getElementById('game-module');
+        if (sectionId === 'game-menu') {
+            gameModule?.classList.remove('game-playing');
+        } else {
+            gameModule?.classList.add('game-playing');
+        }
     },
 
     showMenu() {
@@ -342,6 +350,9 @@ const GameModule = {
             html += `</div>`;
 
             feedbackEl.innerHTML = html;
+
+            // Scroll feedback direct in beeld
+            feedbackEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
             feedbackEl.querySelector('.feedback-next-btn').addEventListener('click', () => {
                 this.currentIndex++;
@@ -704,6 +715,9 @@ const GameModule = {
                     <button class="btn btn-primary feedback-next-btn">${isLast ? 'Bekijk resultaat' : 'Volgende →'}</button>
                 </div>
             `;
+
+            // Scroll feedback direct in beeld
+            feedbackEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
             feedbackEl.querySelector('.feedback-next-btn').addEventListener('click', () => {
                 this.currentIndex++;

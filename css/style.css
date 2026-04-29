@@ -1395,6 +1395,11 @@ body {
     color: var(--accent-color);
 }
 
+/* Verberg module-header tijdens actief spelen */
+#game-module.game-playing .module-header {
+    display: none;
+}
+
 /* Quiz header */
 .quiz-header {
     display: flex;
@@ -1482,14 +1487,14 @@ body {
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: var(--border-radius);
-    padding: 0.9rem 1rem;
-    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: var(--transition);
     text-align: left;
     font-family: inherit;
     color: var(--text-primary);
-    line-height: 1.4;
+    line-height: 1.35;
 }
 .quiz-option-btn:hover:not(:disabled) {
     border-color: var(--primary-color);
