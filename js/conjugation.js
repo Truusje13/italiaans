@@ -66,7 +66,7 @@ const Conjugation = {
         });
     },
 
-    // Render reference conjugation table as 3 tense cards
+    // Render reference conjugation table — one tense at a time with tab switcher
     renderReferenceTable(verbType) {
         const container = document.getElementById('reference-content');
         if (!container) return;
@@ -83,34 +83,47 @@ const Conjugation = {
 
         const example = exampleVerbs[verbType];
 
-        let html = `<p class="ref-example-name">${example.infinitive} <span class="ref-example-meaning">— ${this.getVerbMeaning(example.infinitive)}</span></p>`;
-        html += '<div class="tense-cards-grid">';
+        // Tense tab bar
+        let html = '<div class="ref-tense-tabs">';
+        tenses.forEach((tense, i) => {
+            html += `<button class="ref-tense-tab${i === 0 ? ' active' : ''}" data-tense="${tense}">${AppData.verbs.tenses[tense].name}</button>`;
+        });
+        html += '</div>';
 
-        tenses.forEach(tense => {
-            const tenseName = AppData.verbs.tenses[tense].name;
-            html += `<div class="tense-card">
-                <div class="tense-card-header">${tenseName}</div>
-                <table class="conj-mini-table">`;
+        html += `<p class="ref-example-name">${example.infinitive} <span class="ref-example-meaning">— ${this.getVerbMeaning(example.infinitive)}</span></p>`;
 
+        // One panel per tense (only first visible)
+        tenses.forEach((tense, i) => {
+            html += `<div class="ref-tense-panel" data-tense="${tense}"${i !== 0 ? ' style="display:none"' : ''}>`;
+            html += '<table class="conj-single-table">';
             persons.forEach(person => {
                 const pattern = patterns[tense][verbType];
                 const form = (pattern && pattern[person]) ? example.stem + pattern[person] : '—';
                 html += `<tr><td class="conj-person-cell">${person}</td><td class="conj-form-cell">${form}</td></tr>`;
             });
-
             html += '</table></div>';
         });
 
-        html += '</div>';
-
         if (verbType === 'ire') {
-            html += `<div class="reference-note">
+            html += `<div class="reference-note" style="margin-top:0.75rem">
                 <strong>Let op:</strong> Sommige -ire werkwoorden (capire, finire, preferire) voegen <em>-isc-</em> toe:
                 capisco, capisci, capisce, capiamo, capite, capiscono
             </div>`;
         }
 
         container.innerHTML = html;
+
+        // Tense tab clicks (scoped to this container)
+        container.addEventListener('click', (e) => {
+            const tab = e.target.closest('.ref-tense-tab');
+            if (!tab) return;
+            const tense = tab.dataset.tense;
+            container.querySelectorAll('.ref-tense-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            container.querySelectorAll('.ref-tense-panel').forEach(p => {
+                p.style.display = p.dataset.tense === tense ? 'block' : 'none';
+            });
+        });
     },
 
     // Get verb meaning

@@ -814,53 +814,58 @@ body {
     color: var(--text-secondary);
 }
 
-/* 3 tense cards side by side */
-.tense-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
+/* Tense tab switcher inside reference */
+.ref-tense-tabs {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.7rem;
 }
 
-.tense-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
+.ref-tense-tab {
+    padding: 0.28rem 0.7rem;
+    border-radius: 20px;
+    border: 1.5px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
 }
 
-.tense-card-header {
+.ref-tense-tab.active {
     background: var(--primary-color);
     color: white;
-    padding: 0.3rem 0.5rem;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: 0.01em;
 }
 
-.conj-mini-table {
+/* Single-tense table */
+.conj-single-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.conj-mini-table tr {
-    border-bottom: 1px solid #f3f3f3;
+.conj-single-table tr {
+    border-bottom: 1px solid #f0f0f0;
 }
 
-.conj-mini-table tr:last-child {
+.conj-single-table tr:last-child {
     border-bottom: none;
 }
 
 .conj-person-cell {
-    padding: 0.28rem 0.4rem 0.28rem 0.5rem;
-    font-size: 0.7rem;
+    padding: 0.45rem 0.5rem 0.45rem 0.75rem;
+    font-size: 0.82rem;
     color: var(--text-secondary);
+    width: 40px;
     white-space: nowrap;
-    width: 26px;
 }
 
 .conj-form-cell {
-    padding: 0.28rem 0.5rem 0.28rem 0;
-    font-size: 0.78rem;
+    padding: 0.45rem 0.75rem 0.45rem 0.25rem;
+    font-size: 0.92rem;
     font-weight: 600;
     color: var(--text-primary);
 }
