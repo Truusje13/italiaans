@@ -21,13 +21,29 @@ const Conjugation = {
             this.startExercise();
         });
 
-        // Reference tabs
+        // Reference tabs (-are / -ere / -ire)
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
                 this.renderReferenceTable(e.target.dataset.tab);
             });
+        });
+
+        // Pill buttons — werkwoordtype
+        document.getElementById('verb-type-pills')?.addEventListener('click', (e) => {
+            const pill = e.target.closest('.conj-pill');
+            if (!pill) return;
+            document.querySelectorAll('#verb-type-pills .conj-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+        });
+
+        // Pill buttons — tijd
+        document.getElementById('verb-tense-pills')?.addEventListener('click', (e) => {
+            const pill = e.target.closest('.conj-pill');
+            if (!pill) return;
+            document.querySelectorAll('#verb-tense-pills .conj-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
         });
 
         // Submit answer
@@ -50,7 +66,7 @@ const Conjugation = {
         });
     },
 
-    // Render reference conjugation table
+    // Render reference conjugation table as 3 tense cards
     renderReferenceTable(verbType) {
         const container = document.getElementById('reference-content');
         if (!container) return;
@@ -59,7 +75,6 @@ const Conjugation = {
         const persons = ['io', 'tu', 'lui', 'noi', 'voi', 'loro'];
         const tenses = ['presente', 'imperfetto', 'futuro'];
 
-        // Example verb for this type
         const exampleVerbs = {
             are: { infinitive: 'parlare', stem: 'parl' },
             ere: { infinitive: 'vedere', stem: 'ved' },
@@ -68,41 +83,31 @@ const Conjugation = {
 
         const example = exampleVerbs[verbType];
 
-        let html = `<h4>Voorbeeld: ${example.infinitive} (${this.getVerbMeaning(example.infinitive)})</h4>`;
-        html += '<div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>Persoon</th>';
+        let html = `<p class="ref-example-name">${example.infinitive} <span class="ref-example-meaning">— ${this.getVerbMeaning(example.infinitive)}</span></p>`;
+        html += '<div class="tense-cards-grid">';
 
         tenses.forEach(tense => {
-            html += `<th>${AppData.verbs.tenses[tense].name}</th>`;
-        });
+            const tenseName = AppData.verbs.tenses[tense].name;
+            html += `<div class="tense-card">
+                <div class="tense-card-header">${tenseName}</div>
+                <table class="conj-mini-table">`;
 
-        html += '</tr></thead><tbody>';
-
-        persons.forEach(person => {
-            html += `<tr><td>${AppData.verbs.persons[person]}</td>`;
-
-            tenses.forEach(tense => {
+            persons.forEach(person => {
                 const pattern = patterns[tense][verbType];
-                if (pattern && pattern[person]) {
-                    html += `<td>${example.stem}${pattern[person]}</td>`;
-                } else {
-                    html += '<td>-</td>';
-                }
+                const form = (pattern && pattern[person]) ? example.stem + pattern[person] : '—';
+                html += `<tr><td class="conj-person-cell">${person}</td><td class="conj-form-cell">${form}</td></tr>`;
             });
 
-            html += '</tr>';
+            html += '</table></div>';
         });
 
-        html += '</tbody></table></div>';
+        html += '</div>';
 
-        // Add note about -isc- verbs for -ire
         if (verbType === 'ire') {
-            html += `
-                <div class="reference-note">
-                    <strong>Let op:</strong> Sommige -ire werkwoorden (zoals capire, finire, preferire)
-                    voegen -isc- toe voor io, tu, lui/lei, en loro in de presente:
-                    <br>capire → capisco, capisci, capisce, capiamo, capite, capiscono
-                </div>
-            `;
+            html += `<div class="reference-note">
+                <strong>Let op:</strong> Sommige -ire werkwoorden (capire, finire, preferire) voegen <em>-isc-</em> toe:
+                capisco, capisci, capisce, capiamo, capite, capiscono
+            </div>`;
         }
 
         container.innerHTML = html;
@@ -125,8 +130,8 @@ const Conjugation = {
 
     // Start conjugation exercise
     startExercise() {
-        const verbType = document.getElementById('verb-type').value;
-        this.currentTense = document.getElementById('verb-tense').value;
+        const verbType = document.querySelector('#verb-type-pills .conj-pill.active')?.dataset.value || 'all';
+        this.currentTense = document.querySelector('#verb-tense-pills .conj-pill.active')?.dataset.value || 'presente';
 
         // Collect verbs based on selection
         this.currentVerbs = [];
@@ -162,7 +167,7 @@ const Conjugation = {
 
         // Hide reference, show exercise
         document.getElementById('conjugation-reference').style.display = 'none';
-        document.querySelector('.conjugation-selector').style.display = 'none';
+        document.getElementById('conjugation-selector').style.display = 'none';
         document.getElementById('conjugation-exercise').style.display = 'block';
 
         // Update total
@@ -394,7 +399,7 @@ const Conjugation = {
     // Go back to selector
     backToSelector() {
         document.getElementById('conjugation-reference').style.display = 'block';
-        document.querySelector('.conjugation-selector').style.display = 'flex';
+        document.getElementById('conjugation-selector').style.display = 'block';
 
         const exerciseArea = document.getElementById('conjugation-exercise');
         exerciseArea.style.display = 'none';

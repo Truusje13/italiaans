@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=21">
+    <link rel="stylesheet" href="css/style.css?v=22">
 </head>
 <body>
     <div class="app-container">
@@ -423,45 +423,40 @@
             <section id="conjugation-module" class="module">
                 <button class="back-to-home-btn" data-target="home">← Home</button>
                 <div class="module-header">
-                    <h2>Werkwoordvervoegingen</h2>
-                    <p>Oefen met regelmatige en onregelmatige werkwoorden</p>
+                    <h2>Vervoegingen</h2>
+                    <p>Regelmatig &amp; onregelmatig</p>
                 </div>
 
-                <div class="conjugation-selector">
-                    <div class="selector-group">
-                        <label>Werkwoordtype:</label>
-                        <select id="verb-type">
-                            <option value="all">Alle werkwoorden</option>
-                            <option value="are">-are werkwoorden</option>
-                            <option value="ere">-ere werkwoorden</option>
-                            <option value="ire">-ire werkwoorden</option>
-                            <option value="irregular">Onregelmatige werkwoorden</option>
-                        </select>
-                    </div>
-
-                    <div class="selector-group">
-                        <label>Tijd:</label>
-                        <select id="verb-tense">
-                            <option value="presente">Presente (tegenwoordige tijd)</option>
-                            <option value="passatoProssimo">Passato Prossimo (voltooide tijd)</option>
-                            <option value="imperfetto">Imperfetto (onvoltooid verleden)</option>
-                            <option value="futuro">Futuro (toekomende tijd)</option>
-                        </select>
-                    </div>
-
-                    <button class="btn btn-primary" id="start-conjugation">Start oefening</button>
-                </div>
-
+                <!-- Vervoegingstabel EERST -->
                 <div class="conjugation-reference" id="conjugation-reference">
-                    <h3>Vervoegingstabellen</h3>
                     <div class="reference-tabs">
                         <button class="tab-btn active" data-tab="are">-are</button>
                         <button class="tab-btn" data-tab="ere">-ere</button>
                         <button class="tab-btn" data-tab="ire">-ire</button>
                     </div>
-                    <div class="reference-content" id="reference-content">
-                        <!-- Reference tables will be populated by JS -->
+                    <div id="reference-content">
+                        <!-- Tense cards populated by JS -->
                     </div>
+                </div>
+
+                <!-- Keuze met pill-knoppen -->
+                <div class="conj-selector-section" id="conjugation-selector">
+                    <div class="conj-selector-label">Werkwoordtype</div>
+                    <div class="conj-pills" id="verb-type-pills">
+                        <button class="conj-pill active" data-value="all">Alle</button>
+                        <button class="conj-pill" data-value="are">-are</button>
+                        <button class="conj-pill" data-value="ere">-ere</button>
+                        <button class="conj-pill" data-value="ire">-ire</button>
+                        <button class="conj-pill" data-value="irregular">Onregelmatig</button>
+                    </div>
+                    <div class="conj-selector-label">Tijd</div>
+                    <div class="conj-pills" id="verb-tense-pills">
+                        <button class="conj-pill active" data-value="presente">Presente</button>
+                        <button class="conj-pill" data-value="passatoProssimo">Passato P.</button>
+                        <button class="conj-pill" data-value="imperfetto">Imperfetto</button>
+                        <button class="conj-pill" data-value="futuro">Futuro</button>
+                    </div>
+                    <button class="btn btn-primary conj-start-btn" id="start-conjugation">Start oefening →</button>
                 </div>
 
                 <div class="conjugation-exercise" id="conjugation-exercise" style="display: none;">
@@ -769,7 +764,7 @@
     <script src="js/feedback.js?v=13"></script>
     <script src="js/vocabulary.js?v=19"></script>
     <script src="js/grammar.js?v=21"></script>
-    <script src="js/conjugation.js?v=19"></script>
+    <script src="js/conjugation.js?v=22"></script>
     <script src="js/speaking.js?v=13"></script>
     <script src="js/custom-words.js?v=13"></script>
     <script src="js/game.js?v=13"></script>
