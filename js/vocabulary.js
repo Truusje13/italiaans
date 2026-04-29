@@ -52,9 +52,20 @@ const Vocabulary = {
         document.getElementById('vocab-answer-input')?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.checkTextAnswer();
         });
+        document.getElementById('vocab-answer-input')?.addEventListener('focus', () => {
+            this._scrollToSubmitBtn();
+        });
         document.getElementById('vocab-feedback')?.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn-primary')) this.nextWord();
         });
+    },
+
+    // Scroll de "Controleer"-knop in beeld nadat toetsenbord is opengegaan
+    _scrollToSubmitBtn() {
+        if (!this.hardMode) return;
+        setTimeout(() => {
+            document.getElementById('vocab-submit-btn')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 380);
     },
 
     // Render category buttons
@@ -161,6 +172,11 @@ const Vocabulary = {
             }
         });
 
+        // Scroll "Controleer"-knop in beeld als toetsenbord opengaat
+        document.getElementById('vocab-answer-input')?.addEventListener('focus', () => {
+            this._scrollToSubmitBtn();
+        });
+
         // Next button in feedback
         document.getElementById('vocab-feedback')?.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn-primary')) {
@@ -246,15 +262,18 @@ const Vocabulary = {
         const multipleChoice = document.getElementById('vocab-choices');
         const textInput = document.getElementById('vocab-text-input');
         const exerciseEl = document.getElementById('vocab-exercise');
+        const section = document.getElementById('vocabulary-module');
 
         if (this.hardMode) {
             multipleChoice.style.display = 'none';
             textInput.style.display = 'flex';
             exerciseEl?.classList.add('text-mode');
+            section?.classList.add('exercising');   // verberg header + mode-toggle
         } else {
             multipleChoice.style.display = 'grid';
             textInput.style.display = 'none';
             exerciseEl?.classList.remove('text-mode');
+            section?.classList.remove('exercising');
         }
     },
 
@@ -527,6 +546,8 @@ const Vocabulary = {
         document.querySelector('.category-selector').style.display = 'block';
         const exerciseArea = document.getElementById('vocab-exercise');
         exerciseArea.style.display = 'none';
+        // Herstel module-header en mode-toggle
+        document.getElementById('vocabulary-module')?.classList.remove('exercising');
 
         // Reset exercise area HTML
         exerciseArea.innerHTML = `

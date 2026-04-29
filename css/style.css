@@ -580,35 +580,52 @@ body {
     border-color: var(--primary-color);
 }
 
+/* Hard mode (typen): verberg header + toggle zodat meer ruimte overblijft */
+#vocabulary-module.exercising .module-header,
+#vocabulary-module.exercising .mode-toggle {
+    display: none;
+}
+
 /* Hard mode (typen): compactere layout zodat alles zichtbaar blijft */
 #vocab-exercise.text-mode {
-    padding: 1.25rem;
+    padding: 0.875rem;
 }
 #vocab-exercise.text-mode .exercise-progress {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
 }
 #vocab-exercise.text-mode .flashcard {
-    padding: 1rem 1.5rem;
-    min-height: 80px;
-    margin-bottom: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    min-height: 70px;
+    margin-bottom: 0.625rem;
 }
 #vocab-exercise.text-mode .flashcard-front {
-    gap: 0.5rem;
+    gap: 0.375rem;
 }
 #vocab-exercise.text-mode .italian-word {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
 }
 #vocab-exercise.text-mode .speak-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 1.1rem;
-}
-#vocab-exercise.text-mode .text-input-mode input {
-    padding: 0.75rem;
+    width: 34px;
+    height: 34px;
     font-size: 1rem;
 }
+#vocab-exercise.text-mode .answer-area {
+    margin-bottom: 0;
+}
+#vocab-exercise.text-mode .text-input-mode {
+    gap: 0.5rem;
+}
+#vocab-exercise.text-mode .text-input-mode input {
+    padding: 0.625rem 0.75rem;
+    font-size: 1rem;
+}
+#vocab-exercise.text-mode .text-input-mode .btn {
+    padding: 0.625rem 1rem;
+    white-space: nowrap;
+}
 #vocab-exercise.text-mode .feedback-panel {
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 1rem;
     margin-top: 0.5rem;
 }
 
