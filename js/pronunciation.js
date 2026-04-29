@@ -164,14 +164,27 @@ const Pronunciation = {
 
             return `
                 <div class="pron-group">
-                    <div class="pron-group-header">${group.label}</div>
-                    <div class="pron-cards-grid">${cards}</div>
+                    <button class="pron-group-header" aria-expanded="false">
+                        <span class="pron-group-label">${group.label}</span>
+                        <span class="pron-chevron">▼</span>
+                    </button>
+                    <div class="pron-cards-grid" hidden>${cards}</div>
                 </div>
             `;
         }).join('');
 
-        // Speak button handler
+        // Toggle accordion + speak button handler
         container.addEventListener('click', (e) => {
+            const header = e.target.closest('.pron-group-header');
+            if (header) {
+                const grid = header.nextElementSibling;
+                const chevron = header.querySelector('.pron-chevron');
+                const isOpen = !grid.hidden;
+                grid.hidden = isOpen;
+                header.setAttribute('aria-expanded', String(!isOpen));
+                chevron.textContent = isOpen ? '▼' : '▲';
+                return;
+            }
             const btn = e.target.closest('.pron-speak-btn');
             if (btn) this.speak(btn.dataset.word);
         });
@@ -201,11 +214,33 @@ pronStyle.textContent = `
     }
 
     .pron-group-header {
-        padding: 0.55rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.6rem 1rem;
         background: var(--secondary-color, #1565c0);
         color: white;
         font-weight: 700;
         font-size: 0.88rem;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+        transition: filter 0.15s;
+    }
+
+    .pron-group-header:hover {
+        filter: brightness(1.12);
+    }
+
+    .pron-group-label {
+        flex: 1;
+    }
+
+    .pron-chevron {
+        font-size: 0.75rem;
+        opacity: 0.85;
     }
 
     .pron-cards-grid {
