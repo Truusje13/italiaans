@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=20">
+    <link rel="stylesheet" href="css/style.css?v=21">
 </head>
 <body>
     <div class="app-container">
@@ -365,19 +365,31 @@
                     <p>Leer de regels van de Italiaanse taal</p>
                 </div>
 
-                <!-- Pronunciation Guide -->
-                <div class="pronunciation-guide">
-                    <h3 class="section-subtitle">🗣️ Uitspraakg ids</h3>
-                    <p class="section-intro">Klik op een regel om de uitleg te zien en druk op 🔊 om het voorbeeld te horen.</p>
-                    <div id="pronunciation-rules"></div>
+                <!-- Level 1: Section overview cards -->
+                <div id="grammar-overview">
+                    <!-- Filled by Grammar.renderSectionOverview() -->
                 </div>
 
-                <div class="grammar-topics" id="grammar-topics">
-                    <!-- Topics will be populated by JS -->
+                <!-- Level 2: Section detail (pronunciation or topic list) -->
+                <div id="grammar-section-detail" style="display:none">
+                    <button class="btn btn-outline back-btn" id="grammar-back-overview">← Alle onderdelen</button>
+                    <h3 id="grammar-section-heading" class="section-subtitle grammar-section-heading"></h3>
+
+                    <!-- Pronunciation rules (shown for pronunciation section) -->
+                    <div id="pronunciation-section" style="display:none">
+                        <p class="section-intro">Druk op 🔊 om het voorbeeld te horen.</p>
+                        <div id="pronunciation-rules"></div>
+                    </div>
+
+                    <!-- Grammar topics for selected group -->
+                    <div class="grammar-topics" id="grammar-topics" style="display:none">
+                        <!-- Filled by Grammar.renderTopics(groupId) -->
+                    </div>
                 </div>
 
+                <!-- Level 3: Grammar lesson -->
                 <div class="grammar-lesson" id="grammar-lesson" style="display: none;">
-                    <button class="btn btn-secondary back-btn" id="grammar-back-btn">← Terug naar onderwerpen</button>
+                    <button class="btn btn-secondary back-btn" id="grammar-back-btn">← Terug</button>
 
                     <div class="lesson-content">
                         <h3 id="grammar-title"></h3>
@@ -756,13 +768,13 @@
     <script src="js/progress.js?v=19"></script>
     <script src="js/feedback.js?v=13"></script>
     <script src="js/vocabulary.js?v=19"></script>
-    <script src="js/grammar.js?v=20"></script>
+    <script src="js/grammar.js?v=21"></script>
     <script src="js/conjugation.js?v=19"></script>
     <script src="js/speaking.js?v=13"></script>
     <script src="js/custom-words.js?v=13"></script>
     <script src="js/game.js?v=13"></script>
     <script src="js/listening.js?v=13"></script>
-    <script src="js/pronunciation.js?v=13"></script>
+    <script src="js/pronunciation.js?v=21"></script>
     <script src="js/app.js?v=19"></script>
 
     <!-- Service Worker Registration -->

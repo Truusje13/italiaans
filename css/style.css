@@ -2325,10 +2325,7 @@ body {
 }
 
 /* ==================== Pronunciation Guide ==================== */
-
-.pronunciation-guide {
-    margin-bottom: 2rem;
-}
+/* Styles moved to js/pronunciation.js inline CSS */
 
 .section-subtitle {
     font-size: 1.1rem;
@@ -2340,102 +2337,6 @@ body {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 1rem;
-}
-
-.pron-rule {
-    border: 1px solid #e0e0e0;
-    border-radius: var(--border-radius);
-    margin-bottom: 0.5rem;
-    overflow: hidden;
-}
-
-.pron-rule-header {
-    width: 100%;
-    background: #fafafa;
-    border: none;
-    padding: 0.85rem 1rem;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    transition: background 0.2s;
-}
-
-.pron-rule-header:hover { background: #f0f0f0; }
-
-.pron-symbol {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--secondary-color);
-    min-width: 36px;
-    text-align: center;
-}
-
-.pron-title {
-    flex: 1;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.pron-chevron {
-    color: #888;
-    font-size: 0.8rem;
-}
-
-.pron-rule-body {
-    padding: 1rem;
-    background: white;
-    border-top: 1px solid #e0e0e0;
-}
-
-.pron-description {
-    font-size: 0.92rem;
-    color: #444;
-    margin-bottom: 0.75rem;
-    line-height: 1.5;
-}
-
-.pron-examples {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.pron-example {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: #f9f9f9;
-    border-radius: 6px;
-    padding: 0.5rem 0.75rem;
-}
-
-.pron-speak-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    padding: 0;
-    flex-shrink: 0;
-}
-
-.pron-italian {
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 0.95rem;
-}
-
-.pron-phonetic {
-    color: #888;
-    font-size: 0.85rem;
-    font-style: italic;
-}
-
-.pron-dutch {
-    color: #555;
-    font-size: 0.85rem;
-    margin-left: auto;
 }
 
 /* =============================================
@@ -2515,7 +2416,6 @@ body.dark-mode .main-content {
 body.dark-mode .home-card,
 body.dark-mode .module-card,
 body.dark-mode .flashcard,
-body.dark-mode .pron-rule,
 body.dark-mode .custom-cat-item,
 body.dark-mode .custom-word-item,
 body.dark-mode .dashboard-stat {
@@ -2621,27 +2521,7 @@ body.dark-mode .feedback-panel.error {
     border-color: var(--error-color);
 }
 
-body.dark-mode .pron-rule-header {
-    background: #2a2a2a;
-    color: var(--text-primary);
-}
-
-body.dark-mode .pron-rule-header:hover {
-    background: #333;
-}
-
-body.dark-mode .pron-rule-body {
-    background: #1e1e1e;
-}
-
-body.dark-mode .pron-example {
-    background: #2a2a2a;
-    border-color: #444;
-}
-
-body.dark-mode .pron-dutch {
-    color: var(--text-secondary);
-}
+/* pronunciation dark mode handled in js/pronunciation.js inline styles */
 
 body.dark-mode .example-sentence {
     background: #2a2a2a;

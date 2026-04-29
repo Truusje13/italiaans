@@ -3,64 +3,164 @@
 const Grammar = {
     currentTopic: null,
     currentExerciseIndex: 0,
+    _currentSection: null,  // track open section
+
+    // Pronunciation section definition
+    PRONUNCIATION_SECTION: {
+        id: 'pronunciation',
+        icon: '🗣️',
+        label: 'Uitspraak',
+        desc: 'Klanken, letters en uitspraakregels',
+        type: 'pronunciation'
+    },
 
     // Topic groups definition
     GRAMMAR_GROUPS: [
         {
             id: 'lidwoorden',
-            label: '📚 Lidwoorden & Naamwoorden',
+            icon: '📚',
+            label: 'Lidwoorden & Naamwoorden',
+            desc: 'il/la/lo · bijvoeglijke naamwoorden · bezittelijk',
             topics: ['articles-definite', 'articles-indefinite', 'adjectives', 'possessives']
         },
         {
             id: 'voornaamwoorden',
-            label: '👤 Voornaamwoorden',
+            icon: '👤',
+            label: 'Voornaamwoorden',
+            desc: 'io/tu/lui · me/te/lo · reflexieve werkwoorden',
             topics: ['pronouns-subject', 'pronouns-direct', 'reflexive']
         },
         {
             id: 'zinsbouw',
-            label: '🔧 Zinsbouw',
+            icon: '🔧',
+            label: 'Zinsbouw',
+            desc: 'Voorzetsels · ontkenning · vragen · vergelijkingen',
             topics: ['prepositions', 'negation', 'questions', 'comparatives']
         },
         {
             id: 'werkwoorden',
-            label: '⏰ Werkwoordstijden',
+            icon: '⏰',
+            label: 'Werkwoordstijden',
+            desc: 'Condizionale · imperfetto vs passato prossimo',
             topics: ['condizionale', 'imperfetto-vs-passato']
         }
     ],
 
     // CEFR level per topic
     TOPIC_LEVELS: {
-        'articles-definite':   'A1',
-        'articles-indefinite': 'A1',
-        'adjectives':          'A1',
-        'negation':            'A1',
-        'questions':           'A1',
-        'pronouns-subject':    'A1',
-        'prepositions':        'A2',
-        'pronouns-direct':     'A2',
-        'possessives':         'A2',
-        'reflexive':           'A2',
-        'comparatives':        'B1',
-        'condizionale':        'B1',
+        'articles-definite':     'A1',
+        'articles-indefinite':   'A1',
+        'adjectives':            'A1',
+        'negation':              'A1',
+        'questions':             'A1',
+        'pronouns-subject':      'A1',
+        'prepositions':          'A2',
+        'pronouns-direct':       'A2',
+        'possessives':           'A2',
+        'reflexive':             'A2',
+        'comparatives':          'B1',
+        'condizionale':          'B1',
         'imperfetto-vs-passato': 'B1'
     },
 
     // Initialize the grammar module
     init() {
-        this.renderTopics();
+        this.renderSectionOverview();
         this.setupEventListeners();
     },
 
-    // Render grouped topic rows
-    renderTopics() {
+    // ─── Level 1: Section overview ──────────────────────────────────
+
+    renderSectionOverview() {
+        const container = document.getElementById('grammar-overview');
+        if (!container) return;
+
+        const progress = Progress.load();
+        const sections = [this.PRONUNCIATION_SECTION, ...this.GRAMMAR_GROUPS];
+
+        const cards = sections.map(section => {
+            if (section.type === 'pronunciation') {
+                return `
+                    <button class="grammar-section-card" data-section="${section.id}">
+                        <span class="gsc-icon">${section.icon}</span>
+                        <span class="gsc-label">${section.label}</span>
+                        <span class="gsc-desc">${section.desc}</span>
+                        <span class="gsc-meta">10 regels</span>
+                        <span class="gsc-arrow">›</span>
+                    </button>`;
+            }
+
+            const groupTopics = section.topics
+                .map(id => AppData.grammar.find(t => t.id === id))
+                .filter(Boolean);
+            const completed = groupTopics.filter(t =>
+                progress.grammar.completedTopics.includes(t.id)
+            ).length;
+            const total = groupTopics.length;
+            const allDone = completed === total;
+
+            return `
+                <button class="grammar-section-card${allDone ? ' gsc-done' : ''}" data-section="${section.id}">
+                    <span class="gsc-icon">${section.icon}</span>
+                    <span class="gsc-label">${section.label}</span>
+                    <span class="gsc-desc">${section.desc}</span>
+                    <span class="gsc-meta${allDone ? ' gsc-meta-done' : ''}">${completed}/${total} voltooid</span>
+                    <span class="gsc-arrow">›</span>
+                </button>`;
+        });
+
+        container.innerHTML = `<div class="grammar-section-grid">${cards.join('')}</div>`;
+    },
+
+    // ─── Level 2: Section detail ────────────────────────────────────
+
+    showSection(sectionId) {
+        this._currentSection = sectionId;
+
+        document.getElementById('grammar-overview').style.display = 'none';
+        document.getElementById('grammar-section-detail').style.display = 'block';
+        document.getElementById('grammar-lesson').style.display = 'none';
+
+        const pronSection  = document.getElementById('pronunciation-section');
+        const topicsDiv    = document.getElementById('grammar-topics');
+        const heading      = document.getElementById('grammar-section-heading');
+
+        if (sectionId === 'pronunciation') {
+            heading.textContent = '🗣️ Uitspraak';
+            pronSection.style.display = 'block';
+            topicsDiv.style.display = 'none';
+            if (window.Pronunciation) Pronunciation.render();
+        } else {
+            const group = this.GRAMMAR_GROUPS.find(g => g.id === sectionId);
+            if (!group) return;
+            heading.textContent = `${group.icon} ${group.label}`;
+            pronSection.style.display = 'none';
+            topicsDiv.style.display = 'block';
+            this.renderTopics(sectionId);
+        }
+    },
+
+    backToOverview() {
+        document.getElementById('grammar-overview').style.display = 'block';
+        document.getElementById('grammar-section-detail').style.display = 'none';
+        document.getElementById('grammar-lesson').style.display = 'none';
+        this._currentSection = null;
+        this.renderSectionOverview();  // refresh completion counts
+    },
+
+    // Render topic rows, filtered to one group
+    renderTopics(filterGroupId) {
         const container = document.getElementById('grammar-topics');
         if (!container) return;
 
         container.innerHTML = '';
         const progress = Progress.load();
 
-        this.GRAMMAR_GROUPS.forEach(group => {
-            // Gather topics for this group
+        const groupsToRender = filterGroupId
+            ? this.GRAMMAR_GROUPS.filter(g => g.id === filterGroupId)
+            : this.GRAMMAR_GROUPS;
+
+        groupsToRender.forEach(group => {
             const groupTopics = group.topics
                 .map(id => AppData.grammar.find(t => t.id === id))
                 .filter(Boolean);
@@ -69,12 +169,11 @@ const Grammar = {
                 progress.grammar.completedTopics.includes(t.id)
             ).length;
 
-            // Group header
             const groupEl = document.createElement('div');
             groupEl.className = 'grammar-group';
             groupEl.innerHTML = `
                 <div class="grammar-group-header">
-                    <span class="grammar-group-label">${group.label}</span>
+                    <span class="grammar-group-label">${group.icon} ${group.label}</span>
                     <span class="grammar-group-badge">${completedInGroup}/${groupTopics.length}</span>
                 </div>
                 <div class="grammar-group-rows"></div>
@@ -114,33 +213,8 @@ const Grammar = {
         });
     },
 
-    // Setup event listeners
-    setupEventListeners() {
-        // Topic selection — two buttons per card
-        document.getElementById('grammar-topics')?.addEventListener('click', (e) => {
-            const readBtn = e.target.closest('.btn-topic-read');
-            const practiceBtn = e.target.closest('.btn-topic-practice');
-            if (readBtn) {
-                this.openTopicReadOnly(readBtn.dataset.topicId);
-            } else if (practiceBtn) {
-                this.openTopic(practiceBtn.dataset.topicId);
-            }
-        });
+    // ─── Level 3: Grammar lesson ────────────────────────────────────
 
-        // Back button
-        document.getElementById('grammar-back-btn')?.addEventListener('click', () => {
-            this.backToTopics();
-        });
-
-        // Next exercise button
-        document.getElementById('grammar-feedback')?.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-primary')) {
-                this.nextExercise();
-            }
-        });
-    },
-
-    // Open a topic
     openTopic(topicId) {
         const topic = AppData.grammar.find(t => t.id === topicId);
         if (!topic) return;
@@ -148,28 +222,24 @@ const Grammar = {
         this.currentTopic = topic;
         this.currentExerciseIndex = 0;
 
-        // Hide topics list, show lesson
-        document.getElementById('grammar-topics').style.display = 'none';
+        document.getElementById('grammar-section-detail').style.display = 'none';
         document.getElementById('grammar-lesson').style.display = 'block';
 
-        // Render content
         this.renderLesson(topic);
         this.renderExercise();
     },
 
-    // Open a topic in read-only mode (theory only, no exercises)
     openTopicReadOnly(topicId) {
         const topic = AppData.grammar.find(t => t.id === topicId);
         if (!topic) return;
 
         this.currentTopic = topic;
 
-        document.getElementById('grammar-topics').style.display = 'none';
+        document.getElementById('grammar-section-detail').style.display = 'none';
         document.getElementById('grammar-lesson').style.display = 'block';
 
         this.renderLesson(topic);
 
-        // Replace exercise area with a prompt to start exercises
         const exerciseContainer = document.getElementById('grammar-exercise');
         exerciseContainer.innerHTML = `
             <div class="read-only-actions">
@@ -185,12 +255,46 @@ const Grammar = {
         });
     },
 
-    // Render lesson content
+    // Setup event listeners
+    setupEventListeners() {
+        // Section card clicks (overview → section detail)
+        document.getElementById('grammar-overview')?.addEventListener('click', (e) => {
+            const card = e.target.closest('.grammar-section-card');
+            if (card) this.showSection(card.dataset.section);
+        });
+
+        // Back to overview button
+        document.getElementById('grammar-back-overview')?.addEventListener('click', () => {
+            this.backToOverview();
+        });
+
+        // Topic read/practice buttons (section detail → lesson)
+        document.getElementById('grammar-topics')?.addEventListener('click', (e) => {
+            const readBtn = e.target.closest('.btn-topic-read');
+            const practiceBtn = e.target.closest('.btn-topic-practice');
+            if (readBtn) this.openTopicReadOnly(readBtn.dataset.topicId);
+            else if (practiceBtn) this.openTopic(practiceBtn.dataset.topicId);
+        });
+
+        // Back from lesson to section detail
+        document.getElementById('grammar-back-btn')?.addEventListener('click', () => {
+            this.backToTopics();
+        });
+
+        // Next exercise button
+        document.getElementById('grammar-feedback')?.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-primary')) {
+                this.nextExercise();
+            }
+        });
+    },
+
+    // ─── Lesson helpers ─────────────────────────────────────────────
+
     renderLesson(topic) {
         document.getElementById('grammar-title').textContent = topic.topic;
         document.getElementById('grammar-theory').innerHTML = topic.explanation;
 
-        // Render examples
         const examplesList = document.getElementById('grammar-examples');
         examplesList.innerHTML = '';
         topic.examples.forEach(example => {
@@ -200,7 +304,6 @@ const Grammar = {
         });
     },
 
-    // Render current exercise
     renderExercise() {
         if (!this.currentTopic || !this.currentTopic.exercises) return;
 
@@ -210,10 +313,8 @@ const Grammar = {
             return;
         }
 
-        // Update question
         document.getElementById('grammar-question').textContent = exercise.question;
 
-        // Render options
         const optionsContainer = document.getElementById('grammar-options');
         optionsContainer.innerHTML = '';
 
@@ -226,35 +327,26 @@ const Grammar = {
             optionsContainer.appendChild(btn);
         });
 
-        // Hide feedback
         document.getElementById('grammar-feedback').style.display = 'none';
     },
 
-    // Check answer
     checkAnswer(selectedIndex) {
         const exercise = this.currentTopic.exercises[this.currentExerciseIndex];
         const correct = selectedIndex === exercise.correct;
 
-        // Disable all buttons and show correct/incorrect
         const buttons = document.querySelectorAll('#grammar-options .option-btn');
         buttons.forEach((btn, i) => {
             btn.disabled = true;
-            if (i === exercise.correct) {
-                btn.classList.add('correct');
-            } else if (i === selectedIndex) {
-                btn.classList.add('incorrect');
-            }
+            if (i === exercise.correct) btn.classList.add('correct');
+            else if (i === selectedIndex) btn.classList.add('incorrect');
         });
 
-        // Record progress
         Progress.recordGrammarAttempt(this.currentTopic.id, correct);
 
-        // Show feedback
         const feedback = Feedback.grammarFeedback(exercise, selectedIndex, correct);
         this.showFeedback(feedback);
     },
 
-    // Show feedback panel
     showFeedback(feedback) {
         const container = document.getElementById('grammar-feedback');
         if (!container) return;
@@ -278,10 +370,8 @@ const Grammar = {
         `;
     },
 
-    // Move to next exercise
     nextExercise() {
         this.currentExerciseIndex++;
-
         if (this.currentExerciseIndex >= this.currentTopic.exercises.length) {
             this.showTopicComplete();
         } else {
@@ -289,23 +379,23 @@ const Grammar = {
         }
     },
 
-    // Show topic complete screen
     showTopicComplete() {
         const exerciseContainer = document.getElementById('grammar-exercise');
         if (!exerciseContainer) return;
 
         const progress = Progress.load();
         const topicProgress = progress.grammar.topicProgress[this.currentTopic.id] || { correct: 0, attempts: 0 };
-        const accuracy = topicProgress.attempts > 0 ?
-            Math.round((topicProgress.correct / topicProgress.attempts) * 100) : 0;
+        const accuracy = topicProgress.attempts > 0
+            ? Math.round((topicProgress.correct / topicProgress.attempts) * 100) : 0;
         const isCompleted = progress.grammar.completedTopics.includes(this.currentTopic.id);
 
         exerciseContainer.innerHTML = `
             <div class="session-complete">
                 <h3>${isCompleted ? '🏆' : '🎉'} ${isCompleted ? 'Onderwerp beheerst!' : 'Oefeningen voltooid!'}</h3>
                 <p>Je hebt alle oefeningen over "${this.currentTopic.topic}" afgerond.</p>
-                ${isCompleted ? '<p class="completion-badge">Dit onderwerp is nu als voltooid gemarkeerd!</p>' :
-                    '<p class="hint">Blijf oefenen om dit onderwerp te voltooien (5 correcte antwoorden nodig).</p>'}
+                ${isCompleted
+                    ? '<p class="completion-badge">Dit onderwerp is nu als voltooid gemarkeerd!</p>'
+                    : '<p class="hint">Blijf oefenen om dit onderwerp te voltooien (5 correcte antwoorden nodig).</p>'}
                 <div class="session-stats">
                     <div class="stat-item">
                         <span class="stat-value">${accuracy}%</span>
@@ -318,7 +408,7 @@ const Grammar = {
                 </div>
                 <div class="session-actions">
                     <button class="btn btn-primary" id="grammar-restart">Opnieuw oefenen</button>
-                    <button class="btn btn-secondary" id="grammar-topics-btn">Andere onderwerpen</button>
+                    <button class="btn btn-secondary" id="grammar-topics-btn">Terug naar onderdelen</button>
                 </div>
             </div>
         `;
@@ -334,7 +424,6 @@ const Grammar = {
         });
     },
 
-    // Restore exercise area HTML
     restoreExerciseArea() {
         const exerciseContainer = document.getElementById('grammar-exercise');
         exerciseContainer.innerHTML = `
@@ -355,25 +444,116 @@ const Grammar = {
         `;
     },
 
-    // Go back to topics
+    // Go back to section detail from lesson
     backToTopics() {
-        document.getElementById('grammar-topics').style.display = 'block';
         document.getElementById('grammar-lesson').style.display = 'none';
-
-        // Restore exercise area
         this.restoreExerciseArea();
-
-        // Re-render topics with updated progress
-        this.renderTopics();
-
-        // Re-setup event listeners
-        this.setupEventListeners();
+        // Re-open the section we came from
+        if (this._currentSection) {
+            this.showSection(this._currentSection);
+        } else {
+            this.backToOverview();
+        }
     }
 };
 
-// Add CSS for grammar module
+// ─── CSS ────────────────────────────────────────────────────────────
+
 const grammarStyle = document.createElement('style');
 grammarStyle.textContent = `
+    /* Section overview grid */
+    .grammar-section-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .grammar-section-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: var(--card-background);
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+        padding: 1rem 1rem 2rem;
+        cursor: pointer;
+        text-align: left;
+        position: relative;
+        width: 100%;
+        font-family: inherit;
+        transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+        border-bottom: 3px solid #d0d0d0;
+    }
+
+    .grammar-section-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-color: var(--primary-color);
+    }
+
+    .grammar-section-card:active {
+        transform: translateY(1px);
+    }
+
+    .grammar-section-card.gsc-done {
+        border-color: #a5d6a7;
+        border-bottom-color: #4caf50;
+    }
+
+    .gsc-icon {
+        font-size: 1.7rem;
+        margin-bottom: 0.35rem;
+        display: block;
+    }
+
+    .gsc-label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        line-height: 1.2;
+    }
+
+    .gsc-desc {
+        display: block;
+        font-size: 0.73rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        line-height: 1.35;
+    }
+
+    .gsc-meta {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.15rem 0.45rem;
+        border-radius: 10px;
+        background: #f0f0f0;
+        color: #666;
+    }
+
+    .gsc-meta-done {
+        background: rgba(76, 175, 80, 0.15);
+        color: #2e7d32;
+    }
+
+    .gsc-arrow {
+        position: absolute;
+        bottom: 0.6rem;
+        right: 0.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        line-height: 1;
+    }
+
+    /* Section detail heading */
+    .grammar-section-heading {
+        margin: 0.75rem 0 0.6rem;
+        font-size: 1rem;
+    }
+
     /* Grammar groups */
     .grammar-group {
         margin-bottom: 1.25rem;
@@ -424,7 +604,6 @@ grammarStyle.textContent = `
         background: rgba(76,175,80,0.04);
     }
 
-    /* Status dot */
     .topic-status-dot {
         width: 10px;
         height: 10px;
@@ -435,7 +614,6 @@ grammarStyle.textContent = `
     .dot-progress { background: #ff9800; }
     .dot-done     { background: #4caf50; }
 
-    /* Level pill */
     .topic-level-pill {
         font-size: 0.68rem;
         font-weight: 700;
@@ -449,7 +627,6 @@ grammarStyle.textContent = `
     .pill-B1 { background: #fff3e0; color: #e65100; }
     .pill-B2 { background: #fce4ec; color: #880e4f; }
 
-    /* Row info */
     .topic-row-info {
         flex: 1;
         min-width: 0;
@@ -516,7 +693,6 @@ grammarStyle.textContent = `
     .btn-topic-read {
         background: transparent;
         border: 1.5px solid var(--primary-color);
-        color: var(--primary-color);
     }
     .btn-topic-read:hover {
         background: var(--primary-color);
@@ -534,7 +710,25 @@ grammarStyle.textContent = `
         transform: scale(0.9);
     }
 
-    /* Grammar lesson */
+    /* Back to overview button */
+    #grammar-back-overview {
+        border: 1.5px solid var(--primary-color);
+        color: var(--primary-color);
+        background: transparent;
+        padding: 0.35rem 0.75rem;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background 0.15s;
+    }
+    #grammar-back-overview:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    /* Lesson */
     .completion-badge {
         color: var(--success-color);
         font-weight: 600;
@@ -569,6 +763,18 @@ grammarStyle.textContent = `
     }
 
     /* Dark mode */
+    body.dark-mode .grammar-section-card {
+        border-color: #333;
+        border-bottom-color: #444;
+    }
+    body.dark-mode .grammar-section-card.gsc-done {
+        border-color: #2e5c31;
+        border-bottom-color: #4caf50;
+    }
+    body.dark-mode .gsc-meta {
+        background: #2a2a2a;
+        color: #aaa;
+    }
     body.dark-mode .grammar-group {
         border-color: #333;
     }
@@ -585,12 +791,7 @@ grammarStyle.textContent = `
     body.dark-mode .pill-A1 { background: #1b3a1e; color: #81c784; }
     body.dark-mode .pill-A2 { background: #0d2137; color: #64b5f6; }
     body.dark-mode .pill-B1 { background: #2d1b00; color: #ffb74d; }
-    body.dark-mode .btn-topic-read {
-        background: transparent;
-    }
-    body.dark-mode .read-only-actions {
-        background: #1e1e1e;
-    }
+    body.dark-mode .read-only-actions { background: #1e1e1e; }
 `;
 document.head.appendChild(grammarStyle);
 

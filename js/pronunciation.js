@@ -3,9 +3,9 @@
 const PronunciationRules = [
     {
         id: "c-soft",
-        title: "C vóór E en I — zachte klank",
+        title: "C + E/I",
         symbol: "/tʃ/",
-        description: "C vóór <strong>e</strong> of <strong>i</strong> klinkt als het Nederlandse <em>\"tsj\"</em> (zoals in \"church\").",
+        tip: "klinkt als <em>\"tsj\"</em>",
         examples: [
             { it: "ciao", nl: "hallo", pronounce: "tsja-o" },
             { it: "cinema", nl: "bioscoop", pronounce: "tsji-ne-ma" },
@@ -14,9 +14,9 @@ const PronunciationRules = [
     },
     {
         id: "c-hard",
-        title: "C vóór A, O en U — harde klank",
+        title: "C + A/O/U",
         symbol: "/k/",
-        description: "C vóór <strong>a</strong>, <strong>o</strong> of <strong>u</strong> klinkt als de gewone Nederlandse <em>\"k\"</em>.",
+        tip: "klinkt als <em>\"k\"</em>",
         examples: [
             { it: "casa", nl: "huis", pronounce: "ka-za" },
             { it: "cosa", nl: "ding/wat", pronounce: "ko-za" },
@@ -25,20 +25,20 @@ const PronunciationRules = [
     },
     {
         id: "g-soft",
-        title: "G vóór E en I — zachte klank",
+        title: "G + E/I",
         symbol: "/dʒ/",
-        description: "G vóór <strong>e</strong> of <strong>i</strong> klinkt als het Nederlandse <em>\"dzj\"</em> (zoals in \"journal\").",
+        tip: "klinkt als <em>\"dzj\"</em>",
         examples: [
             { it: "gelato", nl: "ijs", pronounce: "dzje-la-to" },
-            { it: "giro", nl: "ronde/tocht", pronounce: "dzji-ro" },
+            { it: "giro", nl: "ronde", pronounce: "dzji-ro" },
             { it: "gente", nl: "mensen", pronounce: "dzjen-te" }
         ]
     },
     {
         id: "g-hard",
-        title: "G vóór A, O en U — harde klank",
+        title: "G + A/O/U",
         symbol: "/g/",
-        description: "G vóór <strong>a</strong>, <strong>o</strong> of <strong>u</strong> klinkt als de gewone Nederlandse <em>\"g\"</em> (zachte g).",
+        tip: "klinkt als gewone <em>\"g\"</em>",
         examples: [
             { it: "gatto", nl: "kat", pronounce: "gat-to" },
             { it: "gonna", nl: "rok", pronounce: "gon-na" },
@@ -47,9 +47,9 @@ const PronunciationRules = [
     },
     {
         id: "gn",
-        title: "GN — neusklank",
+        title: "GN",
         symbol: "/ɲ/",
-        description: "De combinatie <strong>gn</strong> klinkt als het Nederlandse <em>\"nj\"</em> (zoals in \"oranje\").",
+        tip: "klinkt als <em>\"nj\"</em>",
         examples: [
             { it: "bagno", nl: "badkamer", pronounce: "ban-jo" },
             { it: "agnello", nl: "lam", pronounce: "an-jel-lo" },
@@ -58,9 +58,9 @@ const PronunciationRules = [
     },
     {
         id: "gli",
-        title: "GLI — palatale L",
+        title: "GLI",
         symbol: "/ʎ/",
-        description: "De combinatie <strong>gli</strong> klinkt als een zachte <em>\"lj\"</em> (zoals in \"familie\").",
+        tip: "klinkt als zachte <em>\"lj\"</em>",
         examples: [
             { it: "figlio", nl: "zoon", pronounce: "fil-jo" },
             { it: "famiglia", nl: "familie", pronounce: "fa-mil-ja" },
@@ -69,9 +69,9 @@ const PronunciationRules = [
     },
     {
         id: "sc-soft",
-        title: "SC vóór E en I — zachte klank",
+        title: "SC + E/I",
         symbol: "/ʃ/",
-        description: "SC vóór <strong>e</strong> of <strong>i</strong> klinkt als het Nederlandse <em>\"sj\"</em> (zoals in \"show\").",
+        tip: "klinkt als <em>\"sj\"</em>",
         examples: [
             { it: "scena", nl: "scène", pronounce: "sje-na" },
             { it: "sci", nl: "ski", pronounce: "sji" },
@@ -80,36 +80,52 @@ const PronunciationRules = [
     },
     {
         id: "sc-hard",
-        title: "SC vóór A, O en U — harde klank",
+        title: "SC + A/O/U",
         symbol: "/sk/",
-        description: "SC vóór <strong>a</strong>, <strong>o</strong> of <strong>u</strong> klinkt als het Nederlandse <em>\"sk\"</em>.",
+        tip: "klinkt als <em>\"sk\"</em>",
         examples: [
-            { it: "scala", nl: "trap/ladder", pronounce: "ska-la" },
+            { it: "scala", nl: "trap", pronounce: "ska-la" },
             { it: "scuola", nl: "school", pronounce: "skwo-la" },
             { it: "sconto", nl: "korting", pronounce: "skon-to" }
         ]
     },
     {
         id: "double-consonant",
-        title: "Dubbele medeklinkers",
+        title: "Dubbele medeklinker",
         symbol: "✗✓",
-        description: "Dubbele medeklinkers worden verlengd uitgesproken. Het verschil is belangrijk: <strong>pala</strong> (schop) ≠ <strong>palla</strong> (bal).",
+        tip: "verlengd uitgesproken — betekenisverschil!",
         examples: [
-            { it: "cappello", nl: "hoed (dubbel-p)", pronounce: "kap-pel-lo" },
-            { it: "capello", nl: "haar (enkel-p)", pronounce: "ka-pel-lo" },
-            { it: "nonno", nl: "opa (dubbel-n)", pronounce: "non-no" }
+            { it: "palla", nl: "bal", pronounce: "pal-la" },
+            { it: "pala", nl: "schop", pronounce: "pa-la" },
+            { it: "nonno", nl: "opa", pronounce: "non-no" }
         ]
     },
     {
         id: "h-silent",
-        title: "H — stille letter",
+        title: "H (stille letter)",
         symbol: "∅",
-        description: "De letter <strong>h</strong> is altijd stil in het Italiaans. Maar het verandert de uitspraak van C en G: <em>chi</em> = \"ki\", <em>che</em> = \"ke\", <em>ghi</em> = \"gi\".",
+        tip: "altijd stil — verandert C/G: <em>chi=ki, ghi=gi</em>",
         examples: [
-            { it: "ho", nl: "ik heb (stil h)", pronounce: "o" },
-            { it: "chi", nl: "wie (klinkt als ki)", pronounce: "ki" },
-            { it: "spaghetti", nl: "spaghetti (stil h)", pronounce: "spa-get-ti" }
+            { it: "ho", nl: "ik heb", pronounce: "o" },
+            { it: "chi", nl: "wie", pronounce: "ki" },
+            { it: "spaghetti", nl: "spaghetti", pronounce: "spa-get-ti" }
         ]
+    }
+];
+
+// Group pronunciation rules
+const PRON_GROUPS = [
+    {
+        label: '🔤 C & G klanken',
+        ids: ['c-soft', 'c-hard', 'g-soft', 'g-hard']
+    },
+    {
+        label: '🔗 Letterverbindingen',
+        ids: ['gn', 'gli', 'sc-soft', 'sc-hard']
+    },
+    {
+        label: '✨ Bijzonderheden',
+        ids: ['double-consonant', 'h-silent']
     }
 ];
 
@@ -122,44 +138,42 @@ const Pronunciation = {
         const container = document.getElementById('pronunciation-rules');
         if (!container) return;
 
-        container.innerHTML = PronunciationRules.map(rule => `
-            <div class="pron-rule" id="pron-${rule.id}">
-                <button class="pron-rule-header" data-rule="${rule.id}">
-                    <span class="pron-symbol">${rule.symbol}</span>
-                    <span class="pron-title">${rule.title}</span>
-                    <span class="pron-chevron">▼</span>
-                </button>
-                <div class="pron-rule-body" style="display:none;">
-                    <p class="pron-description">${rule.description}</p>
-                    <div class="pron-examples">
+        const ruleMap = Object.fromEntries(PronunciationRules.map(r => [r.id, r]));
+
+        container.innerHTML = PRON_GROUPS.map(group => {
+            const rules = group.ids.map(id => ruleMap[id]).filter(Boolean);
+            const cards = rules.map(rule => `
+                <div class="pron-card">
+                    <div class="pron-card-head">
+                        <span class="pron-badge">${rule.symbol}</span>
+                        <span class="pron-card-title">${rule.title}</span>
+                    </div>
+                    <p class="pron-card-tip">${rule.tip}</p>
+                    <div class="pron-card-examples">
                         ${rule.examples.map(ex => `
-                            <div class="pron-example">
+                            <div class="pron-ex-row">
                                 <button class="pron-speak-btn" data-word="${ex.it}" title="Uitspreken">🔊</button>
-                                <span class="pron-italian">${ex.it}</span>
+                                <strong class="pron-italian">${ex.it}</strong>
                                 <span class="pron-phonetic">[${ex.pronounce}]</span>
-                                <span class="pron-dutch">= ${ex.nl}</span>
+                                <span class="pron-dutch">${ex.nl}</span>
                             </div>
                         `).join('')}
                     </div>
                 </div>
-            </div>
-        `).join('');
+            `).join('');
 
-        // Event delegation for headers and speak buttons
+            return `
+                <div class="pron-group">
+                    <div class="pron-group-header">${group.label}</div>
+                    <div class="pron-cards-grid">${cards}</div>
+                </div>
+            `;
+        }).join('');
+
+        // Speak button handler
         container.addEventListener('click', (e) => {
-            const header = e.target.closest('.pron-rule-header');
-            if (header) {
-                const body = header.nextElementSibling;
-                const chevron = header.querySelector('.pron-chevron');
-                const isOpen = body.style.display !== 'none';
-                body.style.display = isOpen ? 'none' : 'block';
-                chevron.textContent = isOpen ? '▼' : '▲';
-                return;
-            }
-            const speakBtn = e.target.closest('.pron-speak-btn');
-            if (speakBtn) {
-                this.speak(speakBtn.dataset.word);
-            }
+            const btn = e.target.closest('.pron-speak-btn');
+            if (btn) this.speak(btn.dataset.word);
         });
     },
 
@@ -175,5 +189,126 @@ const Pronunciation = {
         speechSynthesis.speak(utterance);
     }
 };
+
+// ─── CSS ────────────────────────────────────────────────────────────
+const pronStyle = document.createElement('style');
+pronStyle.textContent = `
+    .pron-group {
+        margin-bottom: 1.1rem;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+    }
+
+    .pron-group-header {
+        padding: 0.55rem 1rem;
+        background: var(--secondary-color, #1565c0);
+        color: white;
+        font-weight: 700;
+        font-size: 0.88rem;
+    }
+
+    .pron-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        background: var(--card-background);
+    }
+
+    .pron-card {
+        padding: 0.75rem 0.9rem;
+        border-top: 1px solid #f0f0f0;
+        border-right: 1px solid #f0f0f0;
+    }
+
+    .pron-card:nth-child(odd):last-child {
+        border-right: none;
+    }
+
+    .pron-card-head {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .pron-badge {
+        font-size: 0.7rem;
+        font-weight: 700;
+        background: var(--secondary-color, #1565c0);
+        color: white;
+        border-radius: 4px;
+        padding: 0.1rem 0.4rem;
+        flex-shrink: 0;
+        font-family: monospace;
+        letter-spacing: 0.02em;
+    }
+
+    .pron-card-title {
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--text-primary);
+    }
+
+    .pron-card-tip {
+        font-size: 0.77rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.45rem;
+        line-height: 1.35;
+    }
+
+    .pron-card-examples {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .pron-ex-row {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+    }
+
+    .pron-speak-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+        padding: 0;
+        flex-shrink: 0;
+        line-height: 1;
+    }
+
+    .pron-italian {
+        font-weight: 700;
+        color: var(--primary-color);
+        font-size: 0.85rem;
+    }
+
+    .pron-phonetic {
+        color: #888;
+        font-size: 0.78rem;
+        font-style: italic;
+    }
+
+    .pron-dutch {
+        color: var(--text-secondary);
+        font-size: 0.78rem;
+        margin-left: auto;
+    }
+
+    /* Dark mode */
+    body.dark-mode .pron-group {
+        border-color: #333;
+    }
+    body.dark-mode .pron-card {
+        border-top-color: #2a2a2a;
+        border-right-color: #2a2a2a;
+    }
+    body.dark-mode .pron-phonetic {
+        color: #666;
+    }
+`;
+document.head.appendChild(pronStyle);
 
 window.Pronunciation = Pronunciation;
