@@ -594,20 +594,25 @@ const vocabStyle = document.createElement('style');
 vocabStyle.textContent = `
     .session-complete {
         text-align: center;
-        padding: 2rem;
+        padding: 1.25rem 1rem;
     }
 
     .session-complete h3 {
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: var(--primary-color);
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .session-complete > p {
+        font-size: 0.9rem;
+        margin-bottom: 0;
     }
 
     .session-stats {
         display: flex;
         justify-content: center;
-        gap: 3rem;
-        margin: 2rem 0;
+        gap: 1.5rem;
+        margin: 1rem 0;
     }
 
     .stat-item {
@@ -616,20 +621,28 @@ vocabStyle.textContent = `
 
     .stat-item .stat-value {
         display: block;
-        font-size: 2.5rem;
+        font-size: 1.75rem;
         font-weight: 700;
         color: var(--primary-color);
+        line-height: 1.2;
     }
 
     .stat-item .stat-label {
+        font-size: 0.8rem;
         color: var(--text-secondary);
     }
 
     .session-actions {
         display: flex;
         justify-content: center;
-        gap: 1rem;
-        margin-top: 2rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .session-actions .btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
     }
 
     .category-btn .accuracy {
