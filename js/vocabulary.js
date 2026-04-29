@@ -341,10 +341,19 @@ const Vocabulary = {
 
         if (!userAnswer) return;
 
-        // Check if answer is correct: case-insensitive, accept any "/" alternative or full string
-        const normalised = userAnswer.toLowerCase().trim();
-        const alternatives = word.nl.split('/').map(s => s.trim().toLowerCase());
-        const correct = alternatives.includes(normalised) || normalised === word.nl.toLowerCase().trim();
+        // Normaliseer: kleine letters, witruimte weggehaald
+        const normalise = s => s.toLowerCase().trim();
+        // Verwijder haakjes-toevoegingen: "Sorry (informeel)" → "Sorry", "nul (0)" → "nul"
+        const stripParens = s => s.replace(/\s*\([^)]*\)/g, '').trim();
+        const user = normalise(userAnswer);
+
+        // Splits op "/" voor alternatieve vertalingen ("Hallo / Dag")
+        const variants = word.nl.split('/').map(s => s.trim());
+        let correct = false;
+        for (const variant of variants) {
+            if (normalise(variant) === user) { correct = true; break; }          // exacte match (case-insensitief)
+            if (normalise(stripParens(variant)) === user) { correct = true; break; } // zonder haakjes
+        }
 
         // Record progress
         const wordId = `${this.currentCategory}_${this.currentIndex}`;
