@@ -532,8 +532,10 @@ const App = {
 // Initialize when DOM is ready
 // Herstel eerst voortgang uit cache-backup als localStorage leeg is
 document.addEventListener('DOMContentLoaded', async () => {
-    await Progress._restoreFromCacheIfNeeded();
+    await Progress._restoreFromCacheIfNeeded();   // herstel uit IDB/Cache als localStorage leeg
+    Progress.requestPersistentStorage();           // vraag persistente opslag aan (Chrome/Android)
     App.init();
+    Progress.showInstallPromptIfNeeded();          // toon iOS-installatietip indien nodig
 });
 
 // Make App globally available

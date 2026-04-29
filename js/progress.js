@@ -140,7 +140,7 @@ const Progress = {
         const daysSince = last
             ? Math.floor((new Date(today) - new Date(last)) / 86400000)
             : 999;
-        if (daysSince < 7) return; // nog geen 7 dagen
+        if (daysSince < 3) return; // elke 3 dagen backup
         // Trigger stille download
         this._triggerDownload(data);
         localStorage.setItem('lastAutoBackup', today);
@@ -202,44 +202,126 @@ const Progress = {
         return null;
     },
 
-    // Save progress to LocalStorage + automatische cache-backup
+    // Save progress to LocalStorage + alle backup-lagen
     save(progress) {
         try {
             const json = JSON.stringify(progress);
             localStorage.setItem(this.STORAGE_KEY, json);
-            this._backupToCache(json); // fire-and-forget backup
+            this._backupToCache(json);   // Cache API backup
+            this._saveToIDB(json);       // IndexedDB backup
         } catch (e) {
             console.error('Error saving progress:', e);
         }
     },
 
-    // Sla een kopie op in de Cache API (aparte persistente cache)
+    // ── Cache API backup ────────────────────────────────────────────
     _backupToCache(json) {
         if (typeof caches === 'undefined') return;
         caches.open(this.USERDATA_CACHE).then(cache => {
-            const res = new Response(json, {
-                headers: { 'Content-Type': 'application/json' }
-            });
-            cache.put(this.USERDATA_CACHE_KEY, res);
+            cache.put(this.USERDATA_CACHE_KEY,
+                new Response(json, { headers: { 'Content-Type': 'application/json' } })
+            );
         }).catch(() => {});
     },
 
-    // Herstel vanuit cache-backup als localStorage leeg is (async, voor App.init)
-    async _restoreFromCacheIfNeeded() {
-        if (typeof caches === 'undefined') return;
+    // ── IndexedDB backup ────────────────────────────────────────────
+    _openIDB() {
+        return new Promise((resolve, reject) => {
+            const req = indexedDB.open('impara-italiano-db', 1);
+            req.onupgradeneeded = e => {
+                e.target.result.createObjectStore('data', { keyPath: 'id' });
+            };
+            req.onsuccess = e => resolve(e.target.result);
+            req.onerror = () => reject(req.error);
+        });
+    },
+
+    async _saveToIDB(json) {
+        if (!window.indexedDB) return;
         try {
-            const existing = localStorage.getItem(this.STORAGE_KEY);
-            if (existing) return; // localStorage heeft nog data
-            const cache = await caches.open(this.USERDATA_CACHE);
-            const response = await cache.match(this.USERDATA_CACHE_KEY);
-            if (!response) return;
-            const json = await response.text();
+            const db = await this._openIDB();
+            const tx = db.transaction('data', 'readwrite');
+            tx.objectStore('data').put({ id: 'progress', json, saved: Date.now() });
+        } catch (e) { /* stille mislukking */ }
+    },
+
+    async _restoreFromIDB() {
+        if (!window.indexedDB) return null;
+        try {
+            const db = await this._openIDB();
+            return new Promise(resolve => {
+                const tx = db.transaction('data', 'readonly');
+                const req = tx.objectStore('data').get('progress');
+                req.onsuccess = () => resolve(req.result?.json || null);
+                req.onerror  = () => resolve(null);
+            });
+        } catch (e) { return null; }
+    },
+
+    // ── Herstel vanuit backup-lagen (volgorde: IDB → Cache API) ────
+    async _restoreFromCacheIfNeeded() {
+        try {
+            if (localStorage.getItem(this.STORAGE_KEY)) return; // localStorage heeft nog data
+
+            // 1. Probeer IndexedDB
+            let json = await this._restoreFromIDB();
+
+            // 2. Probeer Cache API als fallback
+            if (!json && typeof caches !== 'undefined') {
+                const cache = await caches.open(this.USERDATA_CACHE);
+                const response = await cache.match(this.USERDATA_CACHE_KEY);
+                if (response) json = await response.text();
+            }
+
+            if (!json) return;
             const parsed = JSON.parse(json);
-            if (parsed && parsed.vocabulary) {
+            if (parsed?.vocabulary) {
                 localStorage.setItem(this.STORAGE_KEY, json);
-                console.log('[Progress] Voortgang automatisch hersteld vanuit cache-backup');
+                console.log('[Progress] Voortgang hersteld vanuit backup');
             }
         } catch (e) { /* stille mislukking */ }
+    },
+
+    // ── Vraag persistente opslag aan (beschermt op Chrome/Android) ─
+    requestPersistentStorage() {
+        if (navigator.storage?.persist) {
+            navigator.storage.persist().then(granted => {
+                if (granted) console.log('[Progress] Persistente opslag verleend');
+            });
+        }
+    },
+
+    // ── Toon installatieherinnering op iOS Safari ──────────────────
+    showInstallPromptIfNeeded() {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isInstalled = window.navigator.standalone === true;
+        const dismissed = localStorage.getItem('installPromptDismissed');
+        if (!isIOS || isInstalled || dismissed) return;
+
+        // Wacht even voor de pagina volledig geladen is
+        setTimeout(() => {
+            const banner = document.createElement('div');
+            banner.className = 'install-prompt-banner';
+            banner.innerHTML = `
+                <div class="install-prompt-inner">
+                    <span class="install-prompt-icon">📲</span>
+                    <div class="install-prompt-text">
+                        <strong>Voortgang permanent bewaren</strong>
+                        <span>Tik op <strong>Deel</strong> → <strong>"Zet op beginscherm"</strong> om de app te installeren. Dan blijft je voortgang altijd bewaard.</span>
+                    </div>
+                    <button class="install-prompt-close" id="install-dismiss-btn">✕</button>
+                </div>
+            `;
+            document.body.appendChild(banner);
+            // Slide in
+            requestAnimationFrame(() => banner.classList.add('visible'));
+
+            document.getElementById('install-dismiss-btn')?.addEventListener('click', () => {
+                banner.classList.remove('visible');
+                setTimeout(() => banner.remove(), 300);
+                localStorage.setItem('installPromptDismissed', '1');
+            });
+        }, 2500);
     },
 
     // Check and update streak
