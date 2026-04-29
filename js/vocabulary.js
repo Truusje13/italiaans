@@ -245,13 +245,16 @@ const Vocabulary = {
     updateAnswerMode() {
         const multipleChoice = document.getElementById('vocab-choices');
         const textInput = document.getElementById('vocab-text-input');
+        const exerciseEl = document.getElementById('vocab-exercise');
 
         if (this.hardMode) {
             multipleChoice.style.display = 'none';
             textInput.style.display = 'flex';
+            exerciseEl?.classList.add('text-mode');
         } else {
             multipleChoice.style.display = 'grid';
             textInput.style.display = 'none';
+            exerciseEl?.classList.remove('text-mode');
         }
     },
 

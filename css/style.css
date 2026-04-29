@@ -580,6 +580,38 @@ body {
     border-color: var(--primary-color);
 }
 
+/* Hard mode (typen): compactere layout zodat alles zichtbaar blijft */
+#vocab-exercise.text-mode {
+    padding: 1.25rem;
+}
+#vocab-exercise.text-mode .exercise-progress {
+    margin-bottom: 0.75rem;
+}
+#vocab-exercise.text-mode .flashcard {
+    padding: 1rem 1.5rem;
+    min-height: 80px;
+    margin-bottom: 0.75rem;
+}
+#vocab-exercise.text-mode .flashcard-front {
+    gap: 0.5rem;
+}
+#vocab-exercise.text-mode .italian-word {
+    font-size: 1.75rem;
+}
+#vocab-exercise.text-mode .speak-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+}
+#vocab-exercise.text-mode .text-input-mode input {
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+#vocab-exercise.text-mode .feedback-panel {
+    padding: 0.85rem 1rem;
+    margin-top: 0.5rem;
+}
+
 /* Feedback Panel — Duolingo slide-up stijl */
 .feedback-panel {
     border-radius: 16px;
