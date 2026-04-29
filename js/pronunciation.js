@@ -130,10 +130,27 @@ const PRON_GROUPS = [
 ];
 
 const Pronunciation = {
+    // init() wordt eenmalig aangeroepen door App — bind events hier
     init() {
-        this.render();
+        const container = document.getElementById('pronunciation-rules');
+        if (!container) return;
+        container.addEventListener('click', (e) => {
+            const header = e.target.closest('.pron-group-header');
+            if (header) {
+                const grid = header.nextElementSibling;
+                const chevron = header.querySelector('.pron-chevron');
+                const isOpen = grid.style.display !== 'none';
+                grid.style.display = isOpen ? 'none' : 'grid';
+                header.setAttribute('aria-expanded', String(!isOpen));
+                chevron.textContent = isOpen ? '▼' : '▲';
+                return;
+            }
+            const btn = e.target.closest('.pron-speak-btn');
+            if (btn) this.speak(btn.dataset.word);
+        });
     },
 
+    // render() zet alleen HTML — geen addEventListener
     render() {
         const container = document.getElementById('pronunciation-rules');
         if (!container) return;
@@ -172,22 +189,6 @@ const Pronunciation = {
                 </div>
             `;
         }).join('');
-
-        // Toggle accordion + speak button handler
-        container.addEventListener('click', (e) => {
-            const header = e.target.closest('.pron-group-header');
-            if (header) {
-                const grid = header.nextElementSibling;
-                const chevron = header.querySelector('.pron-chevron');
-                const isOpen = grid.style.display !== 'none';
-                grid.style.display = isOpen ? 'none' : 'grid';
-                header.setAttribute('aria-expanded', String(!isOpen));
-                chevron.textContent = isOpen ? '▼' : '▲';
-                return;
-            }
-            const btn = e.target.closest('.pron-speak-btn');
-            if (btn) this.speak(btn.dataset.word);
-        });
     },
 
     speak(text) {
