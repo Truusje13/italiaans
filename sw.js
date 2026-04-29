@@ -1,24 +1,24 @@
 // Service Worker for Impara l'Italiano PWA
-const CACHE_NAME = 'impara-italiano-v23';
+const CACHE_NAME = 'impara-italiano-v24';
 const USERDATA_CACHE = 'impara-italiano-userdata'; // nooit verwijderen
 
 // Files to cache for offline use
 const FILES_TO_CACHE = [
     './',
     './index.html',
-    './css/style.css?v=13',
-    './js/app.js?v=13',
+    './css/style.css?v=24',
+    './js/app.js?v=25',
     './js/data.js?v=13',
-    './js/progress.js?v=13',
+    './js/progress.js?v=25',
     './js/feedback.js?v=13',
-    './js/vocabulary.js?v=13',
-    './js/grammar.js?v=13',
-    './js/conjugation.js?v=13',
+    './js/vocabulary.js?v=19',
+    './js/grammar.js?v=21',
+    './js/conjugation.js?v=23',
     './js/speaking.js?v=13',
     './js/game.js?v=13',
     './js/custom-words.js?v=13',
     './js/listening.js?v=13',
-    './js/pronunciation.js?v=13',
+    './js/pronunciation.js?v=24',
     './manifest.json',
     './icons/icon.svg',
     './icons/icon-maskable.svg'
@@ -26,7 +26,7 @@ const FILES_TO_CACHE = [
 
 // Install event - cache all files
 self.addEventListener('install', (event) => {
-    console.log('[ServiceWorker] Install v14');
+    console.log('[ServiceWorker] Install v25');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
@@ -42,7 +42,7 @@ self.addEventListener('install', (event) => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-    console.log('[ServiceWorker] Activate v14');
+    console.log('[ServiceWorker] Activate v25');
     event.waitUntil(
         caches.keys().then((keyList) => {
             return Promise.all(keyList.map((key) => {

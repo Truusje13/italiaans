@@ -291,37 +291,76 @@ const Progress = {
         }
     },
 
-    // ── Toon installatieherinnering op iOS Safari ──────────────────
+    // ── Installatieprompt (Android + iOS) ─────────────────────────
+    _deferredInstallPrompt: null,
+
+    initInstallPrompt() {
+        // Vang de Chrome/Android native install prompt op
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this._deferredInstallPrompt = e;
+            // Toon na korte vertraging als nog niet geïnstalleerd/weggeklikt
+            if (!localStorage.getItem('installPromptDismissed')) {
+                setTimeout(() => this._showInstallBanner('android'), 2500);
+            }
+        });
+    },
+
     showInstallPromptIfNeeded() {
+        const isInstalled = window.matchMedia('(display-mode: standalone)').matches
+                         || window.navigator.standalone === true;
+        if (isInstalled) return; // al geïnstalleerd
+        if (localStorage.getItem('installPromptDismissed')) return;
+
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        const isInstalled = window.navigator.standalone === true;
-        const dismissed = localStorage.getItem('installPromptDismissed');
-        if (!isIOS || isInstalled || dismissed) return;
+        if (isIOS) {
+            setTimeout(() => this._showInstallBanner('ios'), 2500);
+        }
+        // Android wordt afgehandeld via beforeinstallprompt in initInstallPrompt()
+    },
 
-        // Wacht even voor de pagina volledig geladen is
-        setTimeout(() => {
-            const banner = document.createElement('div');
-            banner.className = 'install-prompt-banner';
-            banner.innerHTML = `
-                <div class="install-prompt-inner">
-                    <span class="install-prompt-icon">📲</span>
-                    <div class="install-prompt-text">
-                        <strong>Voortgang permanent bewaren</strong>
-                        <span>Tik op <strong>Deel</strong> → <strong>"Zet op beginscherm"</strong> om de app te installeren. Dan blijft je voortgang altijd bewaard.</span>
-                    </div>
-                    <button class="install-prompt-close" id="install-dismiss-btn">✕</button>
+    _showInstallBanner(platform) {
+        if (document.querySelector('.install-prompt-banner')) return; // al zichtbaar
+
+        const isAndroid = platform === 'android';
+        const text = isAndroid
+            ? 'Installeer de app via de knop hiernaast voor permanente voortgangsopslag.'
+            : 'Tik op <strong>Deel</strong> → <strong>"Zet op beginscherm"</strong> voor permanente opslag.';
+
+        const banner = document.createElement('div');
+        banner.className = 'install-prompt-banner';
+        banner.innerHTML = `
+            <div class="install-prompt-inner">
+                <span class="install-prompt-icon">📲</span>
+                <div class="install-prompt-text">
+                    <strong>Voortgang permanent bewaren</strong>
+                    <span>${text}</span>
                 </div>
-            `;
-            document.body.appendChild(banner);
-            // Slide in
-            requestAnimationFrame(() => banner.classList.add('visible'));
+                ${isAndroid ? '<button class="btn btn-small install-install-btn" id="install-now-btn">Installeer</button>' : ''}
+                <button class="install-prompt-close" id="install-dismiss-btn">✕</button>
+            </div>
+        `;
+        document.body.appendChild(banner);
+        requestAnimationFrame(() => banner.classList.add('visible'));
 
-            document.getElementById('install-dismiss-btn')?.addEventListener('click', () => {
-                banner.classList.remove('visible');
-                setTimeout(() => banner.remove(), 300);
-                localStorage.setItem('installPromptDismissed', '1');
-            });
-        }, 2500);
+        document.getElementById('install-now-btn')?.addEventListener('click', async () => {
+            if (this._deferredInstallPrompt) {
+                this._deferredInstallPrompt.prompt();
+                const { outcome } = await this._deferredInstallPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    banner.classList.remove('visible');
+                    setTimeout(() => banner.remove(), 300);
+                    localStorage.setItem('installPromptDismissed', '1');
+                }
+                this._deferredInstallPrompt = null;
+            }
+        });
+
+        document.getElementById('install-dismiss-btn')?.addEventListener('click', () => {
+            banner.classList.remove('visible');
+            setTimeout(() => banner.remove(), 300);
+            localStorage.setItem('installPromptDismissed', '1');
+        });
     },
 
     // Check and update streak

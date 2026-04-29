@@ -534,6 +534,7 @@ const App = {
 document.addEventListener('DOMContentLoaded', async () => {
     await Progress._restoreFromCacheIfNeeded();   // herstel uit IDB/Cache als localStorage leeg
     Progress.requestPersistentStorage();           // vraag persistente opslag aan (Chrome/Android)
+    Progress.initInstallPrompt();                 // luister naar Android install-event (beforeinstallprompt)
     App.init();
     Progress.showInstallPromptIfNeeded();          // toon iOS-installatietip indien nodig
 });
