@@ -168,7 +168,7 @@ const Pronunciation = {
                         <span class="pron-group-label">${group.label}</span>
                         <span class="pron-chevron">▼</span>
                     </button>
-                    <div class="pron-cards-grid" hidden>${cards}</div>
+                    <div class="pron-cards-grid" style="display:none">${cards}</div>
                 </div>
             `;
         }).join('');
@@ -179,8 +179,8 @@ const Pronunciation = {
             if (header) {
                 const grid = header.nextElementSibling;
                 const chevron = header.querySelector('.pron-chevron');
-                const isOpen = !grid.hidden;
-                grid.hidden = isOpen;
+                const isOpen = grid.style.display !== 'none';
+                grid.style.display = isOpen ? 'none' : 'grid';
                 header.setAttribute('aria-expanded', String(!isOpen));
                 chevron.textContent = isOpen ? '▼' : '▲';
                 return;
