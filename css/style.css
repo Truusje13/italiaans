@@ -731,7 +731,13 @@ body {
 
 .lesson-content h3 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Uitleg-toggle knop in oefenmodus */
+.theory-toggle-btn {
+    margin-bottom: 1.25rem;
+    font-size: 0.85rem;
 }
 
 .theory-section {

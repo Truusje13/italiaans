@@ -225,7 +225,7 @@ const Grammar = {
         document.getElementById('grammar-section-detail').style.display = 'none';
         document.getElementById('grammar-lesson').style.display = 'block';
 
-        this.renderLesson(topic);
+        this.renderLesson(topic, false);   // oefenmodus: uitleg ingeklapt
         this.renderExercise();
     },
 
@@ -238,7 +238,7 @@ const Grammar = {
         document.getElementById('grammar-section-detail').style.display = 'none';
         document.getElementById('grammar-lesson').style.display = 'block';
 
-        this.renderLesson(topic);
+        this.renderLesson(topic, true);    // lees-modus: uitleg uitgebreid
 
         const exerciseContainer = document.getElementById('grammar-exercise');
         exerciseContainer.innerHTML = `
@@ -291,7 +291,7 @@ const Grammar = {
 
     // ─── Lesson helpers ─────────────────────────────────────────────
 
-    renderLesson(topic) {
+    renderLesson(topic, readOnly = true) {
         document.getElementById('grammar-title').textContent = topic.topic;
         document.getElementById('grammar-theory').innerHTML = topic.explanation;
 
@@ -302,6 +302,39 @@ const Grammar = {
             li.textContent = example;
             examplesList.appendChild(li);
         });
+
+        // Verwijder eventueel resterende toggle-knop van vorige les
+        document.getElementById('theory-toggle-btn')?.remove();
+
+        const theorySection  = document.querySelector('.theory-section');
+        const examplesSection = document.querySelector('.examples-section');
+
+        if (readOnly) {
+            // Lees-modus: uitleg volledig zichtbaar
+            theorySection.style.display  = '';
+            examplesSection.style.display = '';
+        } else {
+            // Oefenmodus: uitleg standaard ingeklapt
+            theorySection.style.display  = 'none';
+            examplesSection.style.display = 'none';
+
+            const btn = document.createElement('button');
+            btn.id = 'theory-toggle-btn';
+            btn.className = 'btn btn-secondary btn-small theory-toggle-btn';
+            btn.innerHTML = '📖 Toon uitleg';
+            btn.setAttribute('aria-expanded', 'false');
+
+            // Zet de knop direct na de titel
+            document.getElementById('grammar-title').insertAdjacentElement('afterend', btn);
+
+            btn.addEventListener('click', () => {
+                const open = btn.getAttribute('aria-expanded') === 'true';
+                theorySection.style.display  = open ? 'none' : '';
+                examplesSection.style.display = open ? 'none' : '';
+                btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+                btn.innerHTML = open ? '📖 Toon uitleg' : '📖 Verberg uitleg';
+            });
+        }
     },
 
     renderExercise() {
