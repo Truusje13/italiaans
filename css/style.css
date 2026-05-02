@@ -736,8 +736,17 @@ body {
 
 /* Uitleg-toggle knop in oefenmodus */
 .theory-toggle-btn {
+    display: block;
+    width: 100%;
     margin-bottom: 1.25rem;
-    font-size: 0.85rem;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border: 2px dashed var(--primary-color);
+    color: var(--primary-color);
+    background: #f0faf5;
+    border-radius: var(--border-radius);
+    font-weight: 600;
 }
 
 .theory-section {

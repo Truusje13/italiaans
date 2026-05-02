@@ -401,6 +401,9 @@ const Grammar = {
             </div>
             <button class="btn btn-primary" id="grammar-next-btn">Volgende oefening</button>
         `;
+
+        // Scroll naar de feedback zodat "Volgende oefening" direct zichtbaar is
+        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     },
 
     nextExercise() {
