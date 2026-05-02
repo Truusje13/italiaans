@@ -1,12 +1,12 @@
 // Service Worker for Impara l'Italiano PWA
-const CACHE_NAME = 'impara-italiano-v32';
+const CACHE_NAME = 'impara-italiano-v33';
 const USERDATA_CACHE = 'impara-italiano-userdata'; // nooit verwijderen
 
 // Files to cache for offline use
 const FILES_TO_CACHE = [
     './',
     './index.html',
-    './css/style.css?v=29',
+    './css/style.css?v=30',
     './js/app.js?v=25',
     './js/data.js?v=13',
     './js/progress.js?v=25',

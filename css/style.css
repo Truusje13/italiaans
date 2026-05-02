@@ -1023,13 +1023,14 @@ body {
 
 .answer-input {
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
     max-width: 400px;
     margin: 0 auto;
 }
 
 .answer-input input {
-    flex: 1;
+    width: 100%;
     padding: 1rem;
     border: 2px solid #e0e0e0;
     border-radius: var(--border-radius);
@@ -1040,6 +1041,10 @@ body {
 .answer-input input:focus {
     outline: none;
     border-color: var(--primary-color);
+}
+
+.answer-input .btn {
+    width: 100%;
 }
 
 .conjugation-table-mini {
