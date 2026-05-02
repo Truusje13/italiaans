@@ -281,9 +281,10 @@ const Grammar = {
             this.backToTopics();
         });
 
-        // Next exercise button
-        document.getElementById('grammar-feedback')?.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-primary')) {
+        // Next exercise button — delegeer op #grammar-lesson want #grammar-feedback
+        // wordt vervangen door restoreExerciseArea() en verliest anders zijn listener
+        document.getElementById('grammar-lesson')?.addEventListener('click', (e) => {
+            if (e.target.id === 'grammar-next-btn') {
                 this.nextExercise();
             }
         });
