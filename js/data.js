@@ -788,6 +788,203 @@ const AppData = {
                 { it: "l'avvilimento", nl: "de neerslachtigheid / de ontluistering", note: "Mannelijk woord", level: 7 },
                 { it: "l'esaltazione", nl: "de extase / de vervoering", note: "Vrouwelijk woord, positieve overdrijving", level: 7 }
             ]
+        },
+
+        // ── NIEUWE CATEGORIEËN ──────────────────────────────────────────
+        kleding: {
+            name: "Kleding & Mode",
+            icon: "👗",
+            words: [
+                // Niveau 1
+                { it: "la maglietta", nl: "het t-shirt", note: "Vrouwelijk woord", level: 1, sentence: { it: "Indosso una maglietta rossa.", nl: "Ik draag een rood t-shirt." } },
+                { it: "i pantaloni", nl: "de broek", note: "Meervoud", level: 1, sentence: { it: "I pantaloni sono troppo grandi.", nl: "De broek is te groot." } },
+                { it: "le scarpe", nl: "de schoenen", note: "Meervoud", level: 1, sentence: { it: "Queste scarpe sono comode.", nl: "Deze schoenen zijn comfortabel." } },
+                { it: "il cappello", nl: "de hoed / de pet", note: "Mannelijk woord", level: 1 },
+                { it: "la giacca", nl: "het jasje / de jas", note: "Vrouwelijk woord", level: 1, sentence: { it: "Ho freddo, prendo la giacca.", nl: "Ik heb het koud, ik pak mijn jas." } },
+                { it: "i jeans", nl: "de spijkerbroek", note: "Altijd meervoud in Italiaans", level: 1 },
+                { it: "la borsa", nl: "de tas / de handtas", note: "Vrouwelijk woord", level: 1 },
+                // Niveau 2
+                { it: "il vestito", nl: "de jurk / het pak", note: "Mannelijk: pak; vrouwelijk: jurk", level: 2, sentence: { it: "Che bel vestito!", nl: "Wat een mooie jurk!" } },
+                { it: "la camicia", nl: "het overhemd / de blouse", note: "Vrouwelijk woord", level: 2 },
+                { it: "il cappotto", nl: "de winterjas / de mantel", note: "Mannelijk woord", level: 2 },
+                { it: "la sciarpa", nl: "de sjaal", note: "Vrouwelijk woord", level: 2 },
+                { it: "i guanti", nl: "de handschoenen", note: "Meervoud", level: 2 },
+                { it: "i calzini", nl: "de sokken", note: "Meervoud", level: 2 },
+                { it: "il costume da bagno", nl: "het badpak / de zwembroek", note: "Mannelijk woord", level: 2 },
+                { it: "indossare", nl: "dragen / aanhebben", note: "Regelmatig -are", level: 2, sentence: { it: "Cosa indossi oggi?", nl: "Wat draag jij vandaag?" } },
+                { it: "provare", nl: "passen / proberen", note: "Regelmatig -are", level: 2 },
+                // Niveau 3
+                { it: "la taglia", nl: "de maat (kleding)", note: "Vrouwelijk woord; S/M/L/XL", level: 3, sentence: { it: "Che taglia porti?", nl: "Welke maat heb jij?" } },
+                { it: "la cintura", nl: "de riem / de gordel", note: "Vrouwelijk woord", level: 3 },
+                { it: "la cravatta", nl: "de stropdas", note: "Vrouwelijk woord", level: 3 },
+                { it: "il cotone", nl: "katoen", note: "Mannelijk woord", level: 3 },
+                { it: "la lana", nl: "wol", note: "Vrouwelijk woord", level: 3 },
+                { it: "in saldo", nl: "in de uitverkoop / sale", note: "Veelgebruikte uitdrukking", level: 3 },
+                { it: "il camerino", nl: "het paskamertje", note: "Mannelijk woord", level: 3 },
+                // Niveau 4
+                { it: "la seta", nl: "zijde", note: "Vrouwelijk woord", level: 4 },
+                { it: "elegante", nl: "elegant / chic", note: "Bijvoeglijk naamwoord", level: 4 },
+                { it: "la moda", nl: "de mode", note: "Vrouwelijk woord", level: 4, sentence: { it: "Segui la moda?", nl: "Volg jij de mode?" } },
+                { it: "il marchio", nl: "het merk", note: "Mannelijk woord", level: 4 },
+                { it: "la manica", nl: "de mouw", note: "Vrouwelijk woord; la manica lunga = lange mouw", level: 4 }
+            ]
+        },
+
+        vervoer: {
+            name: "Vervoer & Reizen",
+            icon: "🚌",
+            words: [
+                // Niveau 1
+                { it: "l'autobus", nl: "de bus", note: "Mannelijk woord; ook: il bus", level: 1, sentence: { it: "Prendo l'autobus ogni giorno.", nl: "Ik neem elke dag de bus." } },
+                { it: "il treno", nl: "de trein", note: "Mannelijk woord", level: 1, sentence: { it: "Il treno parte alle otto.", nl: "De trein vertrekt om acht uur." } },
+                { it: "la macchina", nl: "de auto", note: "Vrouwelijk woord; ook: l'auto", level: 1 },
+                { it: "l'aereo", nl: "het vliegtuig", note: "Mannelijk woord", level: 1, sentence: { it: "L'aereo arriva in ritardo.", nl: "Het vliegtuig komt te laat aan." } },
+                { it: "la bici", nl: "de fiets", note: "Vrouwelijk woord; voluit: la bicicletta", level: 1 },
+                { it: "il taxi", nl: "de taxi", note: "Mannelijk, onveranderlijk", level: 1 },
+                { it: "la metropolitana", nl: "de metro", note: "Vrouwelijk woord; ook: la metro", level: 1 },
+                { it: "la stazione", nl: "het station", note: "Vrouwelijk woord", level: 1 },
+                { it: "l'aeroporto", nl: "het vliegveld / de luchthaven", note: "Mannelijk woord", level: 1 },
+                { it: "il biglietto", nl: "het ticket / het kaartje", note: "Mannelijk woord", level: 1 },
+                // Niveau 2
+                { it: "la fermata", nl: "de halte", note: "Vrouwelijk woord", level: 2, sentence: { it: "Dov'è la fermata del bus?", nl: "Waar is de bushalte?" } },
+                { it: "il ritardo", nl: "de vertraging", note: "Mannelijk woord; in ritardo = te laat", level: 2 },
+                { it: "il traffico", nl: "het verkeer / de file", note: "Mannelijk woord", level: 2 },
+                { it: "la nave", nl: "het schip / de boot", note: "Vrouwelijk woord", level: 2 },
+                { it: "prendere", nl: "nemen (bus/trein)", note: "Onregelmatig; prendere il treno = de trein nemen", level: 2 },
+                { it: "scendere", nl: "uitstappen / afdalen", note: "Onregelmatig werkwoord", level: 2 },
+                { it: "salire", nl: "instappen / opstijgen", note: "Onregelmatig werkwoord", level: 2 },
+                { it: "l'orario", nl: "de dienstregeling / het tijdschema", note: "Mannelijk woord", level: 2 },
+                // Niveau 3
+                { it: "il parcheggio", nl: "de parkeerplaats / het parkeren", note: "Mannelijk woord", level: 3 },
+                { it: "il semaforo", nl: "het stoplicht", note: "Mannelijk woord", level: 3 },
+                { it: "la patente", nl: "het rijbewijs", note: "Vrouwelijk woord", level: 3 },
+                { it: "l'autostrada", nl: "de snelweg", note: "Vrouwelijk woord", level: 3 },
+                { it: "prenotare", nl: "reserveren / boeken", note: "Regelmatig -are", level: 3, sentence: { it: "Ho prenotato un posto.", nl: "Ik heb een stoel gereserveerd." } },
+                { it: "la destinazione", nl: "de bestemming", note: "Vrouwelijk woord", level: 3 },
+                // Niveau 4
+                { it: "il percorso", nl: "de route / het traject", note: "Mannelijk woord", level: 4 },
+                { it: "la coincidenza", nl: "de aansluiting (trein/bus)", note: "Vrouwelijk woord", level: 4 },
+                { it: "il binario", nl: "het spoor / het perron", note: "Mannelijk woord", level: 4, sentence: { it: "Il treno parte dal binario 3.", nl: "De trein vertrekt van spoor 3." } },
+                { it: "l'andata e ritorno", nl: "de heen- en terugreis / retour", note: "Biglietto di andata e ritorno = retourtje", level: 4 }
+            ]
+        },
+
+        school: {
+            name: "School & Studie",
+            icon: "📚",
+            words: [
+                // Niveau 1
+                { it: "la scuola", nl: "de school", note: "Vrouwelijk woord", level: 1, sentence: { it: "Vado a scuola ogni mattina.", nl: "Ik ga elke ochtend naar school." } },
+                { it: "la classe", nl: "de klas", note: "Vrouwelijk woord", level: 1 },
+                { it: "il libro", nl: "het boek", note: "Mannelijk woord", level: 1 },
+                { it: "la penna", nl: "de pen", note: "Vrouwelijk woord", level: 1 },
+                { it: "la matita", nl: "het potlood", note: "Vrouwelijk woord", level: 1 },
+                { it: "il quaderno", nl: "het schrift", note: "Mannelijk woord", level: 1 },
+                { it: "i compiti", nl: "het huiswerk", note: "Meervoud; enkelvoud: il compito", level: 1, sentence: { it: "Ho fatto i compiti.", nl: "Ik heb mijn huiswerk gemaakt." } },
+                { it: "studiare", nl: "studeren / leren", note: "Regelmatig -are", level: 1 },
+                { it: "imparare", nl: "leren / aanleren", note: "Regelmatig -are", level: 1, sentence: { it: "Sto imparando l'italiano.", nl: "Ik leer Italiaans." } },
+                { it: "capire", nl: "begrijpen / snappen", note: "Regelmatig -ire (isc-)", level: 1 },
+                // Niveau 2
+                { it: "l'insegnante", nl: "de leraar / de lerares", note: "Mannelijk én vrouwelijk", level: 2 },
+                { it: "il professore", nl: "de professor / de docent", note: "Vrouwelijk: la professoressa", level: 2 },
+                { it: "lo studente", nl: "de student", note: "Vrouwelijk: la studentessa", level: 2 },
+                { it: "il voto", nl: "het cijfer", note: "Mannelijk woord; in Italië: 1-10", level: 2, sentence: { it: "Ho preso un bel voto!", nl: "Ik heb een goed cijfer gehaald!" } },
+                { it: "l'esame", nl: "het examen / de toets", note: "Mannelijk woord", level: 2 },
+                { it: "la lavagna", nl: "het (school)bord", note: "Vrouwelijk woord", level: 2 },
+                { it: "la ricreazione", nl: "de pauze", note: "Vrouwelijk woord", level: 2 },
+                { it: "la biblioteca", nl: "de bibliotheek", note: "Vrouwelijk woord", level: 2 },
+                { it: "il dizionario", nl: "het woordenboek", note: "Mannelijk woord", level: 2 },
+                // Niveau 3
+                { it: "l'università", nl: "de universiteit", note: "Vrouwelijk, onveranderlijk", level: 3 },
+                { it: "la matematica", nl: "wiskunde", note: "Vrouwelijk woord", level: 3 },
+                { it: "la storia", nl: "geschiedenis", note: "Vrouwelijk woord; ook: het verhaal", level: 3 },
+                { it: "la lingua straniera", nl: "de vreemde taal", note: "Vrouwelijk woord", level: 3 },
+                { it: "fare una ricerca", nl: "onderzoek doen / opzoeken", note: "Vaste uitdrukking", level: 3 },
+                // Niveau 4
+                { it: "il diploma", nl: "het diploma", note: "Mannelijk woord", level: 4 },
+                { it: "la laurea", nl: "het universitaire diploma", note: "Vrouwelijk woord; laurearsi = afstuderen", level: 4 },
+                { it: "la tesi", nl: "de scriptie / het proefschrift", note: "Vrouwelijk, onveranderlijk", level: 4 },
+                { it: "la borsa di studio", nl: "de studiebeurs", note: "Vrouwelijk woord", level: 4 },
+                { it: "il tirocinio", nl: "de stage", note: "Mannelijk woord; ook: lo stage", level: 4 }
+            ]
+        },
+
+        muziek: {
+            name: "Muziek & Cultuur",
+            icon: "🎵",
+            words: [
+                // Niveau 1
+                { it: "la musica", nl: "de muziek", note: "Vrouwelijk woord", level: 1, sentence: { it: "Mi piace la musica italiana.", nl: "Ik hou van Italiaanse muziek." } },
+                { it: "la canzone", nl: "het lied / het nummer", note: "Vrouwelijk woord", level: 1 },
+                { it: "cantare", nl: "zingen", note: "Regelmatig -are", level: 1, sentence: { it: "Sai cantare?", nl: "Kun jij zingen?" } },
+                { it: "il film", nl: "de film", note: "Mannelijk, onveranderlijk", level: 1 },
+                { it: "il cinema", nl: "de bioscoop / de film", note: "Mannelijk woord", level: 1, sentence: { it: "Andiamo al cinema stasera?", nl: "Gaan we vanavond naar de bioscoop?" } },
+                { it: "il museo", nl: "het museum", note: "Mannelijk woord", level: 1 },
+                // Niveau 2
+                { it: "suonare", nl: "spelen (een instrument)", note: "Regelmatig -are; suonare la chitarra", level: 2 },
+                { it: "la chitarra", nl: "de gitaar", note: "Vrouwelijk woord", level: 2 },
+                { it: "il pianoforte", nl: "de piano", note: "Mannelijk woord; ook: il piano", level: 2 },
+                { it: "il concerto", nl: "het concert", note: "Mannelijk woord", level: 2, sentence: { it: "Sei andato al concerto?", nl: "Ben je naar het concert geweest?" } },
+                { it: "il teatro", nl: "het theater", note: "Mannelijk woord", level: 2 },
+                { it: "il festival", nl: "het festival", note: "Mannelijk, onveranderlijk", level: 2 },
+                { it: "il ritmo", nl: "het ritme", note: "Mannelijk woord", level: 2 },
+                { it: "la melodia", nl: "de melodie", note: "Vrouwelijk woord", level: 2 },
+                { it: "il cantante", nl: "de zanger / de zangeres", note: "Vrouwelijk: la cantante", level: 2 },
+                // Niveau 3
+                { it: "il violino", nl: "de viool", note: "Mannelijk woord", level: 3 },
+                { it: "l'opera", nl: "de opera", note: "Vrouwelijk woord; ook: het werk", level: 3, sentence: { it: "L'opera italiana è famosa.", nl: "De Italiaanse opera is beroemd." } },
+                { it: "il quadro", nl: "het schilderij", note: "Mannelijk woord", level: 3 },
+                { it: "la mostra", nl: "de tentoonstelling / de expositie", note: "Vrouwelijk woord", level: 3 },
+                { it: "la galleria", nl: "de galerij", note: "Vrouwelijk woord; Galleria degli Uffizi", level: 3 },
+                { it: "applaudire", nl: "applaudisseren / klappen", note: "Regelmatig -ire", level: 3 },
+                // Niveau 4
+                { it: "il compositore", nl: "de componist", note: "Mannelijk woord; Vrouwelijk: la compositrice", level: 4 },
+                { it: "la scultura", nl: "het beeldhouwwerk / de sculptuur", note: "Vrouwelijk woord", level: 4 },
+                { it: "il capolavoro", nl: "het meesterwerk", note: "Mannelijk woord", level: 4 },
+                { it: "la sinfonia", nl: "de symfonie", note: "Vrouwelijk woord", level: 4 },
+                { it: "il patrimonio culturale", nl: "het cultureel erfgoed", note: "Mannelijk woord", level: 5 }
+            ]
+        },
+
+        tech: {
+            name: "Technologie & Media",
+            icon: "💻",
+            words: [
+                // Niveau 1
+                { it: "il telefono", nl: "de telefoon", note: "Mannelijk woord", level: 1 },
+                { it: "il cellulare", nl: "de mobiele telefoon", note: "Mannelijk woord; ook: il telefonino", level: 1, sentence: { it: "Dov'è il mio cellulare?", nl: "Waar is mijn mobiel?" } },
+                { it: "il computer", nl: "de computer", note: "Mannelijk, onveranderlijk", level: 1 },
+                { it: "internet", nl: "het internet", note: "Onveranderlijk", level: 1 },
+                { it: "la TV", nl: "de televisie", note: "Vrouwelijk woord; ook: la televisione", level: 1 },
+                { it: "la foto", nl: "de foto", note: "Vrouwelijk, onveranderlijk; voluit: la fotografia", level: 1 },
+                { it: "il video", nl: "de video", note: "Mannelijk woord", level: 1 },
+                { it: "il messaggio", nl: "het bericht / het berichtje", note: "Mannelijk woord", level: 1, sentence: { it: "Ti mando un messaggio.", nl: "Ik stuur je een berichtje." } },
+                // Niveau 2
+                { it: "il WiFi", nl: "het wifi", note: "Mannelijk, onveranderlijk", level: 2, sentence: { it: "C'è il WiFi qui?", nl: "Is er hier wifi?" } },
+                { it: "la password", nl: "het wachtwoord", note: "Vrouwelijk, onveranderlijk", level: 2 },
+                { it: "l'applicazione", nl: "de app", note: "Vrouwelijk woord; ook: l'app", level: 2 },
+                { it: "scaricare", nl: "downloaden", note: "Regelmatig -are", level: 2 },
+                { it: "caricare", nl: "uploaden / opladen", note: "Regelmatig -are", level: 2 },
+                { it: "il caricatore", nl: "de oplader", note: "Mannelijk woord", level: 2 },
+                { it: "lo schermo", nl: "het scherm", note: "Mannelijk woord", level: 2 },
+                { it: "il laptop", nl: "de laptop", note: "Mannelijk, onveranderlijk", level: 2 },
+                { it: "il tablet", nl: "de tablet", note: "Mannelijk, onveranderlijk", level: 2 },
+                { it: "la fotocamera", nl: "de (foto)camera", note: "Vrouwelijk woord", level: 2 },
+                // Niveau 3
+                { it: "la tastiera", nl: "het toetsenbord", note: "Vrouwelijk woord", level: 3 },
+                { it: "il microfono", nl: "de microfoon", note: "Mannelijk woord", level: 3 },
+                { it: "la stampante", nl: "de printer", note: "Vrouwelijk woord", level: 3 },
+                { it: "il sito web", nl: "de website", note: "Mannelijk woord", level: 3 },
+                { it: "aggiornare", nl: "updaten / bijwerken", note: "Regelmatig -are", level: 3 },
+                { it: "il software", nl: "de software", note: "Mannelijk, onveranderlijk", level: 3 },
+                { it: "i dati", nl: "de gegevens / de data", note: "Meervoud van 'il dato'", level: 3 },
+                // Niveau 4-5
+                { it: "il codice", nl: "de code / het programmacode", note: "Mannelijk woord", level: 4 },
+                { it: "la rete", nl: "het netwerk / het net", note: "Vrouwelijk woord", level: 4 },
+                { it: "la privacy", nl: "de privacy", note: "Vrouwelijk, onveranderlijk", level: 4 },
+                { it: "l'intelligenza artificiale", nl: "de kunstmatige intelligentie", note: "Vrouwelijk; afkorting: IA of AI", level: 5, sentence: { it: "L'IA sta cambiando il mondo.", nl: "AI verandert de wereld." } },
+                { it: "la sicurezza informatica", nl: "de cyberveiligheid", note: "Vrouwelijk woord", level: 5 }
+            ]
         }
     },
 
