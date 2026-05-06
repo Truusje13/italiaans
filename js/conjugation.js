@@ -327,28 +327,49 @@ const Conjugation = {
         const icon = feedback.isCorrect ? '✓' : '✗';
         const title = feedback.isCorrect ? 'Correct!' : 'Helaas, dat is niet juist';
 
+        // Bouw de uitklapbare uitleg + tabel (alleen bij foute antwoorden)
+        const hasDetails = !feedback.isCorrect &&
+            (feedback.explanation || (feedback.conjugationTable && Object.keys(feedback.conjugationTable).length));
+
         let tableHtml = '';
         if (feedback.conjugationTable && Object.keys(feedback.conjugationTable).length > 0) {
-            tableHtml = '<div class="conjugation-table-mini"><h5>Volledige vervoeging:</h5><table>';
+            tableHtml = '<div class="conjugation-table-mini"><table>';
             for (const [person, form] of Object.entries(feedback.conjugationTable)) {
-                const highlight = person === this.currentPerson ? 'style="background: rgba(46, 125, 50, 0.2);"' : '';
-                tableHtml += `<tr ${highlight}><td>${AppData.verbs.persons[person]}</td><td>${form}</td></tr>`;
+                const highlight = person === this.currentPerson ? 'style="background:rgba(46,125,50,0.15);"' : '';
+                tableHtml += `<tr ${highlight}><td>${AppData.verbs.persons[person]}</td><td><strong>${form}</strong></td></tr>`;
             }
             tableHtml += '</table></div>';
         }
+
+        const detailsHtml = hasDetails ? `
+            <div class="conj-details" id="conj-details" style="display:none;">
+                ${feedback.explanation ? `<p class="explanation">${feedback.explanation}</p>` : ''}
+                ${tableHtml}
+            </div>
+            <button class="btn-conj-details" id="conj-toggle-details">📖 Toon uitleg</button>
+        ` : '';
 
         container.innerHTML = `
             <div class="feedback-header">
                 <span class="feedback-icon">${icon}</span>
                 <span class="feedback-title">${title}</span>
             </div>
-            <div class="feedback-content">
-                <p class="correct-answer">Correct antwoord: ${feedback.correctAnswer}</p>
-                <p class="explanation">${feedback.explanation}</p>
-                ${tableHtml}
-            </div>
+            <p class="correct-answer" style="margin:0.4rem 0 0.6rem;">Antwoord: <strong>${feedback.correctAnswer}</strong></p>
+            ${detailsHtml}
             <button class="btn btn-primary" id="conj-next-btn">Volgende</button>
         `;
+
+        // Toggle uitleg
+        document.getElementById('conj-toggle-details')?.addEventListener('click', () => {
+            const details = document.getElementById('conj-details');
+            const btn = document.getElementById('conj-toggle-details');
+            const open = details.style.display !== 'none';
+            details.style.display = open ? 'none' : 'block';
+            btn.textContent = open ? '📖 Toon uitleg' : '📖 Verberg uitleg';
+        });
+
+        // Scroll naar feedback
+        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     },
 
     // Move to next exercise
