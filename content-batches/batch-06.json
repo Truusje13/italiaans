@@ -1,0 +1,122 @@
+{
+  "batch": 6,
+  "scheduledDate": "2026-08-25",
+  "description": "Arte & Letteratura + Congiuntivo passato + cogliere / trascorrere / compiere",
+  "vocabulary": {
+    "key": "arte",
+    "data": {
+      "name": "Arte & Letteratura",
+      "icon": "🎨",
+      "words": [
+        { "it": "il quadro", "nl": "schilderij", "note": "", "level": 2, "sentence": { "it": "Il quadro è appeso al muro.", "nl": "Het schilderij hangt aan de muur." } },
+        { "it": "la scultura", "nl": "sculptuur / beeldhouwwerk", "note": "", "level": 2, "sentence": { "it": "La scultura di Michelangelo è famosa.", "nl": "Het beeldhouwwerk van Michelangelo is beroemd." } },
+        { "it": "il pittore / la pittrice", "nl": "schilder (beroep)", "note": "", "level": 2, "sentence": { "it": "Leonardo da Vinci era un grande pittore.", "nl": "Leonardo da Vinci was een groot schilder." } },
+        { "it": "lo scultore / la scultrice", "nl": "beeldhouwer", "note": "", "level": 3, "sentence": { "it": "Michelangelo era uno scultore geniale.", "nl": "Michelangelo was een geniaal beeldhouwer." } },
+        { "it": "il capolavoro", "nl": "meesterwerk", "note": "", "level": 3, "sentence": { "it": "La Cappella Sistina è un capolavoro.", "nl": "De Sixtijnse Kapel is een meesterwerk." } },
+        { "it": "la galleria d'arte", "nl": "kunstgalerie", "note": "", "level": 2, "sentence": { "it": "Visita la galleria d'arte questo weekend.", "nl": "Bezoek de kunstgalerie dit weekend." } },
+        { "it": "il romanzo", "nl": "roman", "note": "", "level": 2, "sentence": { "it": "Ho letto un romanzo di Umberto Eco.", "nl": "Ik heb een roman van Umberto Eco gelezen." } },
+        { "it": "la poesia", "nl": "gedicht / poëzie", "note": "", "level": 2, "sentence": { "it": "Leopardi è famoso per le sue poesie.", "nl": "Leopardi is bekend om zijn gedichten." } },
+        { "it": "il poeta / la poetessa", "nl": "dichter / dichteres", "note": "", "level": 3, "sentence": { "it": "Dante è il più grande poeta italiano.", "nl": "Dante is de grootste Italiaanse dichter." } },
+        { "it": "il personaggio", "nl": "personage / karakter", "note": "", "level": 3, "sentence": { "it": "Il personaggio principale è molto interessante.", "nl": "Het hoofdpersonage is heel interessant." } },
+        { "it": "la trama", "nl": "plot / verhaallijnen", "note": "", "level": 3, "sentence": { "it": "La trama del film è complicata.", "nl": "Het plot van de film is ingewikkeld." } },
+        { "it": "il capitolo", "nl": "hoofdstuk", "note": "", "level": 2, "sentence": { "it": "Leggo un capitolo ogni sera.", "nl": "Ik lees elke avond een hoofdstuk." } },
+        { "it": "l'autore / l'autrice", "nl": "auteur", "note": "", "level": 2, "sentence": { "it": "Chi è l'autore di questo libro?", "nl": "Wie is de auteur van dit boek?" } },
+        { "it": "pubblicare", "nl": "publiceren / uitgeven", "note": "", "level": 3, "sentence": { "it": "Ha pubblicato il suo primo romanzo a ventidue anni.", "nl": "Ze publiceerde haar eerste roman op tweeëntwintigjarige leeftijd." } },
+        { "it": "la casa editrice", "nl": "uitgeverij", "note": "", "level": 4, "sentence": { "it": "Il libro è stato pubblicato da una grande casa editrice.", "nl": "Het boek is uitgegeven door een grote uitgeverij." } },
+        { "it": "il ritratto", "nl": "portret", "note": "", "level": 3, "sentence": { "it": "La Gioconda è il ritratto più famoso del mondo.", "nl": "De Mona Lisa is het beroemdste portret ter wereld." } },
+        { "it": "l'affresco", "nl": "fresco (muurschildering)", "note": "m.", "level": 4, "sentence": { "it": "La Cappella Sistina è decorata con affreschi.", "nl": "De Sixtijnse Kapel is versierd met fresco's." } },
+        { "it": "il Rinascimento", "nl": "de Renaissance", "note": "Letterlijk: wedergeboorte", "level": 3, "sentence": { "it": "Il Rinascimento nacque in Italia.", "nl": "De Renaissance is in Italië ontstaan." } },
+        { "it": "il Barocco", "nl": "de Barok", "note": "", "level": 4, "sentence": { "it": "Bernini è il maestro del Barocco.", "nl": "Bernini is de meester van de Barok." } },
+        { "it": "il patrimonio culturale", "nl": "cultureel erfgoed", "note": "", "level": 4, "sentence": { "it": "L'Italia ha un enorme patrimonio culturale.", "nl": "Italië heeft een enorm cultureel erfgoed." } },
+        { "it": "la mostra", "nl": "tentoonstelling / expositie", "note": "", "level": 3, "sentence": { "it": "Vado a vedere la mostra su Caravaggio.", "nl": "Ik ga de tentoonstelling over Caravaggio bekijken." } },
+        { "it": "il teatro", "nl": "theater", "note": "", "level": 2, "sentence": { "it": "Andiamo a vedere uno spettacolo a teatro.", "nl": "We gaan een voorstelling kijken in het theater." } },
+        { "it": "la commedia", "nl": "komedie / toneelstuk", "note": "", "level": 3, "sentence": { "it": "La Divina Commedia non è comica!", "nl": "De Goddelijke Komedie is niet komisch!" } },
+        { "it": "la tragedia", "nl": "tragedie", "note": "", "level": 3, "sentence": { "it": "Romeo e Giulietta è una tragedia di Shakespeare.", "nl": "Romeo en Julia is een tragedie van Shakespeare." } },
+        { "it": "ispirarsi a", "nl": "geïnspireerd worden door", "note": "Riflessivo", "level": 4, "sentence": { "it": "Questo pittore si è ispirato alla natura.", "nl": "Deze schilder heeft zich laten inspireren door de natuur." } },
+        { "it": "la critica", "nl": "kritiek / recensie", "note": "", "level": 3, "sentence": { "it": "Il film ha ricevuto ottime critiche.", "nl": "De film heeft uitstekende recensies gekregen." } },
+        { "it": "il genio", "nl": "genie", "note": "", "level": 3, "sentence": { "it": "Leonardo da Vinci era un genio assoluto.", "nl": "Leonardo da Vinci was een absoluut genie." } }
+      ]
+    }
+  },
+  "grammar": {
+    "id": "congiuntivo-passato",
+    "topic": "Congiuntivo passato",
+    "summary": "Penso che sia andato — Ik denk dat hij gegaan is",
+    "level": 4,
+    "explanation": "Het <strong>congiuntivo passato</strong> gebruik je voor bijzinnen waarbij de handeling in het verleden plaatsvond — en de hoofdzin staat in de tegenwoordige tijd.\n\n<strong>Vorming:</strong>\nCongiuntivo presente van <strong>avere</strong> of <strong>essere</strong> + voltooid deelwoord\n\n• <strong>avere</strong> (congiuntivo): abbia, abbia, abbia, abbiamo, abbiate, abbiano\n• <strong>essere</strong> (congiuntivo): sia, sia, sia, siamo, siate, siano\n\n<strong>Keuze avere/essere:</strong>\nZelfde regel als bij het passato prossimo:\n• Transitieve werkwoorden → avere: Penso che lui abbia mangiato.\n• Bewegingswerkwoorden / zijn → essere: Penso che lei sia andata.\n\n<strong>Voorbeelden:</strong>\n• Credo che Marco sia arrivato. (Ik geloof dat Marco is aangekomen.)\n• È possibile che abbiano dimenticato. (Het is mogelijk dat ze het zijn vergeten.)\n• Spero che tu abbia capito. (Ik hoop dat je het hebt begrepen.)\n• Non penso che sia successo niente. (Ik denk niet dat er iets is gebeurd.)",
+    "examples": [
+      "Credo che lui abbia già mangiato. (Ik geloof dat hij al gegeten heeft.)",
+      "È strano che non siano arrivati. (Het is vreemd dat ze niet zijn aangekomen.)",
+      "Spero che abbiate capito la lezione. (Ik hoop dat jullie de les hebben begrepen.)",
+      "Penso che lei si sia dimenticata. (Ik denk dat zij het vergeten is.)",
+      "È possibile che il treno abbia fatto ritardo. (Het is mogelijk dat de trein vertraging heeft gehad.)"
+    ],
+    "exercises": [
+      {
+        "question": "Vul in: 'Credo che Marco ___ (partire) ieri.'",
+        "options": ["sia partito", "è partito", "partiva", "partirà"],
+        "correct": 0,
+        "explanation": "Na 'credere che' gebruik je het congiuntivo. Partire gebruikt essere → sia partito."
+      },
+      {
+        "question": "Vul in: 'È strano che loro ___ (dimenticare) l'appuntamento.'",
+        "options": ["abbiano dimenticato", "hanno dimenticato", "dimenticavano", "avranno dimenticato"],
+        "correct": 0,
+        "explanation": "Na 'è strano che': congiuntivo passato. Dimenticare gebruikt avere → abbiano dimenticato."
+      },
+      {
+        "question": "Welke zin is correct?",
+        "options": ["Penso che lei sia andata via.", "Penso che lei è andata via.", "Penso che lei andava via.", "Penso che lei andrà via."],
+        "correct": 0,
+        "explanation": "Na 'pensare che': congiuntivo. Andare + essere → sia andata."
+      },
+      {
+        "question": "Vul in: 'Spero che tu ___ (capire) tutto.'",
+        "options": ["abbia capito", "hai capito", "capisci", "avrai capito"],
+        "correct": 0,
+        "explanation": "Na 'sperare che': congiuntivo passato. Capire + avere → abbia capito."
+      },
+      {
+        "question": "Wat betekent 'È possibile che abbiano sbagliato'?",
+        "options": ["Het is mogelijk dat ze zich vergist hebben.", "Het is mogelijk dat ze zich vergissen.", "Ze hebben zich misschien vergist.", "Het is mogelijk dat ze zich zullen vergissen."],
+        "correct": 0,
+        "explanation": "Congiuntivo passato na 'è possibile che' drukt een mogelijkheid uit in het verleden."
+      }
+    ]
+  },
+  "verbs": {
+    "irregular": [
+      {
+        "infinitive": "cogliere",
+        "meaning": "plukken / grijpen / benutten",
+        "level": 4,
+        "presente": { "io": "colgo", "tu": "cogli", "lui": "coglie", "noi": "cogliamo", "voi": "cogliete", "loro": "colgono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "colto" },
+        "imperfetto": { "io": "coglievo", "tu": "coglievi", "lui": "coglieva", "noi": "coglievamo", "voi": "coglievate", "loro": "coglievano" },
+        "futuro": { "io": "coglierò", "tu": "coglierai", "lui": "coglierà", "noi": "coglieremo", "voi": "coglierete", "loro": "coglieranno" },
+        "condizionale": { "io": "coglierei", "tu": "coglieresti", "lui": "coglierebbe", "noi": "coglieremmo", "voi": "cogliereste", "loro": "coglierebbero" }
+      },
+      {
+        "infinitive": "trascorrere",
+        "meaning": "doorbrengen (tijd)",
+        "level": 3,
+        "presente": { "io": "trascorro", "tu": "trascorri", "lui": "trascorre", "noi": "trascorriamo", "voi": "trascorrete", "loro": "trascorrono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "trascorso" },
+        "imperfetto": { "io": "trascorrevo", "tu": "trascorrevi", "lui": "trascorreva", "noi": "trascorrevamo", "voi": "trascorrevate", "loro": "trascorrevano" },
+        "futuro": { "io": "trascorrerò", "tu": "trascorrerai", "lui": "trascorrerà", "noi": "trascorreremo", "voi": "trascorrerete", "loro": "trascorreranno" },
+        "condizionale": { "io": "trascorrerei", "tu": "trascorreresti", "lui": "trascorrerebbe", "noi": "trascorreremmo", "voi": "trascorrereste", "loro": "trascorrerebbero" }
+      },
+      {
+        "infinitive": "compiere",
+        "meaning": "voltooien / bereiken / verjaren (anni)",
+        "level": 4,
+        "note": "Compiere gli anni = jarig zijn",
+        "presente": { "io": "compio", "tu": "compi", "lui": "compie", "noi": "compiamo", "voi": "compite", "loro": "compiono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "compiuto" },
+        "imperfetto": { "io": "compivo", "tu": "compivi", "lui": "compiva", "noi": "compivamo", "voi": "compivate", "loro": "compivano" },
+        "futuro": { "io": "compirò", "tu": "compirai", "lui": "compirà", "noi": "compiremo", "voi": "compirete", "loro": "compiranno" },
+        "condizionale": { "io": "compirei", "tu": "compiresti", "lui": "compirebbe", "noi": "compiremmo", "voi": "compireste", "loro": "compirebbero" }
+      }
+    ]
+  }
+}

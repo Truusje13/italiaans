@@ -1,0 +1,121 @@
+{
+  "batch": 4,
+  "scheduledDate": "2026-07-28",
+  "description": "Ambiente & Sostenibilità + Il gerundio + proteggere / cuocere / assumere",
+  "vocabulary": {
+    "key": "ambiente",
+    "data": {
+      "name": "Ambiente & Sostenibilità",
+      "icon": "🌱",
+      "words": [
+        { "it": "l'ambiente", "nl": "milieu / omgeving", "note": "m.", "level": 2, "sentence": { "it": "Dobbiamo proteggere l'ambiente.", "nl": "We moeten het milieu beschermen." } },
+        { "it": "il riciclaggio", "nl": "recycling", "note": "", "level": 2, "sentence": { "it": "Il riciclaggio è fondamentale.", "nl": "Recycling is fundamenteel." } },
+        { "it": "riciclare", "nl": "recyclen", "note": "", "level": 2, "sentence": { "it": "Ricicla la carta e il vetro.", "nl": "Recycle papier en glas." } },
+        { "it": "i rifiuti", "nl": "afval", "note": "Altijd meervoud", "level": 2, "sentence": { "it": "Non lasciare i rifiuti per terra.", "nl": "Laat het afval niet op de grond liggen." } },
+        { "it": "la spazzatura", "nl": "vuilnis / rommel", "note": "", "level": 2, "sentence": { "it": "Porta fuori la spazzatura, per favore.", "nl": "Breng het vuilnis naar buiten, alsjeblieft." } },
+        { "it": "l'inquinamento", "nl": "vervuiling", "note": "m.", "level": 2, "sentence": { "it": "L'inquinamento dell'aria è un problema serio.", "nl": "Luchtvervuiling is een ernstig probleem." } },
+        { "it": "inquinare", "nl": "vervuilen", "note": "", "level": 3, "sentence": { "it": "Le fabbriche inquinano l'aria.", "nl": "De fabrieken vervuilen de lucht." } },
+        { "it": "l'energia rinnovabile", "nl": "hernieuwbare energie", "note": "v.", "level": 3, "sentence": { "it": "Il solare è energia rinnovabile.", "nl": "Zonne-energie is hernieuwbare energie." } },
+        { "it": "il pannello solare", "nl": "zonnepaneel", "note": "", "level": 3, "sentence": { "it": "Molte case hanno pannelli solari.", "nl": "Veel huizen hebben zonnepanelen." } },
+        { "it": "l'energia eolica", "nl": "windenergie", "note": "v.", "level": 4, "sentence": { "it": "L'energia eolica viene dal vento.", "nl": "Windenergie komt van de wind." } },
+        { "it": "il cambiamento climatico", "nl": "klimaatverandering", "note": "", "level": 3, "sentence": { "it": "Il cambiamento climatico è una minaccia.", "nl": "Klimaatverandering is een bedreiging." } },
+        { "it": "il riscaldamento globale", "nl": "opwarming van de aarde", "note": "", "level": 3, "sentence": { "it": "Il riscaldamento globale causa molti problemi.", "nl": "De opwarming van de aarde veroorzaakt veel problemen." } },
+        { "it": "la siccità", "nl": "droogte", "note": "", "level": 4, "sentence": { "it": "La siccità colpisce molte regioni.", "nl": "Droogte treft veel regio's." } },
+        { "it": "l'alluvione", "nl": "overstroming", "note": "v.", "level": 4, "sentence": { "it": "Le alluvioni sono sempre più frequenti.", "nl": "Overstromingen komen steeds vaker voor." } },
+        { "it": "la biodiversità", "nl": "biodiversiteit", "note": "", "level": 4, "sentence": { "it": "Dobbiamo salvare la biodiversità.", "nl": "We moeten de biodiversiteit redden." } },
+        { "it": "estinguersi", "nl": "uitsterven", "note": "Riflessivo", "level": 4, "sentence": { "it": "Molte specie si stanno estinguendo.", "nl": "Veel soorten sterven uit." } },
+        { "it": "sostenibile", "nl": "duurzaam", "note": "", "level": 3, "sentence": { "it": "Cerchiamo soluzioni sostenibili.", "nl": "We zoeken duurzame oplossingen." } },
+        { "it": "la sostenibilità", "nl": "duurzaamheid", "note": "", "level": 3, "sentence": { "it": "La sostenibilità è una priorità.", "nl": "Duurzaamheid is een prioriteit." } },
+        { "it": "risparmiare energia", "nl": "energie besparen", "note": "", "level": 3, "sentence": { "it": "Spegni le luci per risparmiare energia.", "nl": "Doe de lichten uit om energie te besparen." } },
+        { "it": "la foresta", "nl": "bos / woud", "note": "", "level": 2, "sentence": { "it": "La deforestazione distrugge le foreste.", "nl": "Ontbossing vernietigt de bossen." } },
+        { "it": "la deforestazione", "nl": "ontbossing", "note": "", "level": 4, "sentence": { "it": "La deforestazione è un problema globale.", "nl": "Ontbossing is een wereldwijd probleem." } },
+        { "it": "le emissioni di CO2", "nl": "CO2-uitstoot", "note": "", "level": 4, "sentence": { "it": "Le emissioni di CO2 aumentano ogni anno.", "nl": "De CO2-uitstoot neemt elk jaar toe." } },
+        { "it": "il trasporto pubblico", "nl": "openbaar vervoer", "note": "", "level": 2, "sentence": { "it": "Usa il trasporto pubblico invece dell'auto.", "nl": "Gebruik het openbaar vervoer in plaats van de auto." } },
+        { "it": "la bicicletta / la bici", "nl": "fiets", "note": "Bici is de verkorting", "level": 1, "sentence": { "it": "Vado al lavoro in bici ogni giorno.", "nl": "Ik ga elke dag met de fiets naar het werk." } },
+        { "it": "il prodotto biologico", "nl": "biologisch product", "note": "", "level": 3, "sentence": { "it": "Preferisco comprare prodotti biologici.", "nl": "Ik koop liever biologische producten." } },
+        { "it": "la raccolta differenziata", "nl": "gescheiden afvalinzameling", "note": "", "level": 3, "sentence": { "it": "In Italia la raccolta differenziata è obbligatoria.", "nl": "In Italië is gescheiden afvalinzameling verplicht." } },
+        { "it": "proteggere", "nl": "beschermen", "note": "Onregelmatig: protetto", "level": 3, "sentence": { "it": "Dobbiamo proteggere le specie a rischio.", "nl": "We moeten bedreigde soorten beschermen." } }
+      ]
+    }
+  },
+  "grammar": {
+    "id": "gerundio",
+    "topic": "Het gerundium (gerundio)",
+    "summary": "parlando, andando, finendo — al sprekende, al gaande...",
+    "level": 3,
+    "explanation": "Het <strong>gerundio</strong> beschrijft een gelijktijdige of oorzakelijke handeling. Het is vergelijkbaar met 'terwijl' of 'door te' in het Nederlands.\n\n<strong>Vorming:</strong>\n• -are werkwoorden: stam + <strong>-ando</strong> (parlare → parlando)\n• -ere werkwoorden: stam + <strong>-endo</strong> (scrivere → scrivendo)\n• -ire werkwoorden: stam + <strong>-endo</strong> (dormire → dormendo)\n\n<strong>Onregelmatige gerundi:</strong>\n• essere → essendo\n• avere → avendo\n• fare → facendo\n• dire → dicendo\n• bere → bevendo\n\n<strong>Gebruik — stare + gerundio</strong> (bezig zijn met):\n• Sto mangiando. (Ik ben aan het eten.)\n• Stava dormendo. (Hij/zij was aan het slapen.)\n• Stavamo studiando. (We waren aan het studeren.)\n\n<strong>Gebruik — gelijktijdig / oorzaak:</strong>\n• Essendo stanco, sono andato a letto. (Omdat ik moe was, ging ik naar bed.)\n• Camminando nel parco, ho incontrato Marco. (Terwijl ik in het park liep, ontmoette ik Marco.)",
+    "examples": [
+      "Sto leggendo un libro. (Ik ben een boek aan het lezen.)",
+      "Stava piovendo quando sono uscito. (Het regende toen ik naar buiten ging.)",
+      "Parlando italiano impari molte cose. (Door Italiaans te spreken leer je veel.)",
+      "Essendo in ritardo, ho preso un taxi. (Omdat ik te laat was, nam ik een taxi.)",
+      "Cosa stai facendo? (Wat ben je aan het doen?)"
+    ],
+    "exercises": [
+      {
+        "question": "Wat is het gerundio van 'mangiare'?",
+        "options": ["mangiando", "mangiante", "mangiato", "mangiare"],
+        "correct": 0,
+        "explanation": "-are werkwoorden: stam + -ando. Mangi + ando = mangiando."
+      },
+      {
+        "question": "Vul in: 'Sto ___ (leggere) un romanzo.'",
+        "options": ["leggendo", "leggo", "letto", "leggere"],
+        "correct": 0,
+        "explanation": "Stare + gerundio = bezig zijn. Leggere → leggendo (-ere: stam + -endo)."
+      },
+      {
+        "question": "Hoe zeg je 'Zij was aan het schrijven'?",
+        "options": ["Stava scrivendo.", "Stava scritto.", "Sta scrivere.", "Stava scrivere."],
+        "correct": 0,
+        "explanation": "Imperfetto van stare (stava) + gerundio (scrivendo) = stava scrivendo."
+      },
+      {
+        "question": "Wat is het gerundio van 'fare'?",
+        "options": ["facendo", "fando", "fatto", "fare"],
+        "correct": 0,
+        "explanation": "Fare heeft een onregelmatig gerundio: facendo (niet 'farendo')."
+      },
+      {
+        "question": "Wat betekent 'Camminando, ascolto musica'?",
+        "options": ["Terwijl ik loop, luister ik naar muziek.", "Ik ga lopen om muziek te luisteren.", "Ik loop en zal muziek luisteren.", "Al lopend, luisterde ik muziek."],
+        "correct": 0,
+        "explanation": "Gerundio als gelijktijdige handeling: terwijl je loopt, doe je iets anders."
+      }
+    ]
+  },
+  "verbs": {
+    "irregular": [
+      {
+        "infinitive": "proteggere",
+        "meaning": "beschermen",
+        "level": 4,
+        "presente": { "io": "proteggo", "tu": "proteggi", "lui": "protegge", "noi": "proteggiamo", "voi": "proteggete", "loro": "proteggono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "protetto" },
+        "imperfetto": { "io": "proteggevo", "tu": "proteggevi", "lui": "proteggeva", "noi": "proteggevamo", "voi": "proteggevate", "loro": "proteggevano" },
+        "futuro": { "io": "proteggerò", "tu": "proteggerai", "lui": "proteggerà", "noi": "proteggeremo", "voi": "proteggerete", "loro": "proteggeranno" },
+        "condizionale": { "io": "proteggerei", "tu": "proteggeresti", "lui": "proteggerebbe", "noi": "proteggeremmo", "voi": "proteggereste", "loro": "proteggerebbero" }
+      },
+      {
+        "infinitive": "cuocere",
+        "meaning": "koken / garen (van eten)",
+        "level": 3,
+        "presente": { "io": "cuocio", "tu": "cuoci", "lui": "cuoce", "noi": "cuociamo", "voi": "cuocete", "loro": "cuociono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "cotto" },
+        "imperfetto": { "io": "cuocevo", "tu": "cuocevi", "lui": "cuoceva", "noi": "cuocevamo", "voi": "cuocevate", "loro": "cuocevano" },
+        "futuro": { "io": "cuocerò", "tu": "cuocerai", "lui": "cuocerà", "noi": "cuoceremo", "voi": "cuocerete", "loro": "cuoceranno" },
+        "condizionale": { "io": "cuocerei", "tu": "cuoceresti", "lui": "cuocerebbe", "noi": "cuoceremmo", "voi": "cuocereste", "loro": "cuocerebbero" }
+      },
+      {
+        "infinitive": "assumere",
+        "meaning": "aannemen (personeel) / veronderstellen",
+        "level": 4,
+        "presente": { "io": "assumo", "tu": "assumi", "lui": "assume", "noi": "assumiamo", "voi": "assumete", "loro": "assumono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "assunto" },
+        "imperfetto": { "io": "assumevo", "tu": "assumevi", "lui": "assumeva", "noi": "assumevamo", "voi": "assumevate", "loro": "assumevano" },
+        "futuro": { "io": "assumerò", "tu": "assumerai", "lui": "assumerà", "noi": "assumeremo", "voi": "assumerete", "loro": "assumeranno" },
+        "condizionale": { "io": "assumerei", "tu": "assumeresti", "lui": "assumerebbe", "noi": "assumeremmo", "voi": "assumereste", "loro": "assumerebbero" }
+      }
+    ]
+  }
+}

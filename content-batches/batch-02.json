@@ -1,0 +1,122 @@
+{
+  "batch": 2,
+  "scheduledDate": "2026-06-30",
+  "description": "Città & Quartiere + Indirecte objectpronomen + spingere / comprendere / crescere",
+  "vocabulary": {
+    "key": "citta",
+    "data": {
+      "name": "Città & Quartiere",
+      "icon": "🏙️",
+      "words": [
+        { "it": "la strada", "nl": "straat / weg", "note": "", "level": 1, "sentence": { "it": "Attraversa la strada con attenzione.", "nl": "Steek de straat voorzichtig over." } },
+        { "it": "il marciapiede", "nl": "trottoir / stoep", "note": "", "level": 1, "sentence": { "it": "Cammina sul marciapiede.", "nl": "Loop op het trottoir." } },
+        { "it": "il semaforo", "nl": "verkeerslicht", "note": "", "level": 1, "sentence": { "it": "Il semaforo è rosso, aspetta.", "nl": "Het verkeerslicht is rood, wacht." } },
+        { "it": "la piazza", "nl": "plein", "note": "", "level": 1, "sentence": { "it": "Ci troviamo in piazza alle tre.", "nl": "We ontmoeten elkaar om drie uur op het plein." } },
+        { "it": "il palazzo", "nl": "gebouw / paleis", "note": "", "level": 1, "sentence": { "it": "Abito in un palazzo antico.", "nl": "Ik woon in een oud gebouw." } },
+        { "it": "il negozio", "nl": "winkel", "note": "", "level": 1, "sentence": { "it": "C'è un negozio di scarpe qui vicino.", "nl": "Er is een schoenenwinkel vlakbij." } },
+        { "it": "la farmacia", "nl": "apotheek", "note": "Groen kruis als symbool", "level": 1, "sentence": { "it": "Devo andare in farmacia a comprare le medicine.", "nl": "Ik moet naar de apotheek om medicijnen te kopen." } },
+        { "it": "la banca", "nl": "bank", "note": "", "level": 1, "sentence": { "it": "La banca è aperta fino alle cinque.", "nl": "De bank is open tot vijf uur." } },
+        { "it": "il comune", "nl": "gemeentehuis / gemeente", "note": "", "level": 2, "sentence": { "it": "Devo andare al comune per il documento.", "nl": "Ik moet naar het gemeentehuis voor het document." } },
+        { "it": "la biblioteca", "nl": "bibliotheek", "note": "", "level": 2, "sentence": { "it": "Studio in biblioteca ogni giorno.", "nl": "Ik studeer elke dag in de bibliotheek." } },
+        { "it": "il museo", "nl": "museum", "note": "", "level": 2, "sentence": { "it": "Il museo è chiuso il lunedì.", "nl": "Het museum is op maandag gesloten." } },
+        { "it": "il quartiere", "nl": "wijk / buurt", "note": "", "level": 2, "sentence": { "it": "Abito in un quartiere tranquillo.", "nl": "Ik woon in een rustige wijk." } },
+        { "it": "il centro storico", "nl": "historisch centrum / binnenstad", "note": "", "level": 2, "sentence": { "it": "Il centro storico è pieno di turisti.", "nl": "Het historisch centrum zit vol toeristen." } },
+        { "it": "la periferia", "nl": "buitenwijk / randgebied", "note": "", "level": 2, "sentence": { "it": "Abitano in periferia, lontano dal centro.", "nl": "Ze wonen in de buitenwijk, ver van het centrum." } },
+        { "it": "l'angolo", "nl": "hoek (van een straat)", "note": "m.", "level": 2, "sentence": { "it": "Il bar è all'angolo della strada.", "nl": "Het café staat op de hoek van de straat." } },
+        { "it": "girare a destra", "nl": "rechts afslaan", "note": "", "level": 2, "sentence": { "it": "Gira a destra dopo la farmacia.", "nl": "Sla rechts af na de apotheek." } },
+        { "it": "girare a sinistra", "nl": "links afslaan", "note": "", "level": 2, "sentence": { "it": "Gira a sinistra al semaforo.", "nl": "Sla links af bij het verkeerslicht." } },
+        { "it": "andare dritto", "nl": "rechtdoor gaan", "note": "", "level": 2, "sentence": { "it": "Vai sempre dritto per cento metri.", "nl": "Ga honderd meter rechtdoor." } },
+        { "it": "il parcheggio", "nl": "parkeerplaats / parking", "note": "", "level": 2, "sentence": { "it": "Non trovo parcheggio in centro.", "nl": "Ik vind geen parkeerplaats in het centrum." } },
+        { "it": "il traffico", "nl": "verkeer / file", "note": "", "level": 2, "sentence": { "it": "C'è molto traffico a quest'ora.", "nl": "Er is veel verkeer op dit uur." } },
+        { "it": "il vicino di casa", "nl": "buur", "note": "Vrouwelijk: la vicina di casa", "level": 2, "sentence": { "it": "Il mio vicino di casa è molto gentile.", "nl": "Mijn buur is heel vriendelijk." } },
+        { "it": "affittare", "nl": "huren / verhuren", "note": "", "level": 3, "sentence": { "it": "Voglio affittare un appartamento in centro.", "nl": "Ik wil een appartement in het centrum huren." } },
+        { "it": "il condominio", "nl": "appartementsgebouw", "note": "", "level": 3, "sentence": { "it": "Vivo in un condominio di dieci piani.", "nl": "Ik woon in een appartementsgebouw van tien verdiepingen." } },
+        { "it": "il portone", "nl": "voordeur (groot) / ingangspoort", "note": "", "level": 3, "sentence": { "it": "Il portone del palazzo è sempre chiuso.", "nl": "De voordeur van het gebouw is altijd gesloten." } },
+        { "it": "il campanello", "nl": "deurbel", "note": "", "level": 3, "sentence": { "it": "Suona il campanello quando arrivi.", "nl": "Bel aan als je er bent." } },
+        { "it": "la zona pedonale", "nl": "voetgangerszone", "note": "", "level": 3, "sentence": { "it": "In centro c'è una zona pedonale.", "nl": "In het centrum is er een voetgangerszone." } },
+        { "it": "l'incrocio", "nl": "kruispunt", "note": "m.", "level": 3, "sentence": { "it": "Gira al prossimo incrocio.", "nl": "Sla af bij het volgende kruispunt." } },
+        { "it": "il municipio", "nl": "stadhuis", "note": "", "level": 3, "sentence": { "it": "Il matrimonio civile si svolge al municipio.", "nl": "Het burgerlijk huwelijk vindt plaats op het stadhuis." } }
+      ]
+    }
+  },
+  "grammar": {
+    "id": "pronomi-indiretti",
+    "topic": "Indirecte objectpronomen",
+    "summary": "mi, ti, gli/le, ci, vi, loro — aan mij, aan jou...",
+    "level": 3,
+    "explanation": "Indirecte objectpronomen vervangen een meewerkend voorwerp (aan/voor wie).\n\n<strong>De pronomen:</strong>\n• <strong>mi</strong> — aan mij (mi dai...) \n• <strong>ti</strong> — aan jou (ti do...)\n• <strong>gli</strong> — aan hem (gli scrivo...)\n• <strong>le</strong> — aan haar (le telefono...) / aan u (Le scrivo)\n• <strong>ci</strong> — aan ons (ci dici...)\n• <strong>vi</strong> — aan jullie (vi mando...)\n• <strong>gli / loro</strong> — aan hen (gli parlo / parlo loro)\n\n<strong>Positie:</strong> Vóór het werkwoord (behalve loro, dat erachter staat):\n• Mi hai telefonato? (Heb je me gebeld?)\n• Gli scrivo una lettera. (Ik schrijf hem een brief.)\n• Le piace la pizza? (Houdt zij van pizza?)\n\n<strong>Let op — gli vs. le:</strong>\n• gli = aan hem: Gli do il libro. (Ik geef hem het boek.)\n• le = aan haar: Le do il libro. (Ik geef haar het boek.)\n• Le = aan u (formeel): Le scrivo una mail. (Ik schrijf u een e-mail.)",
+    "examples": [
+      "Mi piace il gelato. (Ik houd van ijs.)",
+      "Ti mando un messaggio. (Ik stuur je een bericht.)",
+      "Gli dico la verità. (Ik vertel hem de waarheid.)",
+      "Le ho comprato un regalo. (Ik heb haar een cadeau gekocht.)",
+      "Ci hanno offerto un caffè. (Ze hebben ons een koffie aangeboden.)"
+    ],
+    "exercises": [
+      {
+        "question": "Vul in: '___ (aan hem) scrivo una lettera.'",
+        "options": ["Gli", "Le", "Mi", "Ci"],
+        "correct": 0,
+        "explanation": "'Gli' = aan hem. Gli scrivo una lettera = Ik schrijf hem een brief."
+      },
+      {
+        "question": "Wat betekent 'Le telefono domani'?",
+        "options": ["Ik bel haar/u morgen", "Ik bel hem morgen", "Zij belt morgen", "Bel me morgen"],
+        "correct": 0,
+        "explanation": "'Le' kan 'aan haar' of 'aan u' (formeel) betekenen. 'Le telefono' = Ik bel haar/u."
+      },
+      {
+        "question": "Vul in: 'Mi ___ il nome?' (Vertel jij mij de naam?)",
+        "options": ["dici", "dico", "dice", "diciamo"],
+        "correct": 0,
+        "explanation": "'Mi dici' = jij zegt aan mij. Tu (jij) + dire → dici."
+      },
+      {
+        "question": "Welke zin is correct voor 'Hij geeft ons de sleutels'?",
+        "options": ["Ci dà le chiavi.", "Vi dà le chiavi.", "Gli dà le chiavi.", "Mi dà le chiavi."],
+        "correct": 0,
+        "explanation": "'Ci' = aan ons. Ci dà le chiavi = Hij geeft ons de sleutels."
+      },
+      {
+        "question": "Vul in: '___ (aan jullie) ho mandato una mail.'",
+        "options": ["Vi", "Ci", "Mi", "Gli"],
+        "correct": 0,
+        "explanation": "'Vi' = aan jullie. Vi ho mandato una mail = Ik heb jullie een e-mail gestuurd."
+      }
+    ]
+  },
+  "verbs": {
+    "irregular": [
+      {
+        "infinitive": "spingere",
+        "meaning": "duwen",
+        "level": 3,
+        "presente": { "io": "spingo", "tu": "spingi", "lui": "spinge", "noi": "spingiamo", "voi": "spingete", "loro": "spingono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "spinto" },
+        "imperfetto": { "io": "spingevo", "tu": "spingevi", "lui": "spingeva", "noi": "spingevamo", "voi": "spingevate", "loro": "spingevano" },
+        "futuro": { "io": "spingerò", "tu": "spingerai", "lui": "spingerà", "noi": "spingeremo", "voi": "spingerete", "loro": "spingeranno" },
+        "condizionale": { "io": "spingerei", "tu": "spingeresti", "lui": "spingerebbe", "noi": "spingeremmo", "voi": "spingereste", "loro": "spingerebbero" }
+      },
+      {
+        "infinitive": "comprendere",
+        "meaning": "begrijpen / omvatten",
+        "level": 3,
+        "presente": { "io": "comprendo", "tu": "comprendi", "lui": "comprende", "noi": "comprendiamo", "voi": "comprendete", "loro": "comprendono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "compreso" },
+        "imperfetto": { "io": "comprendevo", "tu": "comprendevi", "lui": "comprendeva", "noi": "comprendevamo", "voi": "comprendevate", "loro": "comprendevano" },
+        "futuro": { "io": "comprenderò", "tu": "comprenderai", "lui": "comprenderà", "noi": "comprenderemo", "voi": "comprenderete", "loro": "comprenderanno" },
+        "condizionale": { "io": "comprenderei", "tu": "comprenderesti", "lui": "comprenderebbe", "noi": "comprenderemmo", "voi": "comprendereste", "loro": "comprenderebbero" }
+      },
+      {
+        "infinitive": "crescere",
+        "meaning": "groeien / toenemen",
+        "level": 3,
+        "presente": { "io": "cresco", "tu": "cresci", "lui": "cresce", "noi": "cresciamo", "voi": "crescete", "loro": "crescono" },
+        "passatoProssimo": { "auxiliary": "essere", "participle": "cresciuto" },
+        "imperfetto": { "io": "crescevo", "tu": "crescevi", "lui": "cresceva", "noi": "crescevamo", "voi": "crescevate", "loro": "crescevano" },
+        "futuro": { "io": "crescerò", "tu": "crescerai", "lui": "crescerà", "noi": "cresceremo", "voi": "crescerete", "loro": "cresceranno" },
+        "condizionale": { "io": "crescerei", "tu": "cresceresti", "lui": "crescerebbe", "noi": "cresceremmo", "voi": "crescereste", "loro": "crescerebbero" }
+      }
+    ]
+  }
+}

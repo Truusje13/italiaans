@@ -1,0 +1,121 @@
+{
+  "batch": 5,
+  "scheduledDate": "2026-08-11",
+  "description": "Finanze & Lavoro + Passato remoto + fingere / sciogliere / reggere",
+  "vocabulary": {
+    "key": "finanze",
+    "data": {
+      "name": "Finanze & Lavoro",
+      "icon": "💰",
+      "words": [
+        { "it": "il denaro", "nl": "geld", "note": "Synoniem: i soldi (meer informeel)", "level": 1, "sentence": { "it": "Non ho abbastanza denaro.", "nl": "Ik heb niet genoeg geld." } },
+        { "it": "i soldi", "nl": "geld (informeel)", "note": "Altijd meervoud", "level": 1, "sentence": { "it": "Hai i soldi per il caffè?", "nl": "Heb je geld voor de koffie?" } },
+        { "it": "il conto (in banca)", "nl": "bankrekening", "note": "", "level": 2, "sentence": { "it": "Ho aperto un conto in banca.", "nl": "Ik heb een bankrekening geopend." } },
+        { "it": "il bancomat", "nl": "geldautomaat / pinautomaat", "note": "", "level": 2, "sentence": { "it": "Devo prelevare soldi al bancomat.", "nl": "Ik moet geld opnemen bij de pinautomaat." } },
+        { "it": "prelevare", "nl": "geld opnemen", "note": "", "level": 2, "sentence": { "it": "Posso prelevare fino a 500 euro al giorno.", "nl": "Ik kan tot 500 euro per dag opnemen." } },
+        { "it": "versare (soldi)", "nl": "geld storten", "note": "Versare soldi = storten", "level": 3, "sentence": { "it": "Devo versare i soldi sul conto.", "nl": "Ik moet het geld op de rekening storten." } },
+        { "it": "il bonifico", "nl": "bankoverschrijving", "note": "", "level": 3, "sentence": { "it": "Ho fatto un bonifico di cento euro.", "nl": "Ik heb een overschrijving van honderd euro gedaan." } },
+        { "it": "lo stipendio", "nl": "salaris / loon", "note": "", "level": 2, "sentence": { "it": "Il mio stipendio è di duemila euro al mese.", "nl": "Mijn salaris is tweeduizend euro per maand." } },
+        { "it": "il budget", "nl": "budget", "note": "", "level": 2, "sentence": { "it": "Devo rispettare il mio budget.", "nl": "Ik moet mijn budget respecteren." } },
+        { "it": "risparmiare", "nl": "sparen / bezuinigen", "note": "", "level": 2, "sentence": { "it": "Cerco di risparmiare ogni mese.", "nl": "Ik probeer elke maand te sparen." } },
+        { "it": "i risparmi", "nl": "spaargeld / spaargelden", "note": "Altijd meervoud", "level": 3, "sentence": { "it": "Ho usato tutti i miei risparmi.", "nl": "Ik heb al mijn spaargeld gebruikt." } },
+        { "it": "investire", "nl": "investeren", "note": "", "level": 3, "sentence": { "it": "È rischioso investire in borsa.", "nl": "Het is riskant om te investeren in aandelen." } },
+        { "it": "il prestito", "nl": "lening", "note": "", "level": 3, "sentence": { "it": "Ho chiesto un prestito in banca.", "nl": "Ik heb een lening aangevraagd bij de bank." } },
+        { "it": "il mutuo", "nl": "hypotheek", "note": "", "level": 4, "sentence": { "it": "Abbiamo preso un mutuo per comprare casa.", "nl": "We hebben een hypotheek genomen om een huis te kopen." } },
+        { "it": "il fatturato", "nl": "omzet", "note": "", "level": 4, "sentence": { "it": "Il fatturato dell'azienda è cresciuto.", "nl": "De omzet van het bedrijf is gegroeid." } },
+        { "it": "il profitto", "nl": "winst", "note": "", "level": 3, "sentence": { "it": "L'azienda ha fatto un buon profitto.", "nl": "Het bedrijf heeft een goede winst gemaakt." } },
+        { "it": "la perdita", "nl": "verlies (financieel)", "note": "", "level": 3, "sentence": { "it": "L'azienda ha subito una grande perdita.", "nl": "Het bedrijf heeft een groot verlies geleden." } },
+        { "it": "la tassa", "nl": "belasting", "note": "", "level": 3, "sentence": { "it": "In Italia le tasse sono alte.", "nl": "In Italië zijn de belastingen hoog." } },
+        { "it": "la busta paga", "nl": "loonstrook", "note": "", "level": 4, "sentence": { "it": "Ho ricevuto la busta paga questo mese.", "nl": "Ik heb deze maand mijn loonstrook ontvangen." } },
+        { "it": "il contratto di lavoro", "nl": "arbeidscontract", "note": "", "level": 3, "sentence": { "it": "Ho firmato un contratto di lavoro.", "nl": "Ik heb een arbeidscontract getekend." } },
+        { "it": "essere disoccupato/a", "nl": "werkloos zijn", "note": "", "level": 3, "sentence": { "it": "Da sei mesi sono disoccupato.", "nl": "Ik ben al zes maanden werkloos." } },
+        { "it": "il colloquio di lavoro", "nl": "sollicitatiegesprek", "note": "", "level": 3, "sentence": { "it": "Ho un colloquio di lavoro domani.", "nl": "Ik heb morgen een sollicitatiegesprek." } },
+        { "it": "licenziare", "nl": "ontslaan", "note": "", "level": 4, "sentence": { "it": "Il capo lo ha licenziato.", "nl": "De baas heeft hem ontslagen." } },
+        { "it": "essere promosso/a", "nl": "gepromoveerd worden / promotie krijgen", "note": "", "level": 3, "sentence": { "it": "Sono stato promosso a manager.", "nl": "Ik ben gepromoveerd tot manager." } },
+        { "it": "il collega / la collega", "nl": "collega", "note": "", "level": 2, "sentence": { "it": "I miei colleghi sono molto simpatici.", "nl": "Mijn collega's zijn heel aardig." } },
+        { "it": "il capo / il/la titolare", "nl": "baas / eigenaar", "note": "", "level": 2, "sentence": { "it": "Il mio capo è molto esigente.", "nl": "Mijn baas is heel veeleisend." } },
+        { "it": "la riunione", "nl": "vergadering", "note": "", "level": 3, "sentence": { "it": "Abbiamo una riunione alle nove.", "nl": "We hebben een vergadering om negen uur." } }
+      ]
+    }
+  },
+  "grammar": {
+    "id": "passato-remoto",
+    "topic": "Het passato remoto",
+    "summary": "parlai, andai, fui — ik sprak (literair/historisch)",
+    "level": 4,
+    "explanation": "Het <strong>passato remoto</strong> is de verleden tijd voor gebeurtenissen die lang geleden of definitief afgesloten zijn. In Noord-Italië wordt het zelden gebruikt in de spreektaal — daar gebruik je het passato prossimo. In Zuid-Italië en in schrijftaal/literatuur is het heel gewoon.\n\n<strong>Regelmatige werkwoorden:</strong>\n• <strong>-are:</strong> parlai, parlasti, parlò, parlammo, parlaste, parlarono\n• <strong>-ere:</strong> credei/credetti, credesti, credé/credette, credemmo, credeste, crederono/credettero\n• <strong>-ire:</strong> dormii, dormisti, dormì, dormimmo, dormiste, dormirono\n\n<strong>Onregelmatige werkwoorden (moet je uit het hoofd leren):</strong>\n• essere: fui, fosti, fu, fummo, foste, furono\n• avere: ebbi, avesti, ebbe, avemmo, aveste, ebbero\n• fare: feci, facesti, fece, facemmo, faceste, fecero\n• andare: andai, andasti, andò, andammo, andaste, andarono\n• venire: venni, venisti, venne, venimmo, veniste, vennero\n• dire: dissi, dicesti, disse, dicemmo, diceste, dissero\n• vedere: vidi, vedesti, vide, vedemmo, vedeste, videro\n\n<strong>Wanneer passato remoto vs. passato prossimo?</strong>\n• Literaire teksten, historische verhalen: passato remoto\n• Zuid-Italië dagelijks gebruik: passato remoto\n• Noord-Italië dagelijks gesprek: passato prossimo",
+    "examples": [
+      "Dante scrisse la Divina Commedia. (Dante schreef de Divina Commedia.)",
+      "Cristoforo Colombo scoprì l'America nel 1492. (Christoforus Columbus ontdekte Amerika in 1492.)",
+      "L'anno scorso andai a Roma. (Vorig jaar ging ik naar Rome.) — typisch Zuid-Italiaans",
+      "Marco Polo viaggiò in Cina. (Marco Polo reisde naar China.)",
+      "La guerra finì nel 1945. (De oorlog eindigde in 1945.)"
+    ],
+    "exercises": [
+      {
+        "question": "Wat is het passato remoto van 'essere' (lui)?",
+        "options": ["fu", "era", "è stato", "sarà"],
+        "correct": 0,
+        "explanation": "Essere passato remoto: fui, fosti, fu, fummo, foste, furono. Lui/lei → fu."
+      },
+      {
+        "question": "Vul in: 'Dante ___ (scrivere) la Divina Commedia.'",
+        "options": ["scrisse", "ha scritto", "scriveva", "scriverà"],
+        "correct": 0,
+        "explanation": "Historische feiten in literaire context: passato remoto. Scrivere → scrisse (lui)."
+      },
+      {
+        "question": "Wat is het passato remoto van 'fare' (loro)?",
+        "options": ["fecero", "hanno fatto", "facevano", "faranno"],
+        "correct": 0,
+        "explanation": "Fare passato remoto: feci, facesti, fece, facemmo, faceste, fecero. Loro → fecero."
+      },
+      {
+        "question": "Wanneer gebruik je het passato remoto NIET in de spreektaal?",
+        "options": ["In Noord-Italië", "In Zuid-Italië", "In literaire teksten", "In historische verhalen"],
+        "correct": 0,
+        "explanation": "In Noord-Italië gebruikt men het passato prossimo voor alle verleden tijden. Het passato remoto klinkt er formeel/literair."
+      },
+      {
+        "question": "Vul in: 'Napoleone ___ (nascere) in Corsica.'",
+        "options": ["nacque", "è nato", "nasceva", "nascerà"],
+        "correct": 0,
+        "explanation": "Historisch feit: passato remoto. Nascere → nacque (lui). Onregelmatig passato remoto."
+      }
+    ]
+  },
+  "verbs": {
+    "irregular": [
+      {
+        "infinitive": "fingere",
+        "meaning": "doen alsof / voorwenden",
+        "level": 4,
+        "presente": { "io": "fingo", "tu": "fingi", "lui": "finge", "noi": "fingiamo", "voi": "fingete", "loro": "fingono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "finto" },
+        "imperfetto": { "io": "fingevo", "tu": "fingevi", "lui": "fingeva", "noi": "fingevamo", "voi": "fingevate", "loro": "fingevano" },
+        "futuro": { "io": "fingerò", "tu": "fingerai", "lui": "fingerà", "noi": "fingeremo", "voi": "fingerete", "loro": "fingeranno" },
+        "condizionale": { "io": "fingerei", "tu": "fingeresti", "lui": "fingerebbe", "noi": "fingeremmo", "voi": "fingereste", "loro": "fingerebbero" }
+      },
+      {
+        "infinitive": "sciogliere",
+        "meaning": "oplossen / smelten / losmaken",
+        "level": 4,
+        "presente": { "io": "sciolgo", "tu": "sciogli", "lui": "scioglie", "noi": "sciogliamo", "voi": "sciogliete", "loro": "sciolgono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "sciolto" },
+        "imperfetto": { "io": "scioglievo", "tu": "scioglievi", "lui": "scioglieva", "noi": "scioglievamo", "voi": "scioglievate", "loro": "scioglievano" },
+        "futuro": { "io": "scioglierò", "tu": "scioglierai", "lui": "scioglierà", "noi": "scioglieremo", "voi": "scioglierete", "loro": "scioglieranno" },
+        "condizionale": { "io": "scioglierei", "tu": "scioglieresti", "lui": "scioglierebbe", "noi": "scioglieremmo", "voi": "sciogliereste", "loro": "scioglierebbero" }
+      },
+      {
+        "infinitive": "reggere",
+        "meaning": "dragen / steunen / standhouden",
+        "level": 4,
+        "presente": { "io": "reggo", "tu": "reggi", "lui": "regge", "noi": "reggiamo", "voi": "reggete", "loro": "reggono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "retto" },
+        "imperfetto": { "io": "reggevo", "tu": "reggevi", "lui": "reggeva", "noi": "reggevamo", "voi": "reggevate", "loro": "reggevano" },
+        "futuro": { "io": "reggerò", "tu": "reggerai", "lui": "reggerà", "noi": "reggeremo", "voi": "reggerete", "loro": "reggeranno" },
+        "condizionale": { "io": "reggerei", "tu": "reggeresti", "lui": "reggerebbe", "noi": "reggeremmo", "voi": "reggereste", "loro": "reggerebbero" }
+      }
+    ]
+  }
+}

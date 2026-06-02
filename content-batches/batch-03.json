@@ -1,0 +1,121 @@
+{
+  "batch": 3,
+  "scheduledDate": "2026-07-14",
+  "description": "Carattere & Personalità + Congiuntivo presente + dipingere / condurre / proporre",
+  "vocabulary": {
+    "key": "carattere",
+    "data": {
+      "name": "Carattere & Personalità",
+      "icon": "😊",
+      "words": [
+        { "it": "gentile", "nl": "vriendelijk / aardig", "note": "", "level": 1, "sentence": { "it": "Sei molto gentile, grazie!", "nl": "Je bent heel vriendelijk, bedankt!" } },
+        { "it": "simpatico/a", "nl": "aardig / sympathiek", "note": "Past aan naar geslacht", "level": 1, "sentence": { "it": "Marco è molto simpatico.", "nl": "Marco is heel aardig." } },
+        { "it": "antipatico/a", "nl": "onaardig / antipathiek", "note": "Tegenstelling van simpatico", "level": 2, "sentence": { "it": "Il professore è un po' antipatico.", "nl": "De professor is een beetje onaardig." } },
+        { "it": "timido/a", "nl": "verlegen / timide", "note": "", "level": 1, "sentence": { "it": "Da piccolo ero molto timido.", "nl": "Als kind was ik heel verlegen." } },
+        { "it": "coraggioso/a", "nl": "dapper / moedig", "note": "", "level": 2, "sentence": { "it": "Devi essere coraggioso in questo momento.", "nl": "Je moet op dit moment dapper zijn." } },
+        { "it": "pigro/a", "nl": "lui / traag", "note": "", "level": 2, "sentence": { "it": "Non essere così pigro, alzati!", "nl": "Wees niet zo lui, sta op!" } },
+        { "it": "diligente", "nl": "ijverig / nauwgezet", "note": "", "level": 2, "sentence": { "it": "È una studentessa molto diligente.", "nl": "Ze is een heel ijverige studente." } },
+        { "it": "curioso/a", "nl": "nieuwsgierig", "note": "", "level": 2, "sentence": { "it": "I bambini sono sempre curiosi.", "nl": "Kinderen zijn altijd nieuwsgierig." } },
+        { "it": "onesto/a", "nl": "eerlijk / oprecht", "note": "", "level": 2, "sentence": { "it": "È importante essere onesti.", "nl": "Het is belangrijk om eerlijk te zijn." } },
+        { "it": "bugiardo/a", "nl": "leugenaar / leugenachtig", "note": "", "level": 2, "sentence": { "it": "Non mi fidare di lui, è un bugiardo.", "nl": "Ik vertrouw hem niet, hij is een leugenaar." } },
+        { "it": "generoso/a", "nl": "vrijgevig / genereus", "note": "", "level": 2, "sentence": { "it": "Mia nonna è molto generosa.", "nl": "Mijn oma is heel vrijgevig." } },
+        { "it": "avaro/a", "nl": "gierig", "note": "", "level": 3, "sentence": { "it": "Non prestare soldi a lui, è avaro.", "nl": "Leen hem geen geld, hij is gierig." } },
+        { "it": "paziente", "nl": "geduldig", "note": "", "level": 2, "sentence": { "it": "Devi essere paziente con i bambini.", "nl": "Je moet geduldig zijn met kinderen." } },
+        { "it": "impaziente", "nl": "ongeduldig", "note": "", "level": 2, "sentence": { "it": "Sono impaziente di vedere i risultati.", "nl": "Ik ben ongeduldig om de resultaten te zien." } },
+        { "it": "ottimista", "nl": "optimistisch", "note": "Zelfde voor m. en v.", "level": 2, "sentence": { "it": "Cerca di essere ottimista!", "nl": "Probeer optimistisch te zijn!" } },
+        { "it": "pessimista", "nl": "pessimistisch", "note": "Zelfde voor m. en v.", "level": 2, "sentence": { "it": "Non essere sempre così pessimista.", "nl": "Wees niet altijd zo pessimistisch." } },
+        { "it": "ambizioso/a", "nl": "ambitieus", "note": "", "level": 3, "sentence": { "it": "È una persona molto ambiziosa.", "nl": "Het is een heel ambitieus persoon." } },
+        { "it": "testardo/a", "nl": "koppig / eigenwijs", "note": "", "level": 3, "sentence": { "it": "È testardo come un mulo!", "nl": "Hij is koppig als een ezel!" } },
+        { "it": "sensibile", "nl": "gevoelig", "note": "", "level": 3, "sentence": { "it": "È una persona molto sensibile.", "nl": "Het is een heel gevoelig persoon." } },
+        { "it": "disponibile", "nl": "behulpzaam / bereidwillig", "note": "", "level": 3, "sentence": { "it": "È sempre disponibile ad aiutare.", "nl": "Hij is altijd bereid te helpen." } },
+        { "it": "affidabile", "nl": "betrouwbaar", "note": "", "level": 3, "sentence": { "it": "Ho bisogno di un collega affidabile.", "nl": "Ik heb een betrouwbare collega nodig." } },
+        { "it": "estroverso/a", "nl": "extravert / uitbundig", "note": "", "level": 3, "sentence": { "it": "Mia sorella è molto estroversa.", "nl": "Mijn zus is heel extravert." } },
+        { "it": "introverso/a", "nl": "introvert / gesloten", "note": "", "level": 3, "sentence": { "it": "Gli introversi preferiscono stare da soli.", "nl": "Introverten zijn liever alleen." } },
+        { "it": "il carattere", "nl": "karakter / persoonlijkheid", "note": "", "level": 2, "sentence": { "it": "Ha un carattere molto forte.", "nl": "Ze heeft een heel sterk karakter." } },
+        { "it": "il difetto", "nl": "gebrek / fout", "note": "", "level": 3, "sentence": { "it": "Ognuno ha i propri difetti.", "nl": "Iedereen heeft zijn eigen gebreken." } },
+        { "it": "la qualità", "nl": "kwaliteit / eigenschap", "note": "", "level": 3, "sentence": { "it": "La pazienza è una grande qualità.", "nl": "Geduld is een grote eigenschap." } },
+        { "it": "il comportamento", "nl": "gedrag", "note": "", "level": 3, "sentence": { "it": "Il suo comportamento è strano.", "nl": "Zijn gedrag is vreemd." } }
+      ]
+    }
+  },
+  "grammar": {
+    "id": "congiuntivo-presente",
+    "topic": "De aanvoegende wijs (congiuntivo)",
+    "summary": "Penso che sia... — Ik denk dat het is...",
+    "level": 3,
+    "explanation": "Het <strong>congiuntivo presente</strong> wordt gebruikt in bijzinnen na uitdrukkingen van twijfel, mening, gevoel of wens.\n\n<strong>Wanneer gebruik je het?</strong>\nNa werkwoorden/uitdrukkingen als:\n• pensare che (denken dat)\n• credere che (geloven dat)\n• sperare che (hopen dat)\n• volere che (willen dat)\n• è importante che (het is belangrijk dat)\n• è possibile che (het is mogelijk dat)\n• è strano che (het is vreemd dat)\n\n<strong>Vorming essere en avere:</strong>\n• essere: sia, sia, sia, siamo, siate, siano\n• avere: abbia, abbia, abbia, abbiamo, abbiate, abbiano\n\n<strong>Regelmatige werkwoorden:</strong>\n• -are → -i, -i, -i, -iamo, -iate, -ino (parlare → parli, parli, parli, parliamo, parliate, parlino)\n• -ere → -a, -a, -a, -iamo, -iate, -ano (scrivere → scriva, scriva, scriva, scriviamo, scriviate, scrivano)\n• -ire → -a, -a, -a, -iamo, -iate, -ano (dormire → dorma, dorma, dorma, dormiamo, dormiate, dormano)\n\n<strong>Let op:</strong> Je/tu/lui/lei hebben dezelfde vorm! Gebruik het subject voor duidelijkheid:\n• Penso che (lui) sia stanco. (Ik denk dat hij moe is.)",
+    "examples": [
+      "Penso che lui sia in ritardo. (Ik denk dat hij te laat is.)",
+      "Spero che tu stia bene. (Ik hoop dat het goed met je gaat.)",
+      "È importante che tu studi. (Het is belangrijk dat je studeert.)",
+      "È possibile che piova domani. (Het is mogelijk dat het morgen regent.)",
+      "Voglio che voi veniate alla festa. (Ik wil dat jullie naar het feest komen.)"
+    ],
+    "exercises": [
+      {
+        "question": "Vul in: 'Penso che lui ___ (essere) stanco.'",
+        "options": ["sia", "è", "sarà", "sarebbe"],
+        "correct": 0,
+        "explanation": "Na 'pensare che' gebruik je het congiuntivo. Essere → sia (io/tu/lui/lei)."
+      },
+      {
+        "question": "Vul in: 'È importante che voi ___ (studiare) ogni giorno.'",
+        "options": ["studiate", "studiano", "studiate", "studierete"],
+        "correct": 0,
+        "explanation": "Congiuntivo van -are werkwoord, voi-vorm: studi + ate = studiate."
+      },
+      {
+        "question": "Welke zin is correct?",
+        "options": ["Spero che tu venga.", "Spero che tu vieni.", "Spero che sei venuto.", "Spero che verrai."],
+        "correct": 0,
+        "explanation": "Na 'sperare che' gebruik je het congiuntivo. Venire (congiuntivo) → venga."
+      },
+      {
+        "question": "Vul in: 'È possibile che ___ (piovere) domani.'",
+        "options": ["piova", "pioverà", "pioveva", "piove"],
+        "correct": 0,
+        "explanation": "Na 'è possibile che' gebruik je het congiuntivo. Piovere → piova."
+      },
+      {
+        "question": "Wat betekent 'Credo che lei abbia ragione'?",
+        "options": ["Ik geloof dat zij gelijk heeft.", "Ik geloof dat ze gelijk had.", "Zij gelooft dat ze gelijk heeft.", "Ik hoop dat zij gelijk heeft."],
+        "correct": 0,
+        "explanation": "'Credere che' + congiuntivo. Avere ragione = gelijk hebben. Abbia = congiuntivo van avere."
+      }
+    ]
+  },
+  "verbs": {
+    "irregular": [
+      {
+        "infinitive": "dipingere",
+        "meaning": "schilderen",
+        "level": 3,
+        "presente": { "io": "dipingo", "tu": "dipingi", "lui": "dipinge", "noi": "dipingiamo", "voi": "dipingete", "loro": "dipingono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "dipinto" },
+        "imperfetto": { "io": "dipingevo", "tu": "dipingevi", "lui": "dipingeva", "noi": "dipingevamo", "voi": "dipingevate", "loro": "dipingevano" },
+        "futuro": { "io": "dipingerò", "tu": "dipingerai", "lui": "dipingerà", "noi": "dipingeremo", "voi": "dipingerete", "loro": "dipingeranno" },
+        "condizionale": { "io": "dipingerei", "tu": "dipingeresti", "lui": "dipingerebbe", "noi": "dipingeremmo", "voi": "dipingereste", "loro": "dipingerebbero" }
+      },
+      {
+        "infinitive": "condurre",
+        "meaning": "leiden / besturen / afleveren",
+        "level": 4,
+        "presente": { "io": "conduco", "tu": "conduci", "lui": "conduce", "noi": "conduciamo", "voi": "conducete", "loro": "conducono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "condotto" },
+        "imperfetto": { "io": "conducevo", "tu": "conducevi", "lui": "conduceva", "noi": "conducevamo", "voi": "conducevate", "loro": "conducevano" },
+        "futuro": { "io": "condurrò", "tu": "condurrai", "lui": "condurrà", "noi": "condurremo", "voi": "condurrete", "loro": "condurranno" },
+        "condizionale": { "io": "condurrei", "tu": "condurresti", "lui": "condurrebbe", "noi": "condurremmo", "voi": "condurreste", "loro": "condurrebbero" }
+      },
+      {
+        "infinitive": "proporre",
+        "meaning": "voorstellen / voorleggen",
+        "level": 4,
+        "presente": { "io": "propongo", "tu": "proponi", "lui": "propone", "noi": "proponiamo", "voi": "proponete", "loro": "propongono" },
+        "passatoProssimo": { "auxiliary": "avere", "participle": "proposto" },
+        "imperfetto": { "io": "proponevo", "tu": "proponevi", "lui": "proponeva", "noi": "proponevamo", "voi": "proponevate", "loro": "proponevano" },
+        "futuro": { "io": "proporrò", "tu": "proporrai", "lui": "proporrà", "noi": "proporremo", "voi": "proporrete", "loro": "proporranno" },
+        "condizionale": { "io": "proporrei", "tu": "proporresti", "lui": "proporrebbe", "noi": "proporremmo", "voi": "proporreste", "loro": "proporrebbero" }
+      }
+    ]
+  }
+}
