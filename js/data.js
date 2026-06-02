@@ -985,6 +985,40 @@ const AppData = {
                 { it: "l'intelligenza artificiale", nl: "de kunstmatige intelligentie", note: "Vrouwelijk; afkorting: IA of AI", level: 5, sentence: { it: "L'IA sta cambiando il mondo.", nl: "AI verandert de wereld." } },
                 { it: "la sicurezza informatica", nl: "de cyberveiligheid", note: "Vrouwelijk woord", level: 5 }
             ]
+        },
+        cucina: {
+            name: "Cucina italiana",
+            icon: "🍝",
+            words: [
+                { it: "il sale", nl: "zout", note: "", level: 1, sentence: { it: "Aggiungi un po' di sale.", nl: "Voeg een beetje zout toe." } },
+                { it: "il pepe", nl: "peper", note: "", level: 1, sentence: { it: "Il pepe nero è piccante.", nl: "Zwarte peper is pittig." } },
+                { it: "l'aglio", nl: "knoflook", note: "m.", level: 1, sentence: { it: "L'aglio è essenziale nella cucina italiana.", nl: "Knoflook is essentieel in de Italiaanse keuken." } },
+                { it: "la cipolla", nl: "ui", note: "", level: 1, sentence: { it: "Taglia la cipolla finemente.", nl: "Snijd de ui fijn." } },
+                { it: "il pomodoro", nl: "tomaat", note: "", level: 1, sentence: { it: "I pomodori sono rossi e maturi.", nl: "De tomaten zijn rood en rijp." } },
+                { it: "il basilico", nl: "basilicum", note: "Kruid, typisch Italiaans", level: 1, sentence: { it: "La pizza margherita ha il basilico.", nl: "De pizza margherita heeft basilicum." } },
+                { it: "l'olio d'oliva", nl: "olijfolie", note: "m.", level: 2, sentence: { it: "Usa l'olio d'oliva per cucinare.", nl: "Gebruik olijfolie om te koken." } },
+                { it: "la farina", nl: "bloem/meel", note: "", level: 2, sentence: { it: "Ho bisogno di farina per la pasta.", nl: "Ik heb bloem nodig voor de pasta." } },
+                { it: "il burro", nl: "boter", note: "", level: 2, sentence: { it: "Metti il burro nella padella.", nl: "Doe de boter in de pan." } },
+                { it: "lo zucchero", nl: "suiker", note: "Begint met z → lo", level: 2, sentence: { it: "Quanto zucchero vuoi nel caffè?", nl: "Hoeveel suiker wil je in de koffie?" } },
+                { it: "l'uovo (pl. le uova)", nl: "ei (pl. eieren)", note: "Onregelmatig meervoud (v.)", level: 2, sentence: { it: "Ho bisogno di due uova per la ricetta.", nl: "Ik heb twee eieren nodig voor het recept." } },
+                { it: "la ricetta", nl: "recept", note: "", level: 2, sentence: { it: "Hai una buona ricetta per il tiramisù?", nl: "Heb jij een goed recept voor tiramisu?" } },
+                { it: "gli ingredienti", nl: "ingrediënten", note: "Altijd meervoud gebruikt", level: 2, sentence: { it: "Questi sono gli ingredienti per la pizza.", nl: "Dit zijn de ingrediënten voor de pizza." } },
+                { it: "la pentola", nl: "kookpot", note: "", level: 2, sentence: { it: "Metti l'acqua nella pentola.", nl: "Doe het water in de kookpot." } },
+                { it: "la padella", nl: "koekenpan", note: "", level: 2, sentence: { it: "Scalda la padella con un po' d'olio.", nl: "Verwarm de koekenpan met een beetje olie." } },
+                { it: "il forno", nl: "oven", note: "", level: 2, sentence: { it: "Cuoci la pizza nel forno a 220 gradi.", nl: "Bak de pizza in de oven op 220 graden." } },
+                { it: "il coltello", nl: "mes", note: "", level: 2, sentence: { it: "Hai bisogno di un coltello affilato.", nl: "Je hebt een scherp mes nodig." } },
+                { it: "bollire", nl: "koken (van vloeistof)", note: "L'acqua bolle = het water kookt", level: 2, sentence: { it: "L'acqua bolle a 100 gradi.", nl: "Water kookt op 100 graden." } },
+                { it: "friggere", nl: "bakken in olie / frituren", note: "", level: 2, sentence: { it: "Non friggere il cibo troppo spesso.", nl: "Bak eten niet te vaak in olie." } },
+                { it: "tagliare", nl: "snijden", note: "", level: 2, sentence: { it: "Taglia le verdure a pezzi piccoli.", nl: "Snijd de groenten in kleine stukjes." } },
+                { it: "mescolare", nl: "roeren / mengen", note: "", level: 2, sentence: { it: "Mescola bene gli ingredienti.", nl: "Meng de ingrediënten goed door elkaar." } },
+                { it: "l'antipasto", nl: "voorgerecht", note: "Letterlijk: 'voor het eten'", level: 2, sentence: { it: "Come antipasto prendiamo il prosciutto.", nl: "Als voorgerecht nemen we prosciutto." } },
+                { it: "il primo (piatto)", nl: "eerste gang (pasta/risotto)", note: "", level: 2, sentence: { it: "Come primo ordino gli spaghetti.", nl: "Als eerste gang bestel ik spaghetti." } },
+                { it: "il secondo (piatto)", nl: "hoofdgerecht (vlees/vis)", note: "", level: 2, sentence: { it: "Come secondo prendo il pollo arrosto.", nl: "Als hoofdgerecht neem ik geroosterde kip." } },
+                { it: "il contorno", nl: "bijgerecht / groente erbij", note: "", level: 3, sentence: { it: "Vuoi un contorno con il secondo?", nl: "Wil je een bijgerecht bij het hoofdgerecht?" } },
+                { it: "il dolce", nl: "nagerecht / iets zoets", note: "", level: 2, sentence: { it: "Per dolce prendo il tiramisù.", nl: "Als nagerecht neem ik tiramisu." } },
+                { it: "versare", nl: "gieten / inschenken", note: "", level: 3, sentence: { it: "Versa il vino nel bicchiere.", nl: "Giet de wijn in het glas." } },
+                { it: "aggiungere", nl: "toevoegen", note: "", level: 3, sentence: { it: "Aggiungi un po' di sale alla pasta.", nl: "Voeg een beetje zout toe aan de pasta." } }
+            ]
         }
     },
 
@@ -1759,6 +1793,77 @@ Infinitief + uitgangen: -ei, -esti, -ebbe, -emmo, -este, -ebbero
                     explanation: "Voor beschrijvingen (weer, uiterlijk, gevoelens) gebruik je de imperfetto."
                 }
             ]
+        },
+        {
+            id: "futuro-semplice",
+            topic: "De toekomende tijd",
+            summary: "parlerò, andrò, sarò — ik zal spreken, ik ga, ik zal zijn",
+            level: 2,
+            explanation: `Het Italiaans heeft één simpele toekomende tijd: het <strong>futuro semplice</strong>.
+
+<strong>Vorming voor regelmatige werkwoorden:</strong>
+• <strong>-are → -erò, -erai, -erà, -eremo, -erete, -eranno</strong>
+  parlare → parlerò, parlerai, parlerà, parleremo, parlerete, parleranno
+
+• <strong>-ere → -erò, -erai, -erà, -eremo, -erete, -eranno</strong>
+  scrivere → scriverò, scriverai, scriverà, scriveremo, scriverete, scriveranno
+
+• <strong>-ire → -irò, -irai, -irà, -iremo, -irete, -iranno</strong>
+  dormire → dormirò, dormirai, dormirà, dormiremo, dormirete, dormiranno
+
+<strong>Onregelmatige stammen (moet je uit het hoofd leren):</strong>
+• essere → sar- (sarò)
+• avere → avr- (avrò)
+• fare → far- (farò)
+• andare → andr- (andrò)
+• venire → verr- (verrò)
+• potere → potr- (potrò)
+• volere → vorr- (vorrò)
+• dovere → dovr- (dovrò)
+
+<strong>Gebruik:</strong>
+• Toekomst: Domani andrò al mercato. (Morgen ga ik naar de markt.)
+• Veronderstelling: Saranno le otto. (Het zal wel acht uur zijn.)
+• Belofte: Ti chiamerò stasera. (Ik bel je vanavond.)`,
+            examples: [
+                "Domani parlerò con il professore. (Morgen praat ik met de professor.)",
+                "L'anno prossimo andremo in Italia. (Volgend jaar gaan we naar Italië.)",
+                "Sarà difficile, ma ce la faremo. (Het zal moeilijk zijn, maar we redden het.)",
+                "Quando arriverai? (Wanneer kom jij aan?)",
+                "Non lo farò mai più! (Ik doe het nooit meer!)"
+            ],
+            exercises: [
+                {
+                    question: "Wat is de futuro van 'parlare' (io)?",
+                    options: ["parlerò", "parlavo", "parleremo", "parlerei"],
+                    correct: 0,
+                    explanation: "Io + futuro van -are werkwoorden: verwijder -are, voeg -erò toe → parlerò."
+                },
+                {
+                    question: "Vul in: 'Domani ___ (noi / andare) al mare.'",
+                    options: ["andremo", "andiamo", "andavamo", "andremmo"],
+                    correct: 0,
+                    explanation: "Andare heeft de onregelmatige stam 'andr-': andremo (noi)."
+                },
+                {
+                    question: "Wat is de futuro van 'essere' (lui/lei)?",
+                    options: ["sarà", "era", "è", "sarebbe"],
+                    correct: 0,
+                    explanation: "Essere heeft de onregelmatige stam 'sar-': sarà (lui/lei)."
+                },
+                {
+                    question: "Vul in: '___ (tu / venire) alla festa domani?'",
+                    options: ["Verrai", "Verrò", "Venivi", "Vieni"],
+                    correct: 0,
+                    explanation: "Venire heeft de onregelmatige stam 'verr-': verrai (tu)."
+                },
+                {
+                    question: "Wat is de futuro van 'finire' (loro)?",
+                    options: ["finiranno", "finivano", "finiscono", "finirebbero"],
+                    correct: 0,
+                    explanation: "-ire werkwoorden in de futuro: stam + -iranno → finiranno (loro)."
+                }
+            ]
         }
     ],
 
@@ -2156,6 +2261,36 @@ Infinitief + uitgangen: -ei, -esti, -ebbe, -emmo, -este, -ebbero
                 imperfetto: { io: "traevo", tu: "traevi", lui: "traeva", noi: "traevamo", voi: "traevate", loro: "traevano" },
                 futuro: { io: "trarrò", tu: "trarrai", lui: "trarrà", noi: "trarremo", voi: "trarrete", loro: "trarranno" },
                 condizionale: { io: "trarrei", tu: "trarresti", lui: "trarrebbe", noi: "trarremmo", voi: "trarreste", loro: "trarrebbero" }
+            },
+            {
+                infinitive: "scendere",
+                meaning: "afdalen / naar beneden gaan",
+                level: 2,
+                presente: { io: "scendo", tu: "scendi", lui: "scende", noi: "scendiamo", voi: "scendete", loro: "scendono" },
+                passatoProssimo: { auxiliary: "essere", participle: "sceso" },
+                imperfetto: { io: "scendevo", tu: "scendevi", lui: "scendeva", noi: "scendevamo", voi: "scendevate", loro: "scendevano" },
+                futuro: { io: "scenderò", tu: "scenderai", lui: "scenderà", noi: "scenderemo", voi: "scenderete", loro: "scenderanno" },
+                condizionale: { io: "scenderei", tu: "scenderesti", lui: "scenderebbe", noi: "scenderemmo", voi: "scendereste", loro: "scenderebbero" }
+            },
+            {
+                infinitive: "vincere",
+                meaning: "winnen",
+                level: 3,
+                presente: { io: "vinco", tu: "vinci", lui: "vince", noi: "vinciamo", voi: "vincete", loro: "vincono" },
+                passatoProssimo: { auxiliary: "avere", participle: "vinto" },
+                imperfetto: { io: "vincevo", tu: "vincevi", lui: "vinceva", noi: "vincevamo", voi: "vincevate", loro: "vincevano" },
+                futuro: { io: "vincerò", tu: "vincerai", lui: "vincerà", noi: "vinceremo", voi: "vincerete", loro: "vinceranno" },
+                condizionale: { io: "vincerei", tu: "vinceresti", lui: "vincerebbe", noi: "vinceremmo", voi: "vincereste", loro: "vincerebbero" }
+            },
+            {
+                infinitive: "aggiungere",
+                meaning: "toevoegen",
+                level: 3,
+                presente: { io: "aggiungo", tu: "aggiungi", lui: "aggiunge", noi: "aggiungiamo", voi: "aggiungete", loro: "aggiungono" },
+                passatoProssimo: { auxiliary: "avere", participle: "aggiunto" },
+                imperfetto: { io: "aggiungevo", tu: "aggiungevi", lui: "aggiungeva", noi: "aggiungevamo", voi: "aggiungevate", loro: "aggiungevano" },
+                futuro: { io: "aggiungerò", tu: "aggiungerai", lui: "aggiungerà", noi: "aggiungeremo", voi: "aggiungerete", loro: "aggiungeranno" },
+                condizionale: { io: "aggiungerei", tu: "aggiungeresti", lui: "aggiungerebbe", noi: "aggiungeremmo", voi: "aggiungereste", loro: "aggiungerebbero" }
             }
         ],
         // Conjugation patterns for regular verbs
