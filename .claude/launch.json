@@ -1,0 +1,1 @@
+version:0.0.1 configurations:[name:italian-app] configurations:[runtimeExecutable:npx] configurations:[runtimeArgs:[serve] configurations:[-l] configurations:[3457] configurations:[.]] configurations:[port:3457]
